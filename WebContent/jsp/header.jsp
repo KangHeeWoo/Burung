@@ -19,9 +19,9 @@
 <ul id="menu">
 	<li><a href="#">회사</a> |&nbsp
 		<ul>
-			<li><a href="#">소개</a></li>
-			<li><a href="#">연혁</a></li>
-			<li><a href="#">오시는길</a></li>
+			<li><a href="../company.do?cmd=introCompany">소개</a></li>
+			<li><a href="../company.do?cmd=historyCompany">연혁</a></li>
+			<li><a href="../company.do?cmd=mapCompany">오시는길</a></li>
 		</ul></li>
 	<li><a href="../sales.do?cmd=choiceName&model=718">구매</a> |&nbsp
 		<ul>

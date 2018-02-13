@@ -9,8 +9,8 @@
 <link rel="stylesheet" type="text/css" href="../../css/introCompany.css">
 </head>
 <body>
-	<div id = introCompany>
-		<h1>회사소개</h1>				
+	<div id = historyCompany>
+		<h1>회사연혁</h1>				
 	</div>
 </body>
 </html>
