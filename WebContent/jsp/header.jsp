@@ -25,11 +25,11 @@
 		</ul></li>
 	<li><a href="../menu.do?cmd=sales">구매</a> |&nbsp
 		<ul>
-			<li><a href="../menu.do?cmd=board&model=718">718</a></li>
-			<li><a href="#">911</a></li>
-			<li><a href="#">Panamera</a></li>
-			<li><a href="#">Macan</a></li>
-			<li><a href="#">Cayenne</a></li>
+			<li><a href="../sales.do?model=718">718</a></li>
+			<li><a href="../sales.do?model=911">911</a></li>
+			<li><a href="../sales.do?model=Panamera">Panamera</a></li>
+			<li><a href="../sales.do?model=Macan">Macan</a></li>
+			<li><a href="../sales.do?model=Cayenne">Cayenne</a></li>
 		</ul></li>
 	<li><a href="../menu.do?cmd=rent">렌트</a> |&nbsp</li>
 	<li><a href="#">게시판</a>
