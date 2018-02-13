@@ -7,49 +7,39 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-table.type10 {
-    border-collapse: collapse;
-    text-align: left;
+table.type11 {
+    border-collapse: separate;
+    border-spacing: 1px;
+    text-align: center;
     line-height: 1.5;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
     margin: 20px 10px;
 }
-table.type10 thead th {
-    width: 150px;
+table.type11 th {
+    width: 155px;
     padding: 10px;
     font-weight: bold;
     vertical-align: top;
     color: #fff;
-    background: #e7708d;
-    margin: 20px 10px;
-    text-align: left;
+    background: #ce4869 ;
 }
-table.type10 tbody th {
-    width: 150px;
-    padding: 10px;
-}
-table.type10 td {
-    width: 350px;
+table.type11 td {
+    width: 155px;
     padding: 10px;
     vertical-align: top;
-}
-table.type10 .even {
-    background: #fdf3f5;
+    border-bottom: 1px solid #ccc;
+    background: #eee;
 }
 </style>
 </head>
 <body>
 <form>
-<table class="type10">
-	<thead>
+<table class="type11">
 	<tr>
 		<th style="text-align: center">회원번호</th>
 		<th>아이디</th>
 		<th>이름</th>
 		<th>전화번호</th>
 	</tr>
-	</thead>
 	<c:forEach var="user" items="${list }">
 	<tr>
 		<td style="text-align: center;">${user.memNum }</td>

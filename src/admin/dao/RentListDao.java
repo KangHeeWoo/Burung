@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import admin.vo.RentListVo;
 import burung.dbcp.DbcpBean;
@@ -12,7 +13,7 @@ import burung.dbcp.DbcpBean;
 
 public class RentListDao {
 	//
-	public RentListVo rentDetail(int memNum) {
+	public ArrayList<RentListVo> rentDetail(int memNum) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -22,7 +23,8 @@ public class RentListDao {
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, memNum);
 			rs=pstmt.executeQuery();
-			if(rs.next()) {
+			ArrayList<RentListVo> list=new ArrayList<>();
+			while(rs.next()) {
 				int rListNum=rs.getInt("rListNum");
 				Date rStartDate=rs.getDate("rStartDate");
 				Date rEndDate=rs.getDate("rEndDate");
@@ -30,10 +32,9 @@ public class RentListDao {
 				String renState=rs.getString("renState");
 				int renNum=rs.getInt("renNum");
 				RentListVo vo=new RentListVo(rListNum, rStartDate, rEndDate, rTotPrice, renState, renNum);
-				return vo;
-			}else {
-				return null;
+				list.add(vo);
 			}
+			return list;
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
 			return null;

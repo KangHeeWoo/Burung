@@ -62,7 +62,7 @@ public class MemberDao {
 		}
 	}
 	
-	public MemberVo memDetail(int memNum) {	//회원정보 상세보기
+	public ArrayList<MemberVo> memDetail(int memNum) {	//회원정보 상세보기
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -72,7 +72,7 @@ public class MemberDao {
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, memNum);
 			rs=pstmt.executeQuery();
-			
+			ArrayList<MemberVo> list=new ArrayList<>();
 			if(rs.next()) {
 				String memId=rs.getString("memId");
 				String memAddr=rs.getString("memAddr");
@@ -81,10 +81,9 @@ public class MemberDao {
 				String memBirth=rs.getString("memBirth");
 				String memName=rs.getString("memName");
 				MemberVo vo=new MemberVo(memNum, memId, memAddr, memPhone, memEmail, memBirth, memName);
-				return vo;
-			}else {
-				return null;
+				list.add(vo);
 			}
+			return list;
 		}catch(SQLException se){
 			System.out.println(se.getMessage());
 			return null;

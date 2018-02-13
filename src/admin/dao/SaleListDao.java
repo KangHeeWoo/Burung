@@ -4,13 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import admin.vo.SaleListVo;
 import burung.dbcp.DbcpBean;
 
 public class SaleListDao {
 	//
-	public SaleListVo saleDetatil(int memNum){	//회원 구매내역 상세보기
+	public ArrayList<SaleListVo> saleDetatil(int memNum){	//회원 구매내역 상세보기
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -20,17 +21,16 @@ public class SaleListDao {
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, memNum);
 			rs=pstmt.executeQuery();
-			if(rs.next()) {
+			ArrayList<SaleListVo> list=new ArrayList<>();
+			while(rs.next()) {
 				int sListNum=rs.getInt("sListNum");
-				int salPrice=rs.getInt("salePrice");
+				int salPrice=rs.getInt("salPrice");
 				String salState=rs.getString("salState");
 				int salNum=rs.getInt("salNum");
-				
 				SaleListVo vo=new SaleListVo(sListNum, salPrice, salState, salNum);
-				return vo;
-			}else {
-				return null;
+				list.add(vo);
 			}
+			return list;
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
 			return null;
