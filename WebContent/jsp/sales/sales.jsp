@@ -4,11 +4,7 @@
 <link rel="stylesheet" href="../css/sales.css"/>
 <script src="../js/sales.js"></script> 
 <div id="sales">
-	<ul id="modelList">
-		<li><a href="../sales.do?cmd=choiceName&model=718&name=718 Cayman Models">718 Cayman Models</a></li>
-		<li><a href="../sales.do?cmd=choiceName&model=718&name=718 Boxster Models">718 Boxster Models</a></li>
-		<li><a href="../sales.do?cmd=choiceName&model=718&name=718 GTS Models">718 GTS Models</a></li>
-	</ul>
+	<ul id="modelList"></ul>
 	<img id="mainImg">
 	<hr>
 	<img id="subImg">

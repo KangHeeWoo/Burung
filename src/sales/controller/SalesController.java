@@ -1,4 +1,4 @@
-package salse.controller;
+package sales.controller;
 
 import java.io.IOException;
 
@@ -22,7 +22,9 @@ public class SalesController extends HttpServlet {
 		case "choiceName":
 			choiceName(request, response);
 			break;
-		//case "
+		case "loadData":
+			loadData(request, response);
+			break;
 		}
 	}
 	
@@ -31,12 +33,17 @@ public class SalesController extends HttpServlet {
 		String name = request.getParameter("name");
 		String path = "/jsp/layout.jsp?spage=sales/sales.jsp&model=" + model;
 		
-		System.out.println(name);
-		
 		if(name != null) {
 			path += "&name=" + name;
 		}
 		
 		response.sendRedirect(request.getContextPath() + path);
+	}
+	
+	private void loadData (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String model = request.getParameter("model");
+		String mName = request.getParameter("mName");
+
+		
 	}
 }

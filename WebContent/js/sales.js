@@ -7,9 +7,8 @@ var subImg 	= null;
 var xhr = null;
 
 window.onload = function(){
-	model	= document.getElementById("model");
-	mName	= document.getElementById("mName");
-	//name = document.getElementsByTagName("span")[1];
+	model	= document.getElementById("model").firstChild.nodeValue;
+	mName	= document.getElementById("mName").firstChild.nodeValue;
 	modelList	= document.getElementById("modelList");
 	mainImg	= document.getElementById("mainImg");
 	subImg	= document.getElementById("subImg");
@@ -17,15 +16,14 @@ window.onload = function(){
 	mainImg.src = "../img/718_Cayman_Models_main.jpg";
 	subImg.src = "../img/718_Cayman_Models_sub.PNG";
 	
-	console.log(model.firstChild.nodeValue);
-	console.log(mName.firstChild.nodeValue);
-	
+	loadData();
 }
 
-function loadDate(){
+function loadData(){
 	xhr = new XMLHttpRequest();
 	xhr.onreadystatechange=getData;
-	xhr.open('get', '', true);
+	xhr.open('get', '../sales.do?cmd=loadData&model='
+			+ model + "&mName=" + mName, true);
 	xhr.send();
 }
 
