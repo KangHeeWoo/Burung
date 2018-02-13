@@ -23,13 +23,20 @@
 			<li><a href="#">연혁</a></li>
 			<li><a href="#">오시는길</a></li>
 		</ul></li>
-	<li><a href="../menu.do?cmd=sales">구매</a> |&nbsp</li>
+	<li><a href="../menu.do?cmd=sales">구매</a> |&nbsp
+		<ul>
+			<li><a href="../menu.do?cmd=board&model=718">718</a></li>
+			<li><a href="#">911</a></li>
+			<li><a href="#">Panamera</a></li>
+			<li><a href="#">Macan</a></li>
+			<li><a href="#">Cayenne</a></li>
+		</ul></li>
 	<li><a href="../menu.do?cmd=rent">렌트</a> |&nbsp</li>
 	<li><a href="#">게시판</a>
 		<ul>
 			<li><a href="#">공지</a></li>
 			<li><a href="#">후기</a></li>
-			<li><a href="#">자유</a></li>
+			<li><a href="../menu.do?cmd=board">자유</a></li>
 		</ul></li>
 </ul>
 <hr>
