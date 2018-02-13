@@ -1,3 +1,3 @@
-/**
- * 123
- */
+window.onload = function(){
+	
+}
