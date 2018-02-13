@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" type="text/css" href="../css/header.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/header.css">
 <div id="top">
 	<!-- 
 	<img alt="a" src="../img/logo.PNG">
@@ -23,13 +23,13 @@
 			<li><a href="#">연혁</a></li>
 			<li><a href="#">오시는길</a></li>
 		</ul></li>
-	<li><a href="../menu.do?cmd=sales">구매</a> |&nbsp
+	<li><a href="../sales.do?cmd=choiceName&model=718">구매</a> |&nbsp
 		<ul>
-			<li><a href="../sales.do?model=718">718</a></li>
-			<li><a href="../sales.do?model=911">911</a></li>
-			<li><a href="../sales.do?model=Panamera">Panamera</a></li>
-			<li><a href="../sales.do?model=Macan">Macan</a></li>
-			<li><a href="../sales.do?model=Cayenne">Cayenne</a></li>
+			<li><a href="../sales.do?cmd=choiceName&model=718">718</a></li>
+			<li><a href="../sales.do?cmd=choiceName&model=911">911</a></li>
+			<li><a href="../sales.do?cmd=choiceName&model=Panamera">Panamera</a></li>
+			<li><a href="../sales.do?cmd=choiceName&model=Macan">Macan</a></li>
+			<li><a href="../sales.do?cmd=choiceName&model=Cayenne">Cayenne</a></li>
 		</ul></li>
 	<li><a href="../menu.do?cmd=rent">렌트</a> |&nbsp</li>
 	<li><a href="#">게시판</a>

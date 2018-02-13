@@ -16,35 +16,27 @@ public class SalesController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String model = request.getParameter("model");
-
-		switch (model) {
-		case "718":
-			choiceName(request, response);
-			break;			
-		case "911":
+		String cmd = request.getParameter("cmd");
+		
+		switch (cmd) {
+		case "choiceName":
 			choiceName(request, response);
 			break;
-		case "Panamera":
-			choiceName(request, response);
-			break;
-		case "Macan":
-			choiceName(request, response);
-			break;
-		case "Cayenne":
-			choiceName(request, response);
-			break;
+		//case "
 		}
 	}
 	
 	private void choiceName (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String model = request.getParameter("model");
 		String name = request.getParameter("name");
-		String path = "jsp/layout.jsp?spage=sales/sales.jsp";
+		String path = "/jsp/layout.jsp?spage=sales/sales.jsp&model=" + model;
+		
+		System.out.println(name);
 		
 		if(name != null) {
-			path += "&name" + name;
+			path += "&name=" + name;
 		}
 		
-		request.getRequestDispatcher(path).forward(request, response);
+		response.sendRedirect(request.getContextPath() + path);
 	}
 }

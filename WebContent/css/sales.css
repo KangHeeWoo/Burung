@@ -4,6 +4,10 @@
 	width:100%;
 }
 
+#subImg{
+	width:50%;
+}
+
 #modelList{
 	position: absolute;
 }
