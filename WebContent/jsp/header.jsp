@@ -36,7 +36,7 @@
 		<ul>
 			<li><a href="#">공지</a></li>
 			<li><a href="#">후기</a></li>
-			<li><a href="../menu.do?cmd=board">자유</a></li>
+			<li><a href="../board.do?cmd=boardlist">자유</a></li>
 		</ul></li>
 </ul>
 <hr>

@@ -31,14 +31,14 @@ public class BoardDao {
          rs.next();
          int maxnum = rs.getInt("maxnum");
          return maxnum;
-      } catch (SQLException se) {
+      }catch (SQLException se) {
          return -1;
-      } finally {
+      }finally {
          DbcpBean.close(conn, pstmt, rs);
       }
    }
 
-   // 전체 글의 갯수 구하기(페이징처리)
+
    public int getCount() {
       Connection conn = null;
       PreparedStatement pstmt = null;
@@ -66,17 +66,18 @@ public class BoardDao {
       ArrayList<BoardMemVo> list=new ArrayList<>();
       try {
          conn=DbcpBean.getConn();
-         String sql="select * from(select aa.*,rownum rnum from(select boatitle,boahit,boaRegd,m.memId memId from board b,members m where m.memNum=b.memNum)aa)where rnum>=? and rnum<=?";
+         String sql="select * from(select aa.*,rownum rnum from(select boanum boatitle,boahit,boaRegd,m.memId memId from board b,members m where m.memNum=b.memNum)aa)where rnum>=? and rnum<=?";
          pstmt=conn.prepareStatement(sql);
          pstmt.setInt(1, startRow);
          pstmt.setInt(2, endRow);
          rs=pstmt.executeQuery();
          while(rs.next()) {
+        	int boanum=rs.getInt("boanum");
             String boatitle=rs.getString("boatitle");
             int boahit=rs.getInt("boahit");
             Date boaRegd=rs.getDate("boaRegd");
             String memid=rs.getString("memid");
-            BoardMemVo vo=new BoardMemVo(boatitle, boahit, boaRegd, memid);
+            BoardMemVo vo=new BoardMemVo(boanum,boatitle, boahit, boaRegd, memid);
             list.add(vo);
          }
          return list;
