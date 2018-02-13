@@ -1,6 +1,7 @@
 package admin.vo;
 
 public class MemberVo {
+	//
 	private int memNum;
 	private String memId;
 	private String memAddr;

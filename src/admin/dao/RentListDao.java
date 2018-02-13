@@ -11,6 +11,7 @@ import burung.dbcp.DbcpBean;
 
 
 public class RentListDao {
+	//
 	public RentListVo rentDetail(int memNum) {
 		Connection con=null;
 		PreparedStatement pstmt=null;

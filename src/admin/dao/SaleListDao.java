@@ -9,6 +9,7 @@ import admin.vo.SaleListVo;
 import burung.dbcp.DbcpBean;
 
 public class SaleListDao {
+	//
 	public SaleListVo saleDetatil(int memNum){	//회원 구매내역 상세보기
 		Connection con=null;
 		PreparedStatement pstmt=null;

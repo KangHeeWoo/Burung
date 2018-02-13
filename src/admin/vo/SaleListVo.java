@@ -1,6 +1,7 @@
 package admin.vo;
 
 public class SaleListVo {
+	//
 	private int sListNum;
 	private int salPrice;
 	private String salState;

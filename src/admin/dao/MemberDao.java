@@ -11,6 +11,7 @@ import burung.dbcp.DbcpBean;
 
 
 public class MemberDao {
+	//
 	public int getCount() {//전체 회원수
 		Connection con=null;
 		PreparedStatement pstmt=null;

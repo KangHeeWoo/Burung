@@ -28,5 +28,6 @@ public class MemberList extends HttpServlet{
 			request.setAttribute("detail", detail);
 			request.getRequestDispatcher("/adminMember/memberdetail.jsp").forward(request, response);
 		}
+		//
 	}
 }

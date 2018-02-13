@@ -3,6 +3,7 @@ package admin.vo;
 import java.sql.Date;
 
 public class RentListVo {
+	//
 	private int rListNum;
 	private Date rStartDate;
 	private Date rEndDate;
