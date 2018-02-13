@@ -1,1 +1,15 @@
 @charset "UTF-8";
+
+#mainImg{
+	width:100%;
+}
+
+#modelList{
+	position: absolute;
+}
+
+#modelList li a{
+	color : #c0c0c0;
+	font-size : 20px;
+	text-decoration:none;
+}
