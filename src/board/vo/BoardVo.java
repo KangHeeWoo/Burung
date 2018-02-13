@@ -6,17 +6,16 @@ public class BoardVo {
 	private int boaNum;
 	private String boaTitle;
 	private String boaContent;
-	private String baoContent;
 	private int boaHit;
 	private Date boaRegd;
 	private int memNum;
-	public BoardVo(int boaNum, String boaTitle, String boaContent, String baoContent, int boaHit, Date boaRegd,
+	public BoardVo(int boaNum, String boaTitle, String boaContent, int boaHit, Date boaRegd,
 			int memNum) {
 		super();
 		this.boaNum = boaNum;
 		this.boaTitle = boaTitle;
 		this.boaContent = boaContent;
-		this.baoContent = baoContent;
+
 		this.boaHit = boaHit;
 		this.boaRegd = boaRegd;
 		this.memNum = memNum;
@@ -40,12 +39,7 @@ public class BoardVo {
 	public void setBoaContent(String boaContent) {
 		this.boaContent = boaContent;
 	}
-	public String getBaoContent() {
-		return baoContent;
-	}
-	public void setBaoContent(String baoContent) {
-		this.baoContent = baoContent;
-	}
+
 	public int getBoaHit() {
 		return boaHit;
 	}

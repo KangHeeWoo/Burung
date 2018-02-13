@@ -9,6 +9,7 @@
 </head>
 <body>
 <h1 align="center">자유게시판</h1><br><br>
+<h5 align="right"><a href="board.do?cmd=boardinsert">글 등록</a></h5>
 <div align="center">
 	<table  width="500" border="1" cellspacing="0" cellpadding="3" bordercolor="#999999" style='border-collapse:collapse'>
 		<tr>
@@ -22,32 +23,40 @@
 			<td>${board.boahit }</td>
 		</tr>
 		</c:forEach>
-</table>
-<div>
-	<c:choose>
-		<c:when test="${startPage>10 }">
-			<a href="board.do?cmd=boardlist&pageNum=${startPage-1 }">[ 이전 ]</a>
-		</c:when>
-		<c:otherwise>[이전]</c:otherwise>
-	</c:choose>
-	<c:forEach var="i" begin="${startPage }" end="${endPage }">
+	</table><br>
+	<div>
 		<c:choose>
-			<c:when test="${pageNum==i }">
-				<span style="color:black;">${i } | </span>
+			<c:when test="${startPage>10 }">
+				<a href="board.do?cmd=boardlist&pageNum=${startPage-1 }">[ 이전 ]</a>
 			</c:when>
-			<c:otherwise>
-				<a href="board.do?cmd=boardlist&pageNum=${i }"><span style="color:gray;">${i } | </span></a>
-			</c:otherwise>
+			<c:otherwise>[이전]</c:otherwise>
 		</c:choose>
-	</c:forEach>
-	
-	<c:choose>
-		<c:when test="${endPage<pageCount }">
-			<a href="board.do?cmd=boardlist&pageNum=${endPage+1 }">[ 다음 ]</a>
-		</c:when>
-		<c:otherwise>[ 다음 ]</c:otherwise>
-	</c:choose>
-</div>
+		<c:forEach var="i" begin="${startPage }" end="${endPage }">
+			<c:choose>
+				<c:when test="${pageNum==i }">
+					<span style="color:black;">${i } | </span>
+				</c:when>
+				<c:otherwise>
+					<a href="board.do?cmd=boardlist&pageNum=${i }"><span style="color:gray;">${i } | </span></a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		
+		<c:choose>
+			<c:when test="${endPage<pageCount }">
+				<a href="board.do?cmd=boardlist&pageNum=${endPage+1 }">[ 다음 ]</a>
+			</c:when>
+			<c:otherwise>[ 다음 ]</c:otherwise>
+		</c:choose>
+	</div>
+	<br>
+	<select name="search">
+		<option value="s0">==선택하세요==</option>
+		<option value="stitle">제목</option>
+		<option value="swriter">작성자</option>
+	</select>
+	<input type="text" name="searchValue">
+	<input type="button" value="검색" onclick="schClick()">
 </div>
 </body>
 </html>

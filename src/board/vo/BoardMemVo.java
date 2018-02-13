@@ -7,7 +7,7 @@ public class BoardMemVo {
 	private String boatitle;
 	private int boahit;
 	private Date boaRegd;
-	private String memId;
+	private String memid;
 	
 	public int getBoanum() {
 		return boanum;
@@ -33,19 +33,19 @@ public class BoardMemVo {
 	public void setBoaRegd(Date boaRegd) {
 		this.boaRegd = boaRegd;
 	}
-	public String getMemId() {
-		return memId;
+	public String getMemid() {
+		return memid;
 	}
-	public void setMemId(String memId) {
-		this.memId = memId;
+	public void setMemid(String memid) {
+		this.memid = memid;
 	}
-	public BoardMemVo(int bonum,String boatitle, int boahit, Date boaRegd, String memId) {
+	public BoardMemVo(int bonum,String boatitle, int boahit, Date boaRegd, String memid) {
 		super();
 		this.boanum=boanum;
 		this.boatitle = boatitle;
 		this.boahit = boahit;
 		this.boaRegd = boaRegd;
-		this.memId = memId;
+		this.memid = memid;
 	}
 	public BoardMemVo() {
 		super();
