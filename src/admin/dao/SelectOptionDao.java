@@ -34,6 +34,8 @@ public class SelectOptionDao {
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
 			return null;
+		}finally {
+			DbcpBean.close(con, pstmt, rs);
 		}
 	}
 }

@@ -33,14 +33,35 @@ public class BoardController extends HttpServlet {
 	         break;
 	      case "boarddelete": boarddelete(request,response);
 	    	  break;
-	      case "boardupdate": response.sendRedirect("jsp/layout.jsp?spage=Board/boardupdate.jsp");
+	      case "boardupdate": boardupdate(request,response);
+	      	  break;
+	      case "boardupdateOk":boardupdateOk(request,response);
 	      	  break;
 	      }
 	   }
+	protected void boardupdateOk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int boanum=Integer.parseInt(request.getParameter("boanum"));
+		String boatitle=request.getParameter("boatitle");
+		String boacontent=request.getParameter("boacontent");
+		BoardDao dao=BoardDao.getInstance();
+		int n=dao.boardupdate(boanum, boatitle, boacontent);
+		if(n>0) {
+			boardList(request, response);
+		}
+	}
 	
 	protected void boardupdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//수정수정
 		
+		 request.setCharacterEncoding("utf-8");
+		 int boanum=Integer.parseInt(request.getParameter("boanum"));
+		 String memid=request.getParameter("memid");
+		 
+		 BoardDao dao=BoardDao.getInstance();
+		 //내용보기
+		 BoardVo  listdetail=dao.detaillist(boanum);
+	  	 request.setAttribute("listdetail", listdetail);
+		 request.getRequestDispatcher("jsp/layout.jsp?spage=Board/boardupdate.jsp").forward(request, response);
+		 
 		
 		
 		
@@ -111,9 +132,12 @@ public class BoardController extends HttpServlet {
 	      int pageCount=(int)Math.ceil(dao.getCount()/10.0);
 	      int startPage=((pageNum-1)/10*10)+1;
 	      int endPage=startPage+9;//끝페이지
+	      System.out.println(endPage);
 	      if(pageCount<endPage) {
 				endPage=pageCount;
+				
 		}
+	      System.out.println(endPage+"," +pageCount);
 	  	request.setAttribute("listAll", listAll);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("startPage", startPage);

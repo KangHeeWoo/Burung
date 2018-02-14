@@ -115,7 +115,7 @@ table.type11 td {
 </div>
 </form>
 
-<form action="">
+<form>
 <div>
 <h2>2.렌트내역</h2>
 <table class="type11">
@@ -141,8 +141,7 @@ table.type11 td {
 </div>
 </form>
 
-<form action="">
-
+<form>
 <div>
 <h2>3.구매내역</h2>
 <table class="type11">

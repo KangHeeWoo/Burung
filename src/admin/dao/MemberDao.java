@@ -16,7 +16,7 @@ public class MemberDao {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select count(num) cnt from members";
+		String sql="select count(memnum) cnt from members";
 		try {
 			con= DbcpBean.getConn();
 			pstmt=con.prepareStatement(sql);
@@ -31,14 +31,16 @@ public class MemberDao {
 		}
 	}
 	
-	public ArrayList<MemberVo> listAll(){	//전체 회원 리스트
+	public ArrayList<MemberVo> listAll(int startRow,int endRow){	//전체 회원 리스트
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from members";
+		String sql="select * from (select aa.*,rownum rnum from(select * from members order by memnum desc)aa) where rnum>=? and rnum<=?";
 		try {
 			con=DbcpBean.getConn();
 			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			rs=pstmt.executeQuery();
 			ArrayList<MemberVo> list=new ArrayList<>();
 			while(rs.next()) {
@@ -91,6 +93,5 @@ public class MemberDao {
 			DbcpBean.close(con, pstmt, rs);
 		}
 	}
-	
 
 }
