@@ -58,5 +58,10 @@ public class BoardVo {
 	public void setMemNum(int memNum) {
 		this.memNum = memNum;
 	}
+	@Override
+	public String toString() {
+		return "BoardVo [boaNum=" + boaNum + ", boaTitle=" + boaTitle + ", boaContent=" + boaContent + ", boaHit="
+				+ boaHit + ", boaRegd=" + boaRegd + ", memNum=" + memNum + "]";
+	}
 	
 }

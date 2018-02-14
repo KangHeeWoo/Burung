@@ -59,28 +59,36 @@ public class BoardDao {
          DbcpBean.close(conn, pstmt, rs);
       }
    }
-   public ArrayList<BoardVo> detaillist(int boanum){
+   public int boardhitupdate(int boanum) {
+	   Connection conn=null;
+	   PreparedStatement pstmt=null;
+	   try {
+		   conn=DbcpBean.getConn();
+		   String sql="update board set boahit=boahit+1 where boanum=?";
+		   pstmt=conn.prepareStatement(sql);
+		   pstmt.setInt(1, boanum);
+		   int n=pstmt.executeUpdate();
+		   return n;
+	   }catch(SQLException se) {
+		   System.out.println(se.getMessage());
+		   return -1;
+	   }finally {
+		   DbcpBean.close(conn, pstmt, null);
+	   }
+   }
+   public BoardVo detaillist(int boanum){
 	   Connection conn=null;
 	      PreparedStatement pstmt=null;
 	      ResultSet rs=null;
-	      ArrayList<BoardVo> list=new ArrayList<>();
 	      try {
 	         conn=DbcpBean.getConn();
 	         String sql="select * from board where boanum=?";
 	         pstmt=conn.prepareStatement(sql);
 	         pstmt.setInt(1, boanum);
 	         rs=pstmt.executeQuery();
-	         if(rs.next()) {
-	        	int boanum1=rs.getInt(1);
-	        	String boatitle=rs.getString(2);
-	        	String boacontent=rs.getString(3);
-	        	int boahit=rs.getInt(4);
-	        	Date boaregd=rs.getDate(5);
-	        	int memnum=rs.getInt(6);
-	        	BoardVo vo=new BoardVo(boanum1, boatitle, boacontent, boahit+1, boaregd, memnum);
-	        	list.add(vo);
-	         }
-	         return list;
+	         rs.next();
+	         BoardVo vo=new BoardVo(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getInt(4),rs.getDate(5), rs.getInt(6));
+	         return vo;
 	      }catch(SQLException se) {
 	         System.out.println(se.getMessage());
 	         se.printStackTrace();
@@ -88,6 +96,23 @@ public class BoardDao {
 	      }finally {
 	         DbcpBean.close(conn, pstmt, rs);
 	      }
+   }
+   public int boarddelete(int boanum) {
+	   Connection conn=null;
+	   PreparedStatement pstmt=null;
+	   try {
+		   conn=DbcpBean.getConn();
+		   String sql="delete from board where boanum=?";
+		   pstmt=conn.prepareStatement(sql);
+		   pstmt.setInt(1, boanum);
+		   int n=pstmt.executeUpdate();
+		   return n;
+	   }catch(SQLException se) {
+		   System.out.println(se.getMessage());
+		   return -1;
+	   }finally {
+		   DbcpBean.close(conn, pstmt, null);
+	   }
    }
    public int memNum(String id) {
 	   Connection conn=null;
@@ -150,6 +175,7 @@ public class BoardDao {
             String memid=rs.getString("memid");
             BoardMemVo vo=new BoardMemVo(boanum,boatitle, boahit, boaRegd, memid);
             list.add(vo);
+            System.out.println(vo);
          }
          System.out.println(list);
          return list;
