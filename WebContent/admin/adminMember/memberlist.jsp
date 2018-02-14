@@ -33,6 +33,7 @@ table.type11 td {
 </head>
 <body>
 <form>
+<h2>회원목록</h2>
 <table class="type11">
 	<tr>
 		<th style="text-align: center">회원번호</th>
@@ -50,5 +51,38 @@ table.type11 td {
 	</c:forEach>
 </table>
 </form>
+<!-- 페이징처리 -->
+<div>
+	<c:choose>
+		<c:when test="${startPage>3 }">
+		<a href="<%=request.getContextPath()%>/semi/list.do?pageNum=${startPage-1}">[이전]</a>
+		</c:when>
+		<c:otherwise>
+			[이전]
+		</c:otherwise>
+	</c:choose>
+	<c:forEach var="i" begin="${startPage }" end="${endPage }">
+		<c:choose>
+			<c:when test="${pageNum==i }">
+				<a href="<%=request.getContextPath() %>/semi/list.do?pageNum=${i}&cmd=memberlist">
+				<span style="color:blue">[${i }]</span>
+				</a>
+			</c:when>
+			<c:otherwise>
+				<a href="<%=request.getContextPath() %>/semi/list.do?pageNum=${i}&cmd=memberlist">
+				<span style="color:gray">[${i }]</span>
+				</a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+	<c:choose>
+	<c:when test="${pageCount>endPage }">
+	<a href="<%=request.getContextPath()%>/semi/list.do?pageNum=${endPage+1}">[다음]</a>
+	</c:when>
+	<c:otherwise>
+		[다음]
+	</c:otherwise>
+	</c:choose>
+</div>
 </body>
 </html>
