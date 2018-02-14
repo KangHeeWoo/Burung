@@ -21,7 +21,7 @@
 	</tr>
 </table>
 	<input type="hidden" value="${listdetail.boaNum }" name="boanum">
-	<h1>${listdetail.boaNum }</h1>
+
 	<input type="submit" value="수정">
 </form>
 
