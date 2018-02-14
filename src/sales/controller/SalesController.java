@@ -3,6 +3,7 @@ package sales.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import sales.dao.SalesDao;
+import sales.dao.SalesDao;import sales.vo.SalesListVo;
 import sales.vo.SalesVo;
 
 @WebServlet("/sales.do")
@@ -33,7 +34,28 @@ public class SalesController extends HttpServlet {
 		case "loadData":
 			loadData(request, response);
 			break;
+		case "buy":
+			buy(request, response);
+			break;
 		}
+	}
+	
+	private void buy (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = (String)request.getSession().getAttribute("id");
+		String carName = request.getParameter("name");
+		String color = request.getParameter("color");
+		String wheel = request.getParameter("wheel");
+		String seet = request.getParameter("seet");
+		String light = request.getParameter("light");
+		String audio = request.getParameter("audio");
+		
+		if(id == null) {
+			id = "test1";
+		}
+		
+		SalesDao dao = SalesDao.getInstance();
+		int sMemNum = dao.sMemNum(id);
+		HashMap<String, Integer> carInfo = dao.sCar(carName);
 	}
 	
 	private void choiceName (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -61,8 +83,10 @@ public class SalesController extends HttpServlet {
 		
 		JSONArray arr = new JSONArray();
 		
-		for(String name : list) {
-			arr.put(name);
+		if(list != null) {
+			for (String name : list) {
+				arr.put(name);
+			}
 		}
 		
 		JSONObject json = new JSONObject();
