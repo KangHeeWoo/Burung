@@ -12,16 +12,37 @@ import burung.dbcp.DbcpBean;
 
 
 public class RentListDao {
-	//
-	public ArrayList<RentListVo> rentDetail(int memNum) {
+	public int getCount(int memNum) {//전체 회원수
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from rentList rl,rentCar rc where rl.rennum=rc.rennum and memNum=?";
+		String sql="select count(rlistnum) cnt from rentlist where memnum=?";
+		try {
+			con= DbcpBean.getConn();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, memNum);
+			rs=pstmt.executeQuery();
+			rs.next();
+			return rs.getInt("cnt");
+		}catch(SQLException se){
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DbcpBean.close(con, pstmt, rs);
+		}
+	}
+	//
+	public ArrayList<RentListVo> rentDetail(int memNum,int startRow,int endRow) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select * from (select rl.*,rownum rnum from(select * from rentlist order by rlistnum desc)rl)rl, rentcar rc where memnum=? and rl.rennum=rc.rennum and rnum>=? and rnum<=?";
 		try {
 			con=DbcpBean.getConn();
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, memNum);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rs=pstmt.executeQuery();
 			ArrayList<RentListVo> list=new ArrayList<>();
 			while(rs.next()) {

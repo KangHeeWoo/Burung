@@ -11,16 +11,37 @@ import admin.vo.SaleListVo;
 import burung.dbcp.DbcpBean;
 
 public class SaleListDao {
-	//
-	public ArrayList<SaleListVo> saleDetatil(int memNum){	//회원 구매내역 상세보기
+	public int getCount(int memNum) {//전체 회원수
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from salesList sl,salescar sc where sl.salnum=sc.salnum and memNum=?";
+		String sql="select count(slistnum) cnt from saleslist where memnum=?";
+		try {
+			con= DbcpBean.getConn();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, memNum);
+			rs=pstmt.executeQuery();
+			rs.next();
+			return rs.getInt("cnt");
+		}catch(SQLException se){
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DbcpBean.close(con, pstmt, rs);
+		}
+	}
+	//
+	public ArrayList<SaleListVo> saleDetatil(int memNum,int startRow,int endRow){	//회원 구매내역 상세보기
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select * from (select sl.*,rownum rnum from(select * from saleslist order by slistnum desc)sl)sl, salescar sc where memnum=? and sl.salnum=sc.salnum and rnum>=? and rnum<=?";
 		try {
 			con=DbcpBean.getConn();
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, memNum);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rs=pstmt.executeQuery();
 			ArrayList<SaleListVo> list=new ArrayList<>();
 			while(rs.next()) {

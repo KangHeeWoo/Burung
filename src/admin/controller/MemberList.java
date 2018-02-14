@@ -51,12 +51,43 @@ public class MemberList extends HttpServlet{
 			request.getRequestDispatcher("/admin/layout.jsp?spage=/admin/adminMember/memberlist.jsp").forward(request, response);
 		}else if(cmd.equals("memberdetail")) {
 			int memNum=Integer.parseInt(request.getParameter("memNum"));
+			String spageNum=request.getParameter("pageNum");
+			int pageNum=1;
+			if(spageNum!=null) {
+				pageNum=Integer.parseInt(spageNum);
+			}
+			
+			int startRow=(pageNum-1)*5+1;//시작행번호
+			int endRow=startRow+4;//끝행번호
+			
 			MemberDao dao=new MemberDao();
 			ArrayList<MemberVo> detail= dao.memDetail(memNum);
 			RentListDao rdao=new RentListDao();
-			ArrayList<RentListVo> rentdetail= rdao.rentDetail(memNum);
+			ArrayList<RentListVo> rentdetail= rdao.rentDetail(memNum,startRow,endRow);
 			SaleListDao sdao=new SaleListDao();
-			ArrayList<SaleListVo> saledetail=sdao.saleDetatil(memNum);
+			ArrayList<SaleListVo> saledetail=sdao.saleDetatil(memNum,startRow,endRow);
+			
+			
+			//전체페이지 갯수 구하기(렌트)
+			int rpageCount=(int)Math.ceil(rdao.getCount(memNum)/5.0);
+			//전체페이지 갯수 구하기(구매)
+			int spageCount=(int)Math.ceil(sdao.getCount(memNum)/5.0);
+			int startPage=((pageNum-1)/4*4)+1;//시작페이지 번호
+			int rendPage=startPage+3;// 끝페이지 번호	//4페이지
+			int sendPage=startPage+3;
+			if(rpageCount<rendPage) {
+				rendPage=rpageCount;
+			}
+			if(spageCount<sendPage) {
+				sendPage=spageCount;
+			}
+			
+			request.setAttribute("rpageCount", rpageCount);//렌트페이지전체
+			request.setAttribute("spageCount", spageCount);//구매페이지전체
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("rendPage", rendPage);//렌트끝페이지
+			request.setAttribute("sendPage", sendPage);//구매끝페이지
+			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("detail", detail);
 			request.setAttribute("rentlist", rentdetail);
 			request.setAttribute("salelist", saledetail);
