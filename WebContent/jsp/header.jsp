@@ -3,9 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/header.css">
 <div id="top">
-	<!-- 
-	<img alt="a" src="../img/logo.PNG">
-	 -->
 	<c:choose>
 		<c:when test="${empty sessionScope.id }">
 			<span><a href="${pageContext.request.contextPath }/members.do?cmd=loginpage">로그인</a> &nbsp&nbsp <a href="${pageContext.request.contextPath }/members.do?cmd=insert">회원가입</a></span>
