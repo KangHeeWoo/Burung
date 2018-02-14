@@ -6,11 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../../css/introCompany.css">
+<link rel="stylesheet" type="text/css" href="../css/introCompany.css">
 </head>
 <body>
 	<div id = historyCompany>
-		<h1>회사연혁</h1>				
+		<img id = "company" src = "../img/company.png">		
+	</div>
+	<div id = his>
+		<img id = "history" src = "../img/history.jpg">
 	</div>
 </body>
 </html>

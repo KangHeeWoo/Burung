@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+#company {
+	width : 100%;
+	height : 550px;
+}
+
+#mapWrap {
+	width : 100%;
+	height : auto;
+	border : 2px solid red;
+}
+
+#map {
+	text-align: center;
+	background-image: url('../img/mapCompany.png'') no-repeat;
+}
+
+#mark1 {
+	text-align: center;
+	z-index: 1;
+	border : 2px solid red;
+}
+
+#history {
+	width: 100%;
+	height: auto;
+}
