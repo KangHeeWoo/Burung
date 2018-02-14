@@ -8,10 +8,10 @@
 	 -->
 	<c:choose>
 		<c:when test="${empty sessionScope.id }">
-			<span><a href="#">로그인</a> &nbsp&nbsp <a href="#">회원가입</a></span>
+			<span><a href="${pageContext.request.contextPath }/members.do?cmd=login">로그인</a> &nbsp&nbsp <a href="${pageContext.request.contextPath }/members.do?cmd=insert">회원가입</a></span>
 		</c:when>
 		<c:otherwise>
-			<span><a href="#">로그아웃</a> &nbsp&nbsp <a href="#">마이페이지</a></span>
+			<span><a href="${pageContext.request.contextPath }/members.do?cmd=logout">로그아웃</a> &nbsp&nbsp <a href="#">마이페이지</a></span>
 		</c:otherwise>
 	</c:choose>
 </div>
