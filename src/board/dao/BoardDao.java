@@ -46,7 +46,7 @@ public class BoardDao {
       ResultSet rs = null;
       try {
          conn = DbcpBean.getConn();
-         String sql = "select NVL(count(num),0) count from board";
+         String sql = "select NVL(count(boanum),0) count from board";
          pstmt = conn.prepareStatement(sql);
          rs = pstmt.executeQuery();
          rs.next();
@@ -58,6 +58,25 @@ public class BoardDao {
       } finally {
          DbcpBean.close(conn, pstmt, rs);
       }
+   }
+   public int boardupdate(int boanum,String boatitle,String boacontent) {
+	   Connection conn=null;
+	   PreparedStatement pstmt=null;
+	   try {
+		   conn=DbcpBean.getConn();
+		   String sql="update board set boatitle=?,boacontent=? where boanum=?";
+		   pstmt=conn.prepareStatement(sql);
+		   pstmt.setString(1, boatitle);
+		   pstmt.setString(2, boacontent);
+		   pstmt.setInt(3, boanum);
+		   int n=pstmt.executeUpdate();
+		   return n;
+	   }catch(SQLException se) {
+		   System.out.println(se.getMessage());
+		   return -1;
+	   }finally {
+		   DbcpBean.close(conn, pstmt, null);
+	   }
    }
    public int boardhitupdate(int boanum) {
 	   Connection conn=null;
@@ -162,7 +181,7 @@ public class BoardDao {
       ArrayList<BoardMemVo> list=new ArrayList<>();
       try {
          conn=DbcpBean.getConn();
-         String sql="select * from(select aa.*,rownum rnum from(select boanum, boatitle,boahit,boaRegd,m.memid memid from board b,members m where m.memNum=b.memNum)aa)where rnum>=? and rnum<=?";
+         String sql="select * from(select aa.*,rownum rnum from(select boanum, boatitle,boahit,boaRegd,m.memid memid from board b,members m where m.memNum=b.memNum order by boaregd desc)aa)where rnum>=? and rnum<=?";
          pstmt=conn.prepareStatement(sql);
          pstmt.setInt(1, startRow);
          pstmt.setInt(2, endRow);

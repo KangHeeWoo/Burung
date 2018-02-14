@@ -24,27 +24,30 @@
 		</tr>
 		</c:forEach>
 	</table><br>
+	<!-- 페이징 처리 -->
+	
 	<div>
 		<c:choose>
 			<c:when test="${startPage>10 }">
-				<a href="board.do?cmd=boardlist&pageNum=${startPage-1 }">[ 이전 ]</a>
+				<a href="<%=request.getContextPath()%>/board.do?cmd=boardlist&pageNum=${startPage-1 }">[ 이전 ]</a>
 			</c:when>
 			<c:otherwise>[이전]</c:otherwise>
 		</c:choose>
+		
 		<c:forEach var="i" begin="${startPage }" end="${endPage }">
 			<c:choose>
 				<c:when test="${pageNum==i }">
 					<span style="color:black;">${i } | </span>
 				</c:when>
 				<c:otherwise>
-					<a href="board.do?cmd=boardlist&pageNum=${i }"><span style="color:gray;">${i } | </span></a>
+					<span style="color:gray;"><a href="<%=request.getContextPath()%>/board.do?cmd=boardlist&pageNum=${i }">${i } | </a></span>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		
 		<c:choose>
 			<c:when test="${endPage<pageCount }">
-				<a href="board.do?cmd=boardlist&pageNum=${endPage+1 }">[ 다음 ]</a>
+				<a href="<%=request.getContextPath()%>/board.do?cmd=boardlist&pageNum=${endPage+1 }">[ 다음 ]</a>
 			</c:when>
 			<c:otherwise>[ 다음 ]</c:otherwise>
 		</c:choose>

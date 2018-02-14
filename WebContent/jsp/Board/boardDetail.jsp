@@ -23,7 +23,7 @@
 
 </table>
 <input type="hidden" id="num" value="${listdetail.boaNum }">
-<input type="hidden" id=memid" value="${param.memid}">
+<input type="hidden" id="memid" value="${param.memid}">
 
 	<c:if test="${sessionScope.id== param.memid}">
 		<div id="updatebnt" align="center">
@@ -37,7 +37,6 @@
 	function boarddelete() {
 		var con = confirm("해당 게시물을 삭제하시겠습니까?");
 		var num = document.getElementById("num").value;
-		var memid=document.getElementById("memid").value;
 		console.log(con);
 		if (con == true) {
 			location.href="<%=request.getContextPath()%>/board.do?cmd=boarddelete&boanum=" + num;
@@ -46,6 +45,7 @@
 	}
 	
 	function boardupdate() {
+		var memid=document.getElementById("memid").value;
 		var con = confirm("해당 게시물을 수정하시겠습니까?");
 		var num = document.getElementById("num").value;
 		console.log(con);
