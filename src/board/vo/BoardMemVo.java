@@ -39,9 +39,10 @@ public class BoardMemVo {
 	public void setMemid(String memid) {
 		this.memid = memid;
 	}
-	public BoardMemVo(int bonum,String boatitle, int boahit, Date boaRegd, String memid) {
+	
+	public BoardMemVo(int boanum, String boatitle, int boahit, Date boaRegd, String memid) {
 		super();
-		this.boanum=boanum;
+		this.boanum = boanum;
 		this.boatitle = boatitle;
 		this.boahit = boahit;
 		this.boaRegd = boaRegd;
@@ -49,6 +50,11 @@ public class BoardMemVo {
 	}
 	public BoardMemVo() {
 		super();
+	}
+	@Override
+	public String toString() {
+		return "BoardMemVo [boanum=" + boanum + ", boatitle=" + boatitle + ", boahit=" + boahit + ", boaRegd=" + boaRegd
+				+ ", memid=" + memid + "]";
 	}
 	
 }

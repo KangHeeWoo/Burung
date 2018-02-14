@@ -18,7 +18,7 @@
 		<c:forEach var="board" items="${listAll }">
 		<tr>
 			<td>${board.memid }</td>
-			<td><a href="board.do?cmd=boardDetail&boanum=${board.boanum }">${board.boatitle }</a></td>
+			<td><a href="board.do?cmd=boardDetail&boanum=${board.boanum }&memid=${board.memid}">${board.boatitle }</a></td>
 			<td>${board.boaRegd }</td>
 			<td>${board.boahit }</td>
 		</tr>

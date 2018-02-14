@@ -16,10 +16,12 @@ import board.vo.BoardVo;
 
 @WebServlet("/board.do")
 public class BoardController extends HttpServlet {
+	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 	    String cmd = request.getParameter("cmd");
+	    request.getSession().setAttribute("id", "test1");
 	    switch(cmd) {
 	      case "boardDetail":detail(request,response);
 	         break;
@@ -29,16 +31,47 @@ public class BoardController extends HttpServlet {
 	         break;
 	      case "boardlist": boardList(request,response);
 	         break;
-	         
+	      case "boarddelete": boarddelete(request,response);
+	    	  break;
+	      case "boardupdate": response.sendRedirect("jsp/layout.jsp?spage=Board/boardupdate.jsp");
+	      	  break;
 	      }
 	   }
+	
+	protected void boardupdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//수정수정
+		
+		
+		
+		
+	}
+	 protected void boarddelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 int boanum=Integer.parseInt(request.getParameter("boanum"));
+		 BoardDao dao=BoardDao.getInstance();
+		 int n=dao.boarddelete(boanum);
+		 if(n>0) {
+			   boardList(request, response);
+		 }else {
+			 response.sendRedirect("#");
+		 }
+	 }
 	 protected void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 request.setCharacterEncoding("utf-8");
 		 int boanum=Integer.parseInt(request.getParameter("boanum"));
+		 String memid=request.getParameter("memid");
+		 
 		 BoardDao dao=BoardDao.getInstance();
-		 ArrayList<BoardVo> listdetail=dao.detaillist(boanum);
-		 request.setAttribute("listdetail", listdetail);
-		 request.getRequestDispatcher("jsp/layout.jsp?spage=Board/boardDetail.jsp").forward(request, response);
+		
+		 //hit업데이트
+		 int n=dao.boardhitupdate(boanum);
+		 System.out.println(boanum+","+n);
+		 if(n>0) {
+			 //내용보기
+			 BoardVo  listdetail=dao.detaillist(boanum);
+			 System.out.println(listdetail);
+			 request.setAttribute("listdetail", listdetail);
+			 request.getRequestDispatcher("jsp/layout.jsp?spage=Board/boardDetail.jsp").forward(request, response);
+		 }
 	 }
 	 protected void insert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 request.setCharacterEncoding("utf-8");
@@ -49,7 +82,9 @@ public class BoardController extends HttpServlet {
 		 
 		 BoardDao dao=BoardDao.getInstance();
 		 int memnum=dao.memNum(id);
+		 
 		 System.out.println(memnum);
+		 
 		 int n=dao.boardinsert(boatitle, boacontent, memnum);
 		 if(n>0) {
 			boardList(request,response);
