@@ -31,6 +31,17 @@
 			<a href="javascript:boarddelete()">삭제</a>
 		</div>
 	</c:if>
+	
+<!--  댓글 리스트 -->
+<div id="comments">
+</div>
+<!--  댓글 입력 -->
+
+<div >
+	<textarea rows="5" cols="30"  id="comment"></textarea>
+	<input type="button" value="댓글"   onclick="addBoardComm()">
+</div>
+
 
 <script type="text/javascript">
 	
@@ -53,4 +64,34 @@
 			location.href="<%=request.getContextPath()%>/board.do?cmd=boardupdate&memid="+memid+"&boanum=" + num;
 		}
 	}
+	
+	//댓글달기
+	var xhr=null;
+	function addBoardComm(){
+		var comment=document.getElementById("comment").value;
+		var boanum=document.getElementById("num").value;
+		
+		
+		xhr=new XMLHttpRequest();
+		xhr.onreadystatechange=insertComm;
+		xhr.open("post", "<%=request.getContextPath()%>/boardcomment.do?cmd=comminsert", true);
+		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		var param="id=<%=session.getAttribute("id")%>&comment="+comment+"&boanum="+boanum;
+		xhr.send(param);
+	}
+	function insertComm(){
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var xml=xhr.responseXML;
+			var code=xml.getElementsByTagName("code")[0].firstChild.nodeValue;
+			if(code=="success"){
+				alert("댓글등록");
+			}else{
+				alert("등록실패");
+			}
+		}
+	}
+	
+	
+	
+	
 </script>
