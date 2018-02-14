@@ -10,6 +10,8 @@ public class RentListVo {
 	private int rTotPrice;
 	private String renState;
 	private int renNum;
+	private String rCarName;
+
 	public RentListVo(int rListNum, Date rStartDate, Date rEndDate, int rTotPrice, String renState,int renNum) {
 		super();
 		this.rListNum = rListNum;
@@ -20,10 +22,29 @@ public class RentListVo {
 		this.renNum = renNum;
 	}
 	
+	public RentListVo(int rListNum, Date rStartDate, Date rEndDate, int rTotPrice, String renState, int renNum,
+			String rCarName) {
+		super();
+		this.rListNum = rListNum;
+		this.rStartDate = rStartDate;
+		this.rEndDate = rEndDate;
+		this.rTotPrice = rTotPrice;
+		this.renState = renState;
+		this.renNum = renNum;
+		this.rCarName = rCarName;
+	}
+
 	public RentListVo() {
 		super();
 	}
 	
+	public String getrCarName() {
+		return rCarName;
+	}
+	
+	public void setrCarName(String rCarName) {
+		this.rCarName = rCarName;
+	}
 	public int getRenNum() {
 		return renNum;
 	}

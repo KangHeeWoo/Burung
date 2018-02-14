@@ -17,7 +17,7 @@ public class RentListDao {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from rentList where memNum=?";
+		String sql="select * from rentList rl,rentCar rc where rl.rennum=rc.rennum and memNum=?";
 		try {
 			con=DbcpBean.getConn();
 			pstmt=con.prepareStatement(sql);
@@ -31,7 +31,8 @@ public class RentListDao {
 				int rTotPrice=rs.getInt("rTotPrice");
 				String renState=rs.getString("renState");
 				int renNum=rs.getInt("renNum");
-				RentListVo vo=new RentListVo(rListNum, rStartDate, rEndDate, rTotPrice, renState, renNum);
+				String rCarName=rs.getString("rCarName");
+				RentListVo vo=new RentListVo(rListNum, rStartDate, rEndDate, rTotPrice, renState, renNum,rCarName);
 				list.add(vo);
 			}
 			return list;

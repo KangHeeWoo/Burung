@@ -1,6 +1,7 @@
 package admin.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +16,7 @@ public class SaleListDao {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from salesList where memNum=?";
+		String sql="select * from salesList sl,salescar sc where sl.salnum=sc.salnum and memNum=?";
 		try {
 			con=DbcpBean.getConn();
 			pstmt=con.prepareStatement(sql);
@@ -27,7 +28,9 @@ public class SaleListDao {
 				int salPrice=rs.getInt("salPrice");
 				String salState=rs.getString("salState");
 				int salNum=rs.getInt("salNum");
-				SaleListVo vo=new SaleListVo(sListNum, salPrice, salState, salNum);
+				Date salDate=rs.getDate("salDate");
+				String sCarModel=rs.getString("scarName");
+				SaleListVo vo=new SaleListVo(sListNum, salPrice, salState, salNum, salDate, sCarModel);
 				list.add(vo);
 			}
 			return list;
