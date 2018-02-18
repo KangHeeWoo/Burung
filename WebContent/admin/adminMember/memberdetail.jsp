@@ -140,7 +140,39 @@ table.type11 td {
 </table>
 </div>
 </form>
-
+<!-- 렌트내역 페이징처리 -->
+<div>
+	<c:choose>
+		<c:when test="${startPage>3 }">
+		<a href="<%=request.getContextPath()%>/semi/list.do?pageNum=${startPage-1}">[이전]</a>
+		</c:when>
+		<c:otherwise>
+			[이전]
+		</c:otherwise>
+	</c:choose>
+	<c:forEach var="i" begin="${startPage }" end="${rendPage }">
+		<c:choose>
+			<c:when test="${pageNum==i }">
+				<a href="<%=request.getContextPath() %>/semi/list.do?pageNum=${i}&cmd=memberdetail&memNum=${memNum}">
+				<span style="color:blue">[${i }]</span>
+				</a>
+			</c:when>
+			<c:otherwise>
+				<a href="<%=request.getContextPath() %>/semi/list.do?pageNum=${i}&cmd=memberdetail&memNum=${memNum}">
+				<span style="color:gray">[${i }]</span>
+				</a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+	<c:choose>
+	<c:when test="${rpageCount>rendPage }">
+	<a href="<%=request.getContextPath()%>/semi/list.do?pageNum=${rendPage+1}">[다음]</a>
+	</c:when>
+	<c:otherwise>
+		[다음]
+	</c:otherwise>
+	</c:choose>
+</div>
 <form>
 <div>
 <h2>3.구매내역</h2>
@@ -164,6 +196,39 @@ table.type11 td {
 </table>
 </div>
 </form>
+<!-- 구매내역 페이징처리 -->
+<div>
+	<c:choose>
+		<c:when test="${startPage>3 }">
+		<a href="<%=request.getContextPath()%>/semi/list.do?pageNum=${startPage-1}">[이전]</a>
+		</c:when>
+		<c:otherwise>
+			[이전]
+		</c:otherwise>
+	</c:choose>
+	<c:forEach var="i" begin="${startPage }" end="${sendPage }">
+		<c:choose>
+			<c:when test="${pageNum==i }">
+				<a href="<%=request.getContextPath() %>/semi/list.do?pageNum=${i}&cmd=memberdetail&memNum=${memNum}">
+				<span style="color:blue">[${i }]</span>
+				</a>
+			</c:when>
+			<c:otherwise>
+				<a href="<%=request.getContextPath() %>/semi/list.do?pageNum=${i}&cmd=memberdetail&memNum=${memNum}">
+				<span style="color:gray">[${i }]</span>
+				</a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+	<c:choose>
+	<c:when test="${spageCount>sendPage }">
+	<a href="<%=request.getContextPath()%>/semi/list.do?pageNum=${sendPage+1}">[다음]</a>
+	</c:when>
+	<c:otherwise>
+		[다음]
+	</c:otherwise>
+	</c:choose>
+</div>
 <form>
 <div id="saledetail">
 </div>

@@ -91,6 +91,7 @@ public class MemberList extends HttpServlet{
 			request.setAttribute("detail", detail);
 			request.setAttribute("rentlist", rentdetail);
 			request.setAttribute("salelist", saledetail);
+			request.setAttribute("memNum", memNum);
 			request.getRequestDispatcher("/admin/layout.jsp?spage=/admin/adminMember/memberdetail.jsp").forward(request, response);
 		}
 	}
