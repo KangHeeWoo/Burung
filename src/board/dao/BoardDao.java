@@ -204,6 +204,7 @@ public class BoardDao {
             BoardMemVo vo=new BoardMemVo(boanum,boatitle, boahit, boaRegd, memid);
             list.add(vo);
             System.out.println(vo);
+            
          }
          System.out.println(list);
          return list;
