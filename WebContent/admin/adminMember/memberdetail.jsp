@@ -143,22 +143,22 @@ table.type11 td {
 <!-- 렌트내역 페이징처리 -->
 <div>
 	<c:choose>
-		<c:when test="${startPage>3 }">
-		<a href="<%=request.getContextPath()%>/semi/list.do?pageNum=${startPage-1}">[이전]</a>
+		<c:when test="${rstartPage>3 }">
+		<a href="<%=request.getContextPath()%>/semi/list.do?rpageNum=${rstartPage-1}">[이전]</a>
 		</c:when>
 		<c:otherwise>
 			[이전]
 		</c:otherwise>
 	</c:choose>
-	<c:forEach var="i" begin="${startPage }" end="${rendPage }">
+	<c:forEach var="i" begin="${rstartPage }" end="${rendPage }">
 		<c:choose>
-			<c:when test="${pageNum==i }">
-				<a href="<%=request.getContextPath() %>/semi/list.do?pageNum=${i}&cmd=memberdetail&memNum=${memNum}">
+			<c:when test="${rpageNum==i }">
+				<a href="<%=request.getContextPath() %>/semi/list.do?rpageNum=${i}&cmd=memberdetail&memNum=${memNum}&pageNum=${pageNum}">
 				<span style="color:blue">[${i }]</span>
 				</a>
 			</c:when>
 			<c:otherwise>
-				<a href="<%=request.getContextPath() %>/semi/list.do?pageNum=${i}&cmd=memberdetail&memNum=${memNum}">
+				<a href="<%=request.getContextPath() %>/semi/list.do?rpageNum=${i}&cmd=memberdetail&memNum=${memNum}&pageNum=${pageNum}">
 				<span style="color:gray">[${i }]</span>
 				</a>
 			</c:otherwise>
@@ -166,7 +166,7 @@ table.type11 td {
 	</c:forEach>
 	<c:choose>
 	<c:when test="${rpageCount>rendPage }">
-	<a href="<%=request.getContextPath()%>/semi/list.do?pageNum=${rendPage+1}">[다음]</a>
+	<a href="<%=request.getContextPath()%>/semi/list.do?rpageNum=${rendPage+1}">[다음]</a>
 	</c:when>
 	<c:otherwise>
 		[다음]
@@ -199,22 +199,22 @@ table.type11 td {
 <!-- 구매내역 페이징처리 -->
 <div>
 	<c:choose>
-		<c:when test="${startPage>3 }">
-		<a href="<%=request.getContextPath()%>/semi/list.do?pageNum=${startPage-1}">[이전]</a>
+		<c:when test="${sstartPage>3 }">
+		<a href="<%=request.getContextPath()%>/semi/list.do?pageNum=${sstartPage-1}">[이전]</a>
 		</c:when>
 		<c:otherwise>
 			[이전]
 		</c:otherwise>
 	</c:choose>
-	<c:forEach var="i" begin="${startPage }" end="${sendPage }">
+	<c:forEach var="i" begin="${sstartPage }" end="${sendPage }">
 		<c:choose>
 			<c:when test="${pageNum==i }">
-				<a href="<%=request.getContextPath() %>/semi/list.do?pageNum=${i}&cmd=memberdetail&memNum=${memNum}">
+				<a href="<%=request.getContextPath() %>/semi/list.do?pageNum=${i}&cmd=memberdetail&memNum=${memNum}&rpageNum=${rpageNum}">
 				<span style="color:blue">[${i }]</span>
 				</a>
 			</c:when>
 			<c:otherwise>
-				<a href="<%=request.getContextPath() %>/semi/list.do?pageNum=${i}&cmd=memberdetail&memNum=${memNum}">
+				<a href="<%=request.getContextPath() %>/semi/list.do?pageNum=${i}&cmd=memberdetail&memNum=${memNum}&rpageNum=${rpageNum}">
 				<span style="color:gray">[${i }]</span>
 				</a>
 			</c:otherwise>

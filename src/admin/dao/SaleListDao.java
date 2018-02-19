@@ -54,7 +54,8 @@ public class SaleListDao {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from (select sl.*,rownum rnum from(select * from saleslist order by slistnum desc)sl)sl, salescar sc where memnum=? and sl.salnum=sc.salnum and rnum>=? and rnum<=?";
+		//order by 삭제함
+		String sql="select * from (select sl.*,rownum rnum from(select * from saleslist)sl)sl, salescar sc where memnum=? and sl.salnum=sc.salnum and rnum>=? and rnum<=?";
 		try {
 			con=DbcpBean.getConn();
 			pstmt=con.prepareStatement(sql);
@@ -110,6 +111,23 @@ public class SaleListDao {
 			return null;
 		}finally {
 			DbcpBean.close(conn, pstmt, rs);
+		}
+	}
+	
+	public int stateChange(int slistNum) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		String sql="update saleslist set salstate='인수완료' where slistnum=?";
+		try {
+			conn=DbcpBean.getConn();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, slistNum);
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DbcpBean.close(conn, pstmt, null);
 		}
 	}
 }

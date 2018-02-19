@@ -95,7 +95,7 @@ table.type11 td {
 	</c:otherwise>
 	</c:choose>
 </div>
-<form action="">
+
 <h2>최근 판매된 차량</h2>
 <div>
 <table class="type11">
@@ -105,6 +105,7 @@ table.type11 td {
 		<th>구매상태</th>
 		<th>구매날짜</th>
 		<th>구매차종</th>
+		<th>인수완료</th>
 	</tr>
 	<c:forEach var="sale" items="${saleslist }">
 	<tr>
@@ -113,11 +114,12 @@ table.type11 td {
 		<td>${sale.salState }</td>
 		<td>${sale.salDate }</td>
 		<td>${sale.sCarModel }</td>
+		<td><button onclick="location.href='<%=request.getContextPath()%>/semi/sales.do?cmd=stateChange&slistNum=${sale.sListNum }'">인수확인</button></td>
 	</tr>
 	</c:forEach>
 </table>
 </div>
-</form>
+
 <!-- 최근판매내역 페이징처리 -->
 <div>
 	<c:choose>

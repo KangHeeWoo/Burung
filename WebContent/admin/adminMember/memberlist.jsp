@@ -42,12 +42,18 @@ table.type11 td {
 		<th>전화번호</th>
 	</tr>
 	<c:forEach var="user" items="${list }">
-	<tr>
-		<td style="text-align: center;">${user.memNum }</td>
-		<td style="text-align: left"><a href="<%=request.getContextPath()%>/semi/list.do?cmd=memberdetail&memNum=${user.memNum}">${user.memId }</a></td>
-		<td style="text-align: left">${user.memName }</td>
-		<td style="text-align: left">${user.memPhone }</td>
-	</tr>
+	<c:choose>
+	<c:when test="${user.memNum=='0' }">
+	</c:when>
+	<c:otherwise>
+		<tr>
+			<td style="text-align: center;">${user.memNum }</td>
+			<td style="text-align: left"><a href="<%=request.getContextPath()%>/semi/list.do?cmd=memberdetail&memNum=${user.memNum}">${user.memId }</a></td>
+			<td style="text-align: left">${user.memName }</td>
+			<td style="text-align: left">${user.memPhone }</td>
+		</tr>	
+	</c:otherwise>
+	</c:choose>
 	</c:forEach>
 </table>
 </form>

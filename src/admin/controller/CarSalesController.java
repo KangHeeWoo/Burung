@@ -57,7 +57,7 @@ public class CarSalesController extends HttpServlet{
 				endPage=pageCount;
 			}
 			//전체페이지 갯수 구하기(최근판매된차량)
-			int lpageCount=(int)Math.ceil(listdao.getCount()/10.0);
+			int lpageCount=(int)Math.ceil(listdao.getCount()/5.0);
 			int lstartPage=((lpageNum-1)/4*4)+1;//시작페이지 번호
 			int lendPage=lstartPage+3;// 끝페이지 번호	//4페이지
 			if(lpageCount<lendPage) {
@@ -113,6 +113,16 @@ public class CarSalesController extends HttpServlet{
 					}else {
 						
 					}
+		}else if(cmd.equals("stateChange")) {
+			int slistNum=Integer.parseInt(request.getParameter("slistNum"));
+			System.out.println(slistNum);
+			SaleListDao dao=new SaleListDao();
+			int n=dao.stateChange(slistNum);
+			if(n>0) {
+				response.sendRedirect(request.getContextPath()+"/semi/sales.do?cmd=carlist");
+			}else {
+				
+			}
 		}
 	}
 }
