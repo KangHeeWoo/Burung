@@ -41,7 +41,6 @@ public class MembersController extends HttpServlet {
 		} else if (cmd.equals("updateOk")) {
 			updateOk(request, response);
 		} else if (cmd.equals("listpage")) {
-			System.out.println("@@@@@@@@@@1");
 			list(request, response);
 		}
 	}
@@ -66,7 +65,7 @@ public class MembersController extends HttpServlet {
 		}else {
 			request.setAttribute("result", "fail");
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/layout.jsp?spage=members/insertOk.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/layout.jsp");
 		rd.forward(request, response);
 	}
 
@@ -85,8 +84,11 @@ public class MembersController extends HttpServlet {
 		if (n == 1) { 
 			HttpSession session = request.getSession(); 
 			session.setAttribute("id", memId);
-			
-			response.sendRedirect(request.getContextPath() + "/jsp/layout.jsp");
+			if(!memId.equals("admin")) {
+				response.sendRedirect(request.getContextPath() + "/jsp/layout.jsp");
+			}else {
+				response.sendRedirect(request.getContextPath() + "/admin/layout.jsp");
+			}
 		} else if (n == 0) { 
 			request.setAttribute("errMsg", "아이디 또는 비밀번호가 일치하지 않아요");
 			request.getRequestDispatcher("/jsp/layout.jsp?spage=members/login.jsp").forward(request, response);
@@ -135,7 +137,7 @@ public class MembersController extends HttpServlet {
 	}
 
 	private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("@@@@@@@@@@2");
+		
 		String memId = (String) request.getSession().getAttribute("memId"); 
 	
 		MembersDao dao = new MembersDao();	
