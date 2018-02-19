@@ -56,6 +56,9 @@ public class SalesController extends HttpServlet {
 		SalesDao dao = SalesDao.getInstance();
 		int sMemNum = dao.sMemNum(id);
 		HashMap<String, Integer> carInfo = dao.sCar(carName);
+		
+		System.out.println(sMemNum);
+		System.out.println(carInfo);
 	}
 	
 	private void choiceName (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

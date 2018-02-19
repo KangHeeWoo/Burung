@@ -73,7 +73,7 @@ public class SalesDao {
 		try {
 			con = DbcpBean.getConn();
 
-			String sql = "select salnum from salescar where scarname = ?";
+			String sql = "select memnum from members where memid = ?";
 			st = con.prepareStatement(sql);
 			st.setString(1, id);
 			rs = st.executeQuery();
