@@ -47,5 +47,10 @@ public class BoardCommentVo {
 		this.boaNum = boaNum;
 	}
 	public BoardCommentVo() {}
+	@Override
+	public String toString() {
+		return "BoardCommentVo [bComNum=" + bComNum + ", bComCon=" + bComCon + ", bComRegd=" + bComRegd + ", memNum="
+				+ memNum + ", boaNum=" + boaNum + "]";
+	}
 
 }
