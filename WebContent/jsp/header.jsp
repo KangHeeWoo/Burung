@@ -28,7 +28,7 @@
 			<li><a href="${pageContext.request.contextPath }/sales.do?cmd=choiceName&model=Macan">Macan</a></li>
 			<li><a href="${pageContext.request.contextPath }/sales.do?cmd=choiceName&model=Cayenne">Cayenne</a></li>
 		</ul></li>
-	<li><a href="${pageContext.request.contextPath }/menu.do?cmd=rent">렌트</a> |&nbsp</li>
+	<li><a href="${pageContext.request.contextPath }/rent.do?cmd=rentpage">렌트</a> |&nbsp</li>
 	<li><a href="#">게시판</a>
 		<ul>
 			<li><a href="#">공지</a></li>
