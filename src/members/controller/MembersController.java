@@ -87,7 +87,7 @@ public class MembersController extends HttpServlet {
 			if(!memId.equals("admin")) {
 				response.sendRedirect(request.getContextPath() + "/jsp/layout.jsp");
 			}else {
-				response.sendRedirect(request.getContextPath() + "/admin/layout.jsp");
+				response.sendRedirect(request.getContextPath() + "/admin/layout.jsp"); 
 			}
 		} else if (n == 0) { 
 			request.setAttribute("errMsg", "아이디 또는 비밀번호가 일치하지 않아요");
