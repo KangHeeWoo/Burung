@@ -21,7 +21,6 @@ public class BoardController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 	    String cmd = request.getParameter("cmd");
-	    request.getSession().setAttribute("id", "test1");
 	    switch(cmd) {
 	      case "boardDetail":detail(request,response);
 	         break;
@@ -103,9 +102,7 @@ public class BoardController extends HttpServlet {
 		 
 		 BoardDao dao=BoardDao.getInstance();
 		 int memnum=dao.memNum(id);
-		 
-		 System.out.println(memnum);
-		 
+		 		 
 		 int n=dao.boardinsert(boatitle, boacontent, memnum);
 		 if(n>0) {
 			boardList(request,response);
@@ -119,6 +116,8 @@ public class BoardController extends HttpServlet {
 	 }
 	   protected void boardList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	      String spageNum=request.getParameter("pageNum"); 
+	      String search=request.getParameter("search");
+	      String searchValue=request.getParameter("searchValue");
 	      int pageNum=1;
 	      if(spageNum!=null) {
 	         pageNum=Integer.parseInt(spageNum);
@@ -126,9 +125,17 @@ public class BoardController extends HttpServlet {
 	      int startRow=(pageNum-1)*10+1; 
 	      int endRow=startRow+9;
 	      
+	      if(search==null || searchValue==null) {
+	    	  search="1";
+	    	  searchValue="1";
+	      }else {
+	    	  request.setAttribute("search", search);
+	    	  request.setAttribute("searchValue", searchValue);
+	      }
+	      
 	      BoardDao dao=BoardDao.getInstance();
-	      ArrayList<BoardMemVo> listAll=dao.listAll(startRow, endRow);
-	      System.out.println(listAll);
+	      ArrayList<BoardMemVo> listAll=dao.listAll(startRow, endRow,search,searchValue);
+	      System.out.println("listAll"+listAll);
 	      int pageCount=(int)Math.ceil(dao.getCount()/10.0);
 	      int startPage=((pageNum-1)/10*10)+1;
 	      int endPage=startPage+9;//끝페이지

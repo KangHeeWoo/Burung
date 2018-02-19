@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+
 <h1 align="center">자유게시판</h1><br><br>
 <h5 align="right"><a href="board.do?cmd=boardinsert">글 등록</a></h5>
 <div align="center">
@@ -53,13 +47,39 @@
 		</c:choose>
 	</div>
 	<br>
-	<select name="search">
+	<select id="search">
 		<option value="s0">==선택하세요==</option>
-		<option value="stitle">제목</option>
-		<option value="swriter">작성자</option>
+		<option value="boatitle">제목</option>
+		<option value="memid">작성자</option>
 	</select>
-	<input type="text" name="searchValue">
-	<input type="button" value="검색" onclick="schClick()">
+	<input type="text" id="searchValue" value="${searchValue}">
+	<input type="button" value="검색" onclick="schClick(1)">
+	<input type="hidden" id="choice" value="${search }">
 </div>
-</body>
-</html>
+
+
+
+
+
+<script type="text/javascript">
+	var search=document.getElementById("search");
+	var searchValue=document.getElementById("searchValue");
+	var choice=document.getElementById("choice");
+	
+	function schClick(num){
+		var url="board.do?cmd=boardlist&pageNum="+num;
+		if(searchValue.value !=""){
+			url+="&search="+search.value+"&searchValue="+searchValue.value;
+		}
+		location.href=url;
+	}
+	window.onload=function(){
+		for(var i=0;i<search.length;i++){
+			console.log(choice.value);
+			console.log(search[i].value);
+			if(search[i].value==choice.value){
+				search[i].selected="selected";
+			}
+		}
+	}
+</script>
