@@ -11,7 +11,7 @@ import admin.vo.SaleListVo;
 import burung.dbcp.DbcpBean;
 
 public class SaleListDao {
-	public int getCount(int memNum) {//전체 회원수
+	public int getCount(int memNum) {//전체 
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -20,6 +20,25 @@ public class SaleListDao {
 			con= DbcpBean.getConn();
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, memNum);
+			rs=pstmt.executeQuery();
+			rs.next();
+			return rs.getInt("cnt");
+		}catch(SQLException se){
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DbcpBean.close(con, pstmt, rs);
+		}
+	}
+	
+	public int getCount() {//전체 
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select count(slistnum) cnt from saleslist";
+		try {
+			con= DbcpBean.getConn();
+			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			rs.next();
 			return rs.getInt("cnt");
@@ -60,6 +79,37 @@ public class SaleListDao {
 			return null;
 		}finally {
 			DbcpBean.close(con, pstmt, rs);
+		}
+	}
+	
+	public ArrayList<SaleListVo> list(int startRow,int endRow){
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select * from (select sl.*,rownum rnum from(select * from saleslist order by slistnum desc)sl)sl, salescar sc where sl.salnum=sc.salnum and rnum>=? and rnum<=?";
+		try {
+			conn=DbcpBean.getConn();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs=pstmt.executeQuery();
+			ArrayList<SaleListVo> list=new ArrayList<>();
+			while(rs.next()) {
+				int sListNum=rs.getInt("sListNum");
+				int salPrice=rs.getInt("salPrice");
+				String salState=rs.getString("salState");
+				int salNum=rs.getInt("salNum");
+				Date salDate=rs.getDate("salDate");
+				String sCarModel=rs.getString("scarName");
+				SaleListVo vo=new SaleListVo(sListNum, salPrice, salState, salNum, salDate, sCarModel);
+				list.add(vo);
+			}
+			return list;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			DbcpBean.close(conn, pstmt, rs);
 		}
 	}
 }
