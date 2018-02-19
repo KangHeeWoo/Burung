@@ -26,8 +26,7 @@ public class LoginFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
+		req.setCharacterEncoding("utf-8");
 
 		// pass the request along the filter chain
 		String spage = req.getParameter("spage");
