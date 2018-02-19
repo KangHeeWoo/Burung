@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import sales.dao.SalesDao;import sales.vo.SalesListVo;
+import sales.dao.SalesDao;
+import sales.vo.SalesListVo;
 import sales.vo.SalesVo;
 
 @WebServlet("/sales.do")
@@ -43,22 +44,31 @@ public class SalesController extends HttpServlet {
 	private void buy (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = (String)request.getSession().getAttribute("id");
 		String carName = request.getParameter("name");
-		String color = request.getParameter("color");
-		String wheel = request.getParameter("wheel");
-		String seet = request.getParameter("seet");
-		String light = request.getParameter("light");
-		String audio = request.getParameter("audio");
-		
-		if(id == null) {
-			id = "test1";
-		}
+		String[] color = request.getParameter("color").split(":");
+		String[] wheel = request.getParameter("wheel").split(":");
+		String[] seet = request.getParameter("seet").split(":");
+		String[] light = request.getParameter("light").split(":");
+		String[] audio = request.getParameter("audio").split(":");
 		
 		SalesDao dao = SalesDao.getInstance();
 		int sMemNum = dao.sMemNum(id);
 		HashMap<String, Integer> carInfo = dao.sCar(carName);
+		int price = carInfo.get("sCarPrice")
+					+ Integer.parseInt(color[1].trim())
+					+ Integer.parseInt(wheel[1].trim())
+					+ Integer.parseInt(seet[1].trim())
+					+ Integer.parseInt(light[1].trim())
+					+ Integer.parseInt(audio[1].trim());
 		
-		System.out.println(sMemNum);
-		System.out.println(carInfo);
+		int sNum = dao.sales(new SalesListVo(0, price, null, sMemNum, carInfo.get("salNum"), null));
+		
+		dao.sSelOpt(color[0].trim(), sNum);
+		dao.sSelOpt(wheel[0].trim(), sNum);
+		dao.sSelOpt(seet[0].trim(), sNum);
+		dao.sSelOpt(light[0].trim(), sNum);
+		dao.sSelOpt(audio[0].trim(), sNum);
+		
+		response.sendRedirect(request.getContextPath() + "/jsp/layout.jsp");
 	}
 	
 	private void choiceName (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -96,6 +106,7 @@ public class SalesController extends HttpServlet {
 		json.put("name", vo.getsCarName());
 		json.put("mainImg", vo.getsMainImg());
 		json.put("subImg", vo.getsSubImg());
+		json.put("price", vo.getsCarPrice());
 		json.put("list", arr);
 		
 		pw.print(json);

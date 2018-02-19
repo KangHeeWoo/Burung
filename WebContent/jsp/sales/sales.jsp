@@ -19,41 +19,44 @@
 	<hr>
 	<img id="subImg">
 	<div id="selOpt">
-		<form method="post" action="${pageContext.request.contextPath }/sales.do?cmd=buy">
+		<!-- action="${pageContext.request.contextPath }/sales.do?cmd=buy" -->
+		<form name="frm" method="post" onsubmit="return buy()" action="${pageContext.request.contextPath }/sales.do?cmd=buy">
+			<input type="hidden" name="id" value="${sessionScope.id }">
 			<input type="hidden" name="name" value="${name }">
 			<h3>옵션 선택</h3>
 			<br><hr><br>
 			<span class="type">Color</span>
-			<span><input type="radio" name="color" value="white" checked="checked"> White</span>
-			<span><input type="radio" name="color" value="black"> Black</span>
-			<span><input type="radio" name="color" value="red"> Red</span>
+			<span><input type="radio" name="color" value="white : 100000" checked="checked"> White</span>
+			<span><input type="radio" name="color" value="black : 200000"> Black</span>
+			<span><input type="radio" name="color" value="red : 500000"> Red</span>
 			<br>
 			
 			<span class="type">Wheel</span>
-			<span><input type="radio" name="wheel" value="Steel Wheel" checked="checked"> Steel Wheel</span>
-			<span><input type="radio" name="wheel" value="Alloy Wheel"> Alloy Wheel</span>
-			<span><input type="radio" name="wheel" value="Flow Forming Wheel"> Flow Forming Wheel</span>
+			<span><input type="radio" name="wheel" value="Steel Wheel : 100000" checked="checked"> Steel Wheel</span>
+			<span><input type="radio" name="wheel" value="Alloy Wheel : 300000"> Alloy Wheel</span>
+			<span><input type="radio" name="wheel" value="Flow Forming Wheel : 600000"> Flow Forming Wheel</span>
 			<br>
 			
 			<span class="type">Seet</span>
-			<span><input type="radio" name="seet" value="Corrected Grain" checked="checked"> Corrected Grain</span>
-			<span><input type="radio" name="seet" value="Full Grain"> Full Grain</span>
-			<span><input type="radio" name="seet" value="Split Leather"> Split Leather</span>
+			<span><input type="radio" name="seet" value="Corrected Grain : 2000000" checked="checked"> Corrected Grain</span>
+			<span><input type="radio" name="seet" value="Full Grain : 2500000"> Full Grain</span>
+			<span><input type="radio" name="seet" value="Split Leather : 5000000"> Split Leather</span>
 			<br>
 			
 			<span class="type">Light</span>
-			<span><input type="radio" name="light" value="HID" checked="checked"> HID</span>
-			<span><input type="radio" name="light" value="Hollogen"> Hollogen</span>
-			<span><input type="radio" name="light" value="LED"> LED</span>
+			<span><input type="radio" name="light" value="HID : 200000" checked="checked"> HID</span>
+			<span><input type="radio" name="light" value="Hollogen : 500000"> Hollogen</span>
+			<span><input type="radio" name="light" value="LED : 600000"> LED</span>
 			<br>
 			
 			<span class="type">Audio</span>
-			<span><input type="radio" name="audio" value="JBL" checked="checked"> JBL</span>
-			<span><input type="radio" name="audio" value="BOSS"> BOSS</span>
-			<span><input type="radio" name="audio" value="B&O"> B&O</span>
+			<span><input type="radio" name="audio" value="JBL : 1500000" checked="checked"> JBL</span>
+			<span><input type="radio" name="audio" value="BOSS : 2200000"> BOSS</span>
+			<span><input type="radio" name="audio" value="B&O : 1800000"> B&O</span>
 			<br>
 			<br><hr><br>
 			<input id="optSub" type="submit" value="구매하기">
 		</form>
 	</div>
 </div>
+

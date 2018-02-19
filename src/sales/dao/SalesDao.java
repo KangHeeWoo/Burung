@@ -23,44 +23,63 @@ public class SalesDao {
 	public int sales(SalesListVo vo) {
 		Connection con = null;
 		PreparedStatement st = null;
+		PreparedStatement st2 = null;
 		ResultSet rs = null;
 
 		try {
 			con = DbcpBean.getConn();
 
-			String sql = "select salnum from salescar where scarname = ?";
+			String sql = "insert into saleslist values(0, ?, ?, ?, ?, sysdate)";
 			st = con.prepareStatement(sql);
-			rs = st.executeQuery();
+			st.setInt(1, vo.getSalPrice());
+			st.setString(2, "인수대기");
+			st.setInt(3, vo.getMemNum());
+			st.setInt(4, vo.getSalNum());
+			st.executeUpdate();
+			
+			sql = "select max(slistnum) from saleslist";
+			st2 = con.prepareStatement(sql);
+			rs = st2.executeQuery();
 			rs.next();
+			
 			return rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return -1;
 		} finally {
-			DbcpBean.close(con, st, rs);
+			DbcpBean.close(null, st2, rs);
+			DbcpBean.close(con, st, null);
 		}
 	}
 	
-	public int sSelOpt(String opt) {
+	public int sSelOpt(String opt, int sNum) {
 		Connection con = null;
 		PreparedStatement st = null;
+		PreparedStatement st2 = null;
 		ResultSet rs = null;
 
 		try {
 			con = DbcpBean.getConn();
-
-			String sql = "select salnum from salescar where scarname = ?";
+			
+			String sql = "select optnum from caroption where optinfo = ?";
 			st = con.prepareStatement(sql);
 			st.setString(1, opt);
 			rs = st.executeQuery();
 			rs.next();
-			return rs.getInt(1);
+			
+			sql = "insert into selectoption values(0, ?, ?)";
+			st2 = con.prepareStatement(sql);
+			st2.setInt(1, sNum);
+			st2.setInt(2, rs.getInt(1));
+			
+			return st2.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return -1;
 		} finally {
+			DbcpBean.close(st2);
 			DbcpBean.close(con, st, rs);
 		}
 	}
@@ -152,7 +171,7 @@ public class SalesDao {
 			con = DbcpBean.getConn();
 
 			String sql = "select * from "
-					+ "(select salNum, sCarName, sCarModel, salCnt from SALESCAR where SCARNAME=?), "
+					+ "(select salNum, sCarName, sCarModel, salCnt, scarprice from SALESCAR where SCARNAME=?), "
 					+ "(select scarimgname smainimg from scarimg s where s.salNum in("
 					+ "select salNum from SALESCAR where SCARNAME=?) and SCARIMGNAME like '%main%'), "
 					+ "(select scarimgname ssubimg from scarimg s where s.salNum in("
@@ -163,9 +182,8 @@ public class SalesDao {
 			st.setString(3, sCarName);
 			rs = st.executeQuery();
 			rs.next();
-
-			return new SalesVo(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5),
-					rs.getString(6));
+			
+			return new SalesVo(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getString(7));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

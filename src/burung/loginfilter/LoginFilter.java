@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter("/jsp")
+@WebFilter("/jsp/*")
 public class LoginFilter implements Filter {
 
 	/**
@@ -31,12 +31,19 @@ public class LoginFilter implements Filter {
 
 		// pass the request along the filter chain
 		String spage = req.getParameter("spage");
-		switch(spage) {
-		case "Board/boardinsert.jsp":
-		//case "Board/boardinsert.jsp":
+		if(spage != null) {
+			switch(spage) {
+			case "Board/boardinsert.jsp":
 			//원하는 경로 case 추가
-			loginCheck(req, resp, chain);
-			break;
+			//case "Board/boardinsert.jsp":
+				loginCheck(req, resp, chain);
+				break;
+			default:
+				chain.doFilter(req, resp);
+				break;
+			}
+		}else {
+			chain.doFilter(req, resp);
 		}
 	}
 
@@ -63,7 +70,7 @@ public class LoginFilter implements Filter {
 			chain.doFilter(req, resp);
 		} else {
 			HttpServletResponse response = (HttpServletResponse) resp;
-			response.sendRedirect(request.getContextPath() + "/jsp/layout.jsp?spage=members/login.jsp");
+			response.sendRedirect(request.getContextPath() + "/members.do?cmd=loginpage");
 		}
 	}
 }
