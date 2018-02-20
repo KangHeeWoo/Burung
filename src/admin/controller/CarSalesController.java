@@ -45,7 +45,7 @@ public class CarSalesController extends HttpServlet{
 			int lendRow=lstartRow+4;
 			
 			SalesCarDao dao=new SalesCarDao();
-			ArrayList<SalesCarVo> list=dao.list();
+			ArrayList<SalesCarVo> list=dao.list(startRow,endRow);
 			SaleListDao listdao=new SaleListDao();
 			ArrayList<SaleListVo> saleslist=listdao.list(lstartRow, lendRow);
 			

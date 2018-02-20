@@ -36,7 +36,7 @@ public class MemberList extends HttpServlet{
 			ArrayList<MemberVo> list= dao.listAll(startRow,endRow);
 			
 			//전체페이지 갯수 구하기
-			int pageCount=(int)Math.ceil(dao.getCount()/10.0)-1;
+			int pageCount=(int)Math.ceil(dao.getCount()/10.0);
 			int startPage=((pageNum-1)/4*4)+1;//시작페이지 번호
 			int endPage=startPage+3;// 끝페이지 번호	//4페이지
 			if(pageCount<endPage) {
@@ -95,7 +95,7 @@ public class MemberList extends HttpServlet{
 			request.setAttribute("rpageCount", rpageCount);//렌트페이지전체
 			request.setAttribute("spageCount", spageCount);//구매페이지전체
 			request.setAttribute("sstartPage", sstartPage);//구매
-			request.setAttribute("rstartPage", rstartPage);//구매
+			request.setAttribute("rstartPage", rstartPage);//렌트
 			request.setAttribute("rendPage", rendPage);//렌트끝페이지
 			request.setAttribute("sendPage", sendPage);//구매끝페이지
 			request.setAttribute("pageNum", pageNum);//구매

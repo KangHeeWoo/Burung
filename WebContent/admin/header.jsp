@@ -19,7 +19,7 @@
 <ul id="menu">
 	<li><a href="<%=request.getContextPath() %>/semi/list.do?cmd=memberlist">회원관리</a> &nbsp;
 	<li><a href="<%=request.getContextPath() %>/semi/sales.do?cmd=carlist">구매관리</a> &nbsp;</li>
-	<li><a href="">렌트관리</a> &nbsp;</li>
+	<li><a href="<%=request.getContextPath() %>/semi/rent.do?cmd=rentlist">렌트관리</a> &nbsp;</li>
 	<li><a href="#">공지사항관리</a>
 </ul>
 <hr>

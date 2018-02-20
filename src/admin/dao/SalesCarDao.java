@@ -29,14 +29,16 @@ public class SalesCarDao {
 		}
 	}
 	
-	public ArrayList<SalesCarVo> list(){
+	public ArrayList<SalesCarVo> list(int startRow,int endRow){
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from salescar";
+		String sql="select * from (select sc.*,rownum rnum from(select * from salescar order by salnum desc)sc) where rnum>=? and rnum<=?";
 		try {
 			conn=DbcpBean.getConn();
 			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			rs=pstmt.executeQuery();
 			ArrayList<SalesCarVo> list=new ArrayList<>();
 			while(rs.next()) {

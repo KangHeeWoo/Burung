@@ -22,7 +22,7 @@ public class MemberDao {
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			rs.next();
-			return rs.getInt("cnt");
+			return rs.getInt("cnt")-1;
 		}catch(SQLException se){
 			System.out.println(se.getMessage());
 			return -1;
@@ -93,5 +93,4 @@ public class MemberDao {
 			DbcpBean.close(con, pstmt, rs);
 		}
 	}
-
 }

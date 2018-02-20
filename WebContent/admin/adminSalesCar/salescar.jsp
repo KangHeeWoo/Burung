@@ -32,13 +32,40 @@ table.type11 td {
  img{width:120px;height: 60px;vertical-align:middle;} 
 
 </style>
-
+<script type="text/javascript">
+	function addCar(){
+		var div=document.getElementById("caradd");
+		div.style.display="block";
+	}
+	function showAdd(){
+		window.open("<%=request.getContextPath()%>/semi/sales.do?cmd=carinsert","add","width=250,height=500,left=100,top=50");
+	}
+</script>
 </head>
 <body>
+<span style="margin-left: 90%;"><button onclick="showAdd()">신규차량등록</button></span>
+<!-- 
 <span style="margin-left: 90%;"><button onclick="location.href='<%=request.getContextPath()%>/semi/sales.do?cmd=carinsert'">신규차량등록</button></span>
+ -->
 <!-- 
 <input type="button" value="차량등록" onclick="location.href='<%=request.getContextPath()%>/semi/sales.do?cmd=carinsert'">
  -->
+ <div id="caradd" style="display: none">
+<h2>신규차량등록</h2>
+<form action="<%=request.getContextPath() %>/semi/sales.do?cmd=insertOk" method="post" enctype="multipart/form-data">
+차량이름<br>
+<input type="text" name="scarName"><br>
+차량모델<br>
+<input type="text" name="scarModel"><br>
+수량<br>
+<input type="text" name="salCnt"><br>
+차량가격<br>
+<input type="text" name="scarPrice"><br><br>
+메인이미지<input type="file" name="main"><br>
+서브이미지<input type="file" name="sub"><br><br>
+<input type="submit" value="등록">
+</form>
+ </div>
 <form>
 <h2>등록된차량</h2>
 <table class="type11">
@@ -75,12 +102,12 @@ table.type11 td {
 	<c:forEach var="i" begin="${startPage }" end="${endPage }">
 		<c:choose>
 			<c:when test="${pageNum==i }">
-				<a href="<%=request.getContextPath() %>/semi/sales.do?pageNum=${i}&cmd=carlist">
+				<a href="<%=request.getContextPath() %>/semi/sales.do?pageNum=${i}&cmd=carlist&lpageNum=${lpageNum}">
 				<span style="color:blue">[${i }]</span>
 				</a>
 			</c:when>
 			<c:otherwise>
-				<a href="<%=request.getContextPath() %>/semi/sales.do?pageNum=${i}&cmd=carlist">
+				<a href="<%=request.getContextPath() %>/semi/sales.do?pageNum=${i}&cmd=carlist&lpageNum=${lpageNum}">
 				<span style="color:gray">[${i }]</span>
 				</a>
 			</c:otherwise>
@@ -133,12 +160,12 @@ table.type11 td {
 	<c:forEach var="i" begin="${lstartPage }" end="${lendPage }">
 		<c:choose>
 			<c:when test="${lpageNum==i }">
-				<a href="<%=request.getContextPath() %>/semi/sales.do?lpageNum=${i}&cmd=carlist">
+				<a href="<%=request.getContextPath() %>/semi/sales.do?lpageNum=${i}&cmd=carlist&pageNum=${pageNum}">
 				<span style="color:blue">[${i }]</span>
 				</a>
 			</c:when>
 			<c:otherwise>
-				<a href="<%=request.getContextPath() %>/semi/sales.do?lpageNum=${i}&cmd=carlist">
+				<a href="<%=request.getContextPath() %>/semi/sales.do?lpageNum=${i}&cmd=carlist&pageNum=${pageNum}">
 				<span style="color:gray">[${i }]</span>
 				</a>
 			</c:otherwise>
