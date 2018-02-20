@@ -116,6 +116,7 @@ public class BoardController extends HttpServlet {
 	 }
 	   protected void boardList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	      String spageNum=request.getParameter("pageNum"); 
+	      //검색기능
 	      String search=request.getParameter("search");
 	      String searchValue=request.getParameter("searchValue");
 	      int pageNum=1;
@@ -135,16 +136,16 @@ public class BoardController extends HttpServlet {
 	      
 	      BoardDao dao=BoardDao.getInstance();
 	      ArrayList<BoardMemVo> listAll=dao.listAll(startRow, endRow,search,searchValue);
-	      System.out.println("listAll"+listAll);
+	      //System.out.println("listAll"+listAll);
 	      int pageCount=(int)Math.ceil(dao.getCount()/10.0);
 	      int startPage=((pageNum-1)/10*10)+1;
 	      int endPage=startPage+9;//끝페이지
-	      System.out.println(endPage);
+	     // System.out.println(endPage);
 	      if(pageCount<endPage) {
 				endPage=pageCount;
 				
 		}
-	      System.out.println(endPage+"," +pageCount);
+	     // System.out.println(endPage+"," +pageCount);
 	  	request.setAttribute("listAll", listAll);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("startPage", startPage);

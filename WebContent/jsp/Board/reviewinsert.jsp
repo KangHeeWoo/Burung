@@ -74,17 +74,17 @@
 	
 		
 		for(var i=0;i<cnt;i++){			
-		var tr=document.createElement("tr");
-		var td=document.createElement("td");
-		var td2=document.createElement("td");
-		var input=document.createElement("input");
-		td.innerHTML="첨부파일"+(i+1);
-		input.type="file";
-		input.name="file"+i;
-		td2.appendChild(input);
-		tr.appendChild(td);
-		tr.appendChild(td2);
-		table.appendChild(tr);
+			var tr=document.createElement("tr");
+			var td=document.createElement("td");
+			var td2=document.createElement("td");
+			var input=document.createElement("input");
+			td.innerHTML="첨부파일"+(i+1);
+			input.type="file";
+			input.name="file"+i;
+			td2.appendChild(input);
+			tr.appendChild(td);
+			tr.appendChild(td2);
+			table.appendChild(tr);
 		}
 		
 		var tr2=document.createElement("tr");

@@ -1,9 +1,11 @@
 package board.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import board.vo.ReviewVo;
 import burung.dbcp.DbcpBean;
@@ -119,7 +121,7 @@ public class ReviewDao {
 			rs=pstmt2.executeQuery();
 			rs.next();
 						
-			
+			//insert후 마지막 revnum리턴
 			return rs.getInt(1); 
 			
 		}catch(SQLException se) {
@@ -127,6 +129,44 @@ public class ReviewDao {
 			return -1;
 		}finally {
 			DbcpBean.close(conn, pstmt, null);
+		}
+	}
+	public ArrayList<ReviewVo> listAll(int startRow,int endRow){
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<ReviewVo> list=new ArrayList<>();
+		
+		try {
+			conn=DbcpBean.getConn();
+			String sql="select * from(select aa.*,rownum rnum from(select revnum,revcontent,revscore, revtitle,revhit,revRegd,m.memid memid from review r,members m where m.memNum=r.memNum order by revregd desc)aa)where rnum>=? and rnum<=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				int revnum=rs.getInt("revnum");
+				String revtitle=rs.getString("revtitle");
+				String revcontent=rs.getString("revcontent");
+				int revhit=rs.getInt("revhit");
+				int revscore=rs.getInt("revscore");
+				Date revregd=rs.getDate("revregd");
+				int memnum=rs.getInt("memnum");
+				String memid=rs.getString("memid");
+				ReviewVo vo=new ReviewVo(revnum, revtitle, revcontent, revscore, revhit, revregd, memnum, memid);
+				list.add(vo);
+				
+				
+				System.out.println(vo);
+				
+			}
+			return list;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			DbcpBean.close(conn, pstmt, rs);
 		}
 	}
 	

@@ -10,6 +10,7 @@ public class ReviewVo {
 	private int revHit;
 	private Date revRegd;
 	private int memNum;
+	private String memId;
 	public ReviewVo(int revNum, String revTitle, String revContent, int revScore, int revHit, Date revRegd,
 			int memNum) {
 		super();
@@ -21,11 +22,29 @@ public class ReviewVo {
 		this.revRegd = revRegd;
 		this.memNum = memNum;
 	}
+	public ReviewVo(int revNum, String revTitle, String revContent, int revScore, int revHit, Date revRegd,int memNum,String memId) {
+		super();
+		this.revNum = revNum;
+		this.revTitle = revTitle;
+		this.revContent = revContent;
+		this.revScore = revScore;
+		this.revHit = revHit;
+		this.revRegd = revRegd;
+		this.memNum = memNum;
+		this.memId=memId;
+	}
 	
 	public ReviewVo() {}
+	
+	public String getMemId() {
+		return memId;
+	}
 
 	public int getRevNum() {
 		return revNum;
+	}
+	public void setMemId(String memId) {
+		this.memId = memId;
 	}
 
 	public void setRevNum(int revNum) {
