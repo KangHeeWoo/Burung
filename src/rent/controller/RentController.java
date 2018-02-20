@@ -18,9 +18,13 @@ public class RentController extends HttpServlet{
 		String cmd = request.getParameter("cmd");
 		
 		switch (cmd) {
-		case "rentpage":
-			response.sendRedirect(request.getContextPath() + "/jsp/layout.jsp?spage=rent/rent.jsp");
+		case "rentlist":
+			rentList(request, response);
 			break;
 		}
+	}
+	
+	private void rentList (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.sendRedirect(request.getContextPath() + "/jsp/layout.jsp?spage=rent/rent.jsp");		
 	}
 }

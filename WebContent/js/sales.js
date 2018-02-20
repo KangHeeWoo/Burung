@@ -42,8 +42,6 @@ function getData(){
 		mainImg.src = "../img/" + data.mainImg;
 		subImg.src = "../img/" + data.subImg;
 		price = data.price;
-		
-		console.log(price);
 	}
 }
 function buy(){

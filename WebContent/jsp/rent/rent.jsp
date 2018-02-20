@@ -63,9 +63,4 @@
 		<option value="23:00">23:00</option>
 	</select>
 </div>
-<div id="rentList">
-<h1>차량리스트</h1>
-<h1>차량리스트</h1>
-<h1>차량리스트</h1>
-<h1>차량리스트</h1>
-</div>
+<div id="rentList"></div>
