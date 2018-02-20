@@ -203,10 +203,10 @@ public class BoardDao {
             String memid=rs.getString("memid");
             BoardMemVo vo=new BoardMemVo(boanum,boatitle, boahit, boaRegd, memid);
             list.add(vo);
-            System.out.println(vo);
+            //System.out.println(vo);
             
          }
-         System.out.println(list);
+         //System.out.println(list);
          return list;
          
       }catch(SQLException se) {

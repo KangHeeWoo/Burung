@@ -19,9 +19,10 @@
 		<!-- ---------------------------------------------------------------------------------- -->
 		
 		
-		<c:forEach var="board" items="${listAll }">
+		<c:forEach var="review" items="${listAll }">
 		<tr>
-			<td>${board. }</td>
+			<td>${review.memid }</td>
+			<td></td>
 			<td><a href="board.do?cmd=boardDetail&boanum=${board.boanum }&memid=${board.memid}">${board.boatitle }</a></td>
 			<td>${board. }</td>
 			<td>${board. }</td>
