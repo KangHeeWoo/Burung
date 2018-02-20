@@ -78,7 +78,7 @@
 		var td=document.createElement("td");
 		var td2=document.createElement("td");
 		var input=document.createElement("input");
-		td.innerHTML="첨부파일"+i;
+		td.innerHTML="첨부파일"+(i+1);
 		input.type="file";
 		input.name="file"+i;
 		td2.appendChild(input);
@@ -92,7 +92,7 @@
 		var input2=document.createElement("input");
 		td3.colspan=2;
 		input2.type="submit";
-		input2.name="등록";
+		input2.value="등록";
 		td3.appendChild(input2);
 		tr2.appendChild(td3);
 		table.appendChild(tr2);

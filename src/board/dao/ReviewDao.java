@@ -102,7 +102,8 @@ public class ReviewDao {
 	public int reviewinsert(ReviewVo vo) {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
-		
+		PreparedStatement pstmt2=null;
+		ResultSet rs=null;
 		try {
 			conn=DbcpBean.getConn();
 			String sql="insert into review values(0,?,?,?,0,sysdate,?)";
@@ -111,7 +112,16 @@ public class ReviewDao {
 			pstmt.setString(2, vo.getRevContent());
 			pstmt.setInt(3, vo.getRevScore());
 			pstmt.setInt(4, vo.getMemNum());
-			return pstmt.executeUpdate();
+			pstmt.executeUpdate();
+			
+			String sql2="select max(revnum) from review";
+			pstmt2=conn.prepareStatement(sql2);
+			rs=pstmt2.executeQuery();
+			rs.next();
+						
+			
+			return rs.getInt(1); 
+			
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;

@@ -56,12 +56,12 @@ public class ReviewController extends HttpServlet{
 				
 				
 				
-				System.out.println("파일 업로드 정보 받아오는가 번호"+memNum+"아이디"+memid+" 제목"+revTitle
-						+"내용"+revContent+"스코어"+revScore+"차종"+carname);
+				//System.out.println("파일 업로드 정보 받아오는가 번호"+memNum+"아이디"+memid+" 제목"+revTitle+"내용"+revContent+"스코어"+revScore+"차종"+carname);
 				
 				
 				ReviewVo vo=new ReviewVo(0, revTitle, revContent, revScore, 0, null, memNum);
 				ReviewDao dao=ReviewDao.getInstance();
+				int n=dao.reviewinsert(vo);
 				
 				
 				
