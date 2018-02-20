@@ -69,13 +69,15 @@ public class RentListDao {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from (select rl.*,rownum rnum from(select * from rentlist order by rlistnum desc)rl)rl, rentcar rc where memnum=? and rl.rennum=rc.rennum and rnum>=1 and rnum<=100";
+		ArrayList<RentListVo> list=new ArrayList<>();
 		try {
 			con=DbcpBean.getConn();
+			
+			String sql = "select * from rentlist l, rentcar c where l.memnum=? and l.rennum=c.rennum order by rlistnum desc";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, memNum);
 			rs=pstmt.executeQuery();
-			ArrayList<RentListVo> list=new ArrayList<>();
+			
 			while(rs.next()) {
 				int rListNum=rs.getInt("rListNum");
 				Date rStartDate=rs.getDate("rStartDate");

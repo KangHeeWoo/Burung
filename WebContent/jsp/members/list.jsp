@@ -35,18 +35,18 @@
 		<th>반납시간</th>
 		<th>총 대여료</th>
 		<th>렌트상태</th>
-		<th>회원번호</th>
 		<th>렌트차량번호</th>
+		<th>후기</th>
 	</tr>
 	<c:forEach var = "rent" items="${rentlist }">
 	<tr>
 		<td>${rent.rListNum }</td>
 		<td>${rent.rStartDate }</td>
 		<td>${rent.rEndDate }</td>
-		<td>${rent.rTotP }</td>
+		<td>${rent.rTotPrice }</td>
 		<td>${rent.renState }</td>
-		<td>${rent.memNum }</td>
-		<td>${rent.renNum }</td>
+		<td>${rent.rCarName }</td>
+		<td><a href="#">후기</a></td>
 	</tr>	
 	</c:forEach>
 </table>
@@ -57,16 +57,18 @@
 		<th>구매내역번호</th>
 		<th>구매가격</th>
 		<th>인수상태</th>
-		<th>회원번호</th>
 		<th>구매차량번호</th>
+		<th>후기</th>
 	</tr>
-	<tr>
-		<td>${salelist.sListNum }</td>
-		<td>${salelist.salPrice }</td>
-		<td>${salelist.salState }</td>
-		<td>${salelist.memNum }</td>
-		<td>${salelist.salNum }</td>
-	</tr>
+	<c:forEach var="sale" items="${salelist}">
+		<tr>
+			<td>${sale.sListNum }</td>
+			<td>${sale.salPrice }</td>
+			<td>${sale.salState }</td>
+			<td>${sale.scarName }</td>
+			<td><a href="#">후기</a></td>
+		</tr>
+	</c:forEach>
 </table>
 
 <br>

@@ -8,7 +8,23 @@
 		<c:set var="name" value="${param.name }"/>
 	</c:when>
 	<c:otherwise>
-		<c:set var="name" value="718 Cayman Models"/>
+		<c:choose>
+			<c:when test="${param.model == '718' }">
+				<c:set var="name" value="718 Cayman Models"/>
+			</c:when>
+			<c:when test="${param.model == '911' }">
+				<c:set var="name" value="911 Carrera Models"/>
+			</c:when>
+			<c:when test="${param.model == 'Panamera' }">
+				<c:set var="name" value="Panamera Models"/>
+			</c:when>
+			<c:when test="${param.model == 'Cayenne' }">
+				<c:set var="name" value="Macan Models"/>
+			</c:when>
+			<c:when test="${param.model == 'Macan' }">
+				<c:set var="name" value="Cayenne Models"/>
+			</c:when>
+		</c:choose>
 	</c:otherwise>
 </c:choose>
 <span style="display: none;" id="model">${param.model }</span>
@@ -19,7 +35,6 @@
 	<hr>
 	<img id="subImg">
 	<div id="selOpt">
-		<!-- action="${pageContext.request.contextPath }/sales.do?cmd=buy" -->
 		<form name="frm" method="post" onsubmit="return buy()" action="${pageContext.request.contextPath }/sales.do?cmd=buy">
 			<input type="hidden" name="id" value="${sessionScope.id }">
 			<input type="hidden" name="name" value="${name }">

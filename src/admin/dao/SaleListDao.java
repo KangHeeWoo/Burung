@@ -84,7 +84,38 @@ public class SaleListDao {
 	}
 	
 	public ArrayList<SaleListVo> saleDetatil(int memNum){	//회원 구매내역 상세보기
-		return null;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<SaleListVo> list = new ArrayList<>();
+		
+		try {
+			con = DbcpBean.getConn();
+			
+			String sql = "select * from salelist l, salescar c where l.memnum=? and l.salnum = c.salnum order by salnum desc";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, memNum);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				int sListNum=rs.getInt("sListNum");
+				int salPrice=rs.getInt("salPrice");
+				String salState=rs.getString("salState");
+				int salNum=rs.getInt("salNum");
+				Date salDate=rs.getDate("salDate");
+				String sCarModel=rs.getString("scarName");
+				SaleListVo vo=new SaleListVo(sListNum, salPrice, salState, salNum, salDate, sCarModel);
+				list.add(vo);
+			}
+			
+			return list;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} finally {
+			DbcpBean.close(con, pstmt, rs);
+		}
 	}
 	
 	public ArrayList<SaleListVo> list(int startRow,int endRow){
