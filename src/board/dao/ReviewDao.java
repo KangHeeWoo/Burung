@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import board.vo.ReviewVo;
 import burung.dbcp.DbcpBean;
 
 public class ReviewDao {
@@ -98,4 +99,25 @@ public class ReviewDao {
 			DbcpBean.close(conn, pstmt, rs);
 		}
 	}
+	public int reviewinsert(ReviewVo vo) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		
+		try {
+			conn=DbcpBean.getConn();
+			String sql="insert into review values(0,?,?,?,0,sysdate,?)";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getRevTitle());
+			pstmt.setString(2, vo.getRevContent());
+			pstmt.setInt(3, vo.getRevScore());
+			pstmt.setInt(4, vo.getMemNum());
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DbcpBean.close(conn, pstmt, null);
+		}
+	}
+	
 }
