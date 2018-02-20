@@ -26,7 +26,7 @@ public class BoardDao {
       ResultSet rs = null;
       try {
          conn =DbcpBean.getConn();
-         String sql = "select NVL(max(num),0) maxnum from board";
+         String sql = "select NVL(max(boanum),0) maxnum from board";
          pstmt = conn.prepareStatement(sql);
          rs = pstmt.executeQuery();
          rs.next();

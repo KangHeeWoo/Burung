@@ -92,7 +92,7 @@ public class SaleListDao {
 		try {
 			con = DbcpBean.getConn();
 			
-			String sql = "select * from salelist l, salescar c where l.memnum=? and l.salnum = c.salnum order by salnum desc";
+			String sql = "select * from saleslist l, salescar c where l.memnum=? and l.salnum = c.salnum order by l.salnum desc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, memNum);
 			rs = pstmt.executeQuery();

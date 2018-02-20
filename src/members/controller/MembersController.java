@@ -61,7 +61,7 @@ public class MembersController extends HttpServlet {
 
 		members.vo.MembersVo members = new MembersVo(memId, memPwd, memAddr, memPhone, memEmail, memBirth, memName);
 
-		MembersDao dao = new MembersDao();
+		MembersDao dao = MembersDao.getInstance();
 
 		int n = dao.insert(members);
 		if (n > 0) {
@@ -81,7 +81,7 @@ public class MembersController extends HttpServlet {
 		map.put("memId", memId);
 		map.put("memPwd", memPwd);
 
-		MembersDao dao = new MembersDao();
+		MembersDao dao = MembersDao.getInstance();
 
 		int n = dao.login(map);
 
@@ -117,7 +117,7 @@ public class MembersController extends HttpServlet {
 		String memBirth = (String) request.getSession().getAttribute("memBirth");
 		String memName = (String) request.getSession().getAttribute("memName");
 
-		MembersDao dao = new MembersDao();
+		MembersDao dao = MembersDao.getInstance();
 
 		members.vo.MembersVo members = dao.list(memId);
 
@@ -136,7 +136,7 @@ public class MembersController extends HttpServlet {
 		String memBirth = request.getParameter("memBirth");
 		String memName = request.getParameter("memName");
 
-		MembersDao dao = new MembersDao();
+		MembersDao dao = MembersDao.getInstance();
 		members.vo.MembersVo members = new MembersVo(memId, memPwd, memAddr, memPhone, memEmail, memBirth, memName);
 		int n = dao.update(members);
 		if (n > 0) {
@@ -166,7 +166,7 @@ public class MembersController extends HttpServlet {
 		// 1. 세션이 가지고있는 memId 정보 가져오기
 		String memId = (String) request.getSession().getAttribute("id"); 
 		// 2. DB 연결	
-		MembersDao Mdao = new MembersDao();
+		MembersDao Mdao = MembersDao.getInstance();
 		RentListDao Rdao = new RentListDao();
 		SaleListDao Sdao = new SaleListDao();
 		// 3. DB값을 VO로 대입

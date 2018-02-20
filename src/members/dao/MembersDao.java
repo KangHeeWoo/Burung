@@ -7,11 +7,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import board.dao.BoardDao;
 import burung.dbcp.DbcpBean;
 import members.vo.MembersVo;
 
 public class MembersDao {
-
+	  private static MembersDao instance=new MembersDao();
+	   private MembersDao() {}
+	   public static MembersDao getInstance() {
+	      return instance;
+	   }
 	public int insert(MembersVo user) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -145,7 +150,30 @@ public class MembersDao {
 			System.out.println(se.getMessage());
 			return null;
 		}finally {
-			DbcpBean.close(con);
+			DbcpBean.close(con, pstmt, rs);
+		}
+	}
+	
+	//세션아이디로 회원번호 리턴
+	public int memnum(String id) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			conn=DbcpBean.getConn();
+			String sql="select memnum from members where memid=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("memnum");
+			}
+			return -1;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DbcpBean.close(conn, pstmt, rs);
 		}
 	}
 }

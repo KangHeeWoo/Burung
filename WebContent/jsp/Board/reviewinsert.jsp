@@ -14,21 +14,33 @@
 		<c:set var="title" value=""/>
 		<c:set var="content" value=""/>
 	</c:if>
-<form method="post" action="${pageContext.request.contextPath }/jsp/Board/reviewinsert.jsp">
+	
+	
+<form method="post" action="${pageContext.request.contextPath }/jsp/layout.jsp?spage=Board/reviewinsert.jsp">
 	<table border="1" width="500">
 		<tr>
 			<td>점수</td>
-			<td><input type="number" min="1" max="5" name="revscore"></td>
+			<td><input type="number" min="1" max="5" name="revscore" value="${param.revscore }"></td>
 		</tr>
 		<tr>
 			<td>작성자</td>
-			<td><input type="text" name="memid" value="${sessionScope.id }"  readonly="readonly"></td>
+			<td><input type="text" name="memid" value="${sessionScope.id }"  readonly="readonly">
+			<input type="hidden"  name="memnum" value="${memnum }"></td>
 		</tr>
 		<tr>
-			<td>차종</td>
-			<td><input type="text" name="memid" value="${scarname }"  readonly="readonly"></td>
+		<!-- 구매 렌트에 따라 다른 차종으로 불러와야함 1.구매 2.렌트 -->
+		<c:choose>
+			<c:when test="${num==1 }">
+				<td>차종</td>
+				<td><input type="text" name="scarname" value="${scarname }"  readonly="readonly"></td>
+			</c:when>
+			<c:otherwise>
+				<td>차종</td>
+				<td><input type="text" name="rcarname" value="${rcarname }"  readonly="readonly"></td>
+			</c:otherwise>
+		</c:choose>
 		</tr>
-			<tr>
+		<tr>
 			<td>제목</td>
 			<td><input type="text" name="title" value="${param.title }"></td>
 		</tr>

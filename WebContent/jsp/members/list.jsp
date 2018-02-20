@@ -46,7 +46,7 @@
 		<td>${rent.rTotPrice }</td>
 		<td>${rent.renState }</td>
 		<td>${rent.rCarName }</td>
-		<td><a href="#">후기</a></td>
+		<td><a href="<%=request.getContextPath()%>/review.do?cmd=reviewinsert&num=2&rlistnum=${rent.rListNum}">후기</a></td>
 	</tr>	
 	</c:forEach>
 </table>
@@ -65,8 +65,8 @@
 			<td>${sale.sListNum }</td>
 			<td>${sale.salPrice }</td>
 			<td>${sale.salState }</td>
-			<td>${sale.scarName }</td>
-			<td><a href="#">후기</a></td>
+			<td>${sale.sCarModel }</td>
+			<td><a href="<%=request.getContextPath()%>/review.do?cmd=reviewinsert&num=1&slistnum=${sale.sListNum}">후기</a></td>
 		</tr>
 	</c:forEach>
 </table>
