@@ -83,6 +83,10 @@ public class SaleListDao {
 		}
 	}
 	
+	public ArrayList<SaleListVo> saleDetatil(int memNum){	//회원 구매내역 상세보기
+		return null;
+	}
+	
 	public ArrayList<SaleListVo> list(int startRow,int endRow){
 		Connection conn=null;
 		PreparedStatement pstmt=null;

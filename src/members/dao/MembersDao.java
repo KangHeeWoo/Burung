@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import burung.dbcp.DbcpBean;
 import members.vo.MembersVo;
-
 
 public class MembersDao {
 
@@ -42,7 +42,7 @@ public class MembersDao {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			con = DbcpBean.getConn();
 			String sql = "select * from members where memId=? and memPwd=?";
@@ -50,7 +50,7 @@ public class MembersDao {
 			pstmt.setString(1, memId);
 			pstmt.setString(2, memPwd);
 			rs = pstmt.executeQuery();
-			
+
 			if (rs.next()) {
 				return 1; // 회원이 맞으면 1리턴
 			} else {
@@ -98,13 +98,14 @@ public class MembersDao {
 			pstmt.setString(1, memId);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
+				int memNum = rs.getInt("memNum");
 				String memPwd = rs.getString("memPwd");
 				String memAddr = rs.getString("memAddr");
 				String memPhone = rs.getString("memPhone");
 				String memEmail = rs.getString("memEmail");
 				String memBirth = rs.getString("memBirth");
 				String memName = rs.getString("memName");
-				MembersVo members = new MembersVo(memId, memPwd, memAddr, memPhone, memEmail, memBirth, memName);
+				MembersVo members = new MembersVo(memNum, memId, memPwd, memAddr, memPhone, memEmail, memBirth, memName);
 				return members;
 			}
 			return null;
@@ -113,6 +114,38 @@ public class MembersDao {
 			return null;
 		} finally {
 			DbcpBean.close(con, pstmt, rs);
+		}
+	}
+
+	public ArrayList<MembersVo> listAll(){
+		
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=DbcpBean.getConn();
+			String sql="select * from members";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			ArrayList<MembersVo> list=new ArrayList<>();
+			while(rs.next()) {
+				String memId=rs.getString("memId");
+				String memPwd=rs.getString("memPwd");
+				String memAddr=rs.getString("memAddr");
+				String memPhone=rs.getString("memPhone");
+				String memEmail=rs.getString("memEmail");
+				String memBirth=rs.getString("memBirth");
+				String memName=rs.getString("memName");
+				
+				MembersVo user=new MembersVo(memId, memPwd, memAddr, memPhone, memEmail, memBirth, memName);
+				list.add(user);
+			}
+			return list;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			DbcpBean.close(con);
 		}
 	}
 }

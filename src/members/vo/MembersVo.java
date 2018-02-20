@@ -1,6 +1,7 @@
 package members.vo;
 
 public class MembersVo {
+	private int memNum;
 	private String memId;	
 	private String memPwd;
 	private String memAddr;
@@ -21,7 +22,26 @@ public class MembersVo {
 		this.memBirth = memBirth;
 		this.memName = memName;
 	}
-
+	
+	public MembersVo(int memNum, String memId, String memPwd, String memAddr, String memPhone, String memEmail,
+			String memBirth, String memName) {
+		super();
+		this.memNum = memNum;
+		this.memId = memId;
+		this.memPwd = memPwd;
+		this.memAddr = memAddr;
+		this.memPhone = memPhone;
+		this.memEmail = memEmail;
+		this.memBirth = memBirth;
+		this.memName = memName;
+	}
+	public int getMemNum() {
+		return memNum;
+	}
+	public void setMemNum(int memNum) {
+		this.memNum = memNum;
+	}
+	
 	public String getMemId() {
 		return memId;
 	}

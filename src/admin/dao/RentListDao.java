@@ -64,4 +64,35 @@ public class RentListDao {
 			DbcpBean.close(con, pstmt, rs);
 		}
 	}
+	
+	public ArrayList<RentListVo> rentDetail1(int memNum){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select * from (select rl.*,rownum rnum from(select * from rentlist order by rlistnum desc)rl)rl, rentcar rc where memnum=? and rl.rennum=rc.rennum and rnum>=1 and rnum<=100";
+		try {
+			con=DbcpBean.getConn();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, memNum);
+			rs=pstmt.executeQuery();
+			ArrayList<RentListVo> list=new ArrayList<>();
+			while(rs.next()) {
+				int rListNum=rs.getInt("rListNum");
+				Date rStartDate=rs.getDate("rStartDate");
+				Date rEndDate=rs.getDate("rEndDate");
+				int rTotPrice=rs.getInt("rTotPrice");
+				String renState=rs.getString("renState");
+				int renNum=rs.getInt("renNum");
+				String rCarName=rs.getString("rCarName");
+				RentListVo vo=new RentListVo(rListNum, rStartDate, rEndDate, rTotPrice, renState, renNum,rCarName);
+				list.add(vo);
+			}
+			return list;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			DbcpBean.close(con, pstmt, rs);
+		}
+	}
 }
