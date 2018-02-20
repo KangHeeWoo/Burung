@@ -22,10 +22,12 @@
 		<c:forEach var="review" items="${listAll }">
 		<tr>
 			<td>${review.memid }</td>
-			<td></td>
-			<td><a href="board.do?cmd=boardDetail&boanum=${board.boanum }&memid=${board.memid}">${board.boatitle }</a></td>
-			<td>${board. }</td>
-			<td>${board. }</td>
+			<td>${review.carname }</td>
+			<!--  <td><a href="board.do?cmd=boardDetail&boanum=${board.boanum }&memid=${board.memid}">${board.boatitle }</a></td>-->
+			
+			<td>${review.revtitle }</td>
+			<td>${review.revregd}</td>
+			<td>${review.revhit}</td>
 		</tr>
 		</c:forEach>
 	</table><br>
@@ -40,7 +42,7 @@
 	<div>
 		<c:choose>
 			<c:when test="${startPage>10 }">
-				<a href="<%=request.getContextPath()%>/board.do?cmd=boardlist&pageNum=${startPage-1 }">[ 이전 ]</a>
+				<a href="<%=request.getContextPath()%>/review.do?cmd=reviewlist&pageNum=${startPage-1 }">[ 이전 ]</a>
 			</c:when>
 			<c:otherwise>[이전]</c:otherwise>
 		</c:choose>
@@ -51,14 +53,14 @@
 					<span style="color:black;">${i } | </span>
 				</c:when>
 				<c:otherwise>
-					<span style="color:gray;"><a href="<%=request.getContextPath()%>/board.do?cmd=boardlist&pageNum=${i }">${i } | </a></span>
+					<span style="color:gray;"><a href="<%=request.getContextPath()%>/review.do?cmd=reviewlist&pageNum=${i }">${i } | </a></span>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		
 		<c:choose>
 			<c:when test="${endPage<pageCount }">
-				<a href="<%=request.getContextPath()%>/board.do?cmd=boardlist&pageNum=${endPage+1 }">[ 다음 ]</a>
+				<a href="<%=request.getContextPath()%>/review.do?cmd=reviewlist&pageNum=${endPage+1 }">[ 다음 ]</a>
 			</c:when>
 			<c:otherwise>[ 다음 ]</c:otherwise>
 		</c:choose>
@@ -66,7 +68,7 @@
 	<br>
 	<select id="search">
 		<option value="s0">==선택하세요==</option>
-		<option value="boatitle">제목</option>
+		<option value="revtitle">제목</option>
 		<option value="memid">작성자</option>
 	</select>
 	<input type="text" id="searchValue" value="${searchValue}">

@@ -139,7 +139,7 @@ public class ReviewDao {
 		
 		try {
 			conn=DbcpBean.getConn();
-			String sql="select * from(select aa.*,rownum rnum from(select revnum,revcontent,revscore, revtitle,revhit,revRegd,m.memid memid from review r,members m where m.memNum=r.memNum order by revregd desc)aa)where rnum>=? and rnum<=?";
+			String sql="select * from(select aa.*,rownum rnum from(select carname,revnum,revcontent,revscore, revtitle,revhit,revRegd,m.memid memid from review r,members m where m.memNum=r.memNum order by revregd desc)aa)where rnum>=? and rnum<=?";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
@@ -154,7 +154,9 @@ public class ReviewDao {
 				Date revregd=rs.getDate("revregd");
 				int memnum=rs.getInt("memnum");
 				String memid=rs.getString("memid");
-				ReviewVo vo=new ReviewVo(revnum, revtitle, revcontent, revscore, revhit, revregd, memnum, memid);
+				String carname=rs.getString("carname");
+				
+				ReviewVo vo=new ReviewVo(revnum, revtitle, revcontent, revscore, revhit, revregd, memnum, memid, carname);
 				list.add(vo);
 				
 				

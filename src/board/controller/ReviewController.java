@@ -55,7 +55,7 @@ public class ReviewController extends HttpServlet{
 		
 		ReviewDao dao=ReviewDao.getInstance();
 		ArrayList<ReviewVo> listAll=dao.listAll(startRow, endRow);
-		
+		//listAll null값 나옵!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		System.out.println("listAll:"+listAll);
 		
 		int pageCount=(int)Math.ceil(dao.getCount()/10.0);
@@ -72,6 +72,7 @@ public class ReviewController extends HttpServlet{
 		request.setAttribute("pageNum", pageNum);
 		request.getRequestDispatcher("jsp/layout.jsp?spage=Board/reviewlist.jsp").forward(request, response);
 	}
+	
 	protected void reviewinsertOk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String uploadPath=request.getServletContext().getRealPath("/jsp/Board/img");
@@ -93,8 +94,7 @@ public class ReviewController extends HttpServlet{
 				
 				//System.out.println("파일 업로드 정보 받아오는가 번호"+memNum+"아이디"+memid+" 제목"+revTitle+"내용"+revContent+"스코어"+revScore+"차종"+carname);
 				
-				
-				ReviewVo vo=new ReviewVo(0, revTitle, revContent, revScore, 0, null, memNum);
+				ReviewVo vo=new ReviewVo(0, revTitle, revContent, revScore, 0, null, memNum, carname);
 				ReviewDao dao=ReviewDao.getInstance();
 				//업뎃후 revnum얻어오기
 				int revnum=dao.reviewinsert(vo);
