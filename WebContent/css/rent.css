@@ -5,15 +5,32 @@
 	src : url('../font/DXPnM-KSCpc-EUC-H_0.ttf') format('truetype');
 }
 
-#date{
-	display: inline-block; 
-	width: 200px;
-}
-
 #date h2{
 	font-family: 'DXme';
+	display: inline-block;
 }
 
-#rentList{
+#rentList div{
+	width:500px;
 	display: inline-block;
+}
+
+#rentList div img{
+	width:90%;
+	margin : 10px;
+}
+
+#rentList div a{
+	text-decoration: none;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#listSearch {
+	background-color: #555555;
+	border: none;
+    color: white;
+    width: 100px;
+    height: 26px;
+    font-size: 15px;
 }

@@ -1,14 +1,16 @@
-window.onload = function(){
-	var date = new Date();
-	var y = date.getFullYear();
-	var m = date.getMonth() + 1;
-	var d = date.getDate();
+function checkDate(){
+	var sDate = frm.sDate.value;
+	var sTime = frm.sTime.value;
+	var eDate = frm.eDate.value;
+	var eTime = frm.eTime.value;
 	
-	var sdate = document.getElementById("sdate");
-	var edate = document.getElementById("edate");
+	if(new Date(sDate + " " + sTime) <= new Date()){
+		alert('대여일은 현재 날짜보다 빠를 수 없습니다.');
+		return false;
+	}
 	
-	if(m < 10) m = "0" + m;
-	
-	sdate.defaultValue = y + "-" + m + "-" + d;
-	edate.defaultValue = y + "-" + m + "-" + (d+1);
+	if(new Date(sDate + " " + sTime) >= new Date(eDate + " " + eTime)){
+		alert('반납일은 대여일보다 빠를 수 없습니다.');
+		return false;
+	}
 }
