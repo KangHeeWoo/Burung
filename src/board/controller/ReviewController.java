@@ -44,10 +44,21 @@ public class ReviewController extends HttpServlet{
 	      	break;
 	      case "reviewdelete":reviewdelete(request,response);
 	      	break;
-	      
+	      case "loginOk" :loginOk(request,response);
+	      	break;
 	      }
 	 
 	}
+	 protected void loginOk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 String id=(String)request.getSession().getAttribute("id");
+		 if(id!=null) {
+			 //마이페이지
+			 response.sendRedirect(request.getContextPath()+"/members.do?cmd=listpage");
+		 }else {
+			 //로그인페이지
+			 response.sendRedirect(request.getContextPath()+"/jsp/layout.jsp?spage=members/login.jsp");
+		 }
+	 }
 	 protected void reviewdelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 int revnum=Integer.parseInt(request.getParameter("revnum"));
 		 

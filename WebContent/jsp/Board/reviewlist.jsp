@@ -4,7 +4,7 @@
 
 <h1 align="center">후기게시판</h1><br><br>
 
-<h5 align="right"><a href="${pageContext.request.contextPath }/members.do?cmd=listpage">글 등록</a></h5>
+<h5 align="right"><a href="${pageContext.request.contextPath }/review.do?cmd=loginOk">글 등록</a></h5>
 
 
 <div align="center">
