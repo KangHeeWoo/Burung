@@ -33,6 +33,7 @@ public class LoginFilter implements Filter {
 		if(spage != null) {
 			switch(spage) {
 			case "Board/boardinsert.jsp":
+			case "Board/reviewinsert.jsp":
 			//원하는 경로 case 추가
 			//case "Board/boardinsert.jsp":
 				loginCheck(req, resp, chain);

@@ -39,15 +39,21 @@ public class ReviewVo {
 		this.carname=carname;
 	}
 	
+	@Override
+	public String toString() {
+		return "ReviewVo [revNum=" + revNum + ", revTitle=" + revTitle + ", revContent=" + revContent + ", revScore="
+				+ revScore + ", revHit=" + revHit + ", revRegd=" + revRegd + ", memNum=" + memNum + ", memId=" + memId
+				+ ", carname=" + carname + "]";
+	}
 	public ReviewVo() {}
 	
 	public String getMemId() {
 		return memId;
 	}
-	public String getCarName() {
+	public String getCarname() {
 		return carname;
 	}
-	public void setCarName(String carname) {
+	public void setCarname(String carname) {
 		this.carname = carname;
 	}
 	public int getRevNum() {

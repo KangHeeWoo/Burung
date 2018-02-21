@@ -7,27 +7,27 @@
 
 //등록시 마이페이지로 이동
 
-<h5 align="right"><a href="#">글 등록</a></h5>
+<h5 align="right"><a href="${pageContext.request.contextPath }/members.do?cmd=listpage">글 등록</a></h5>
 
 
 <div align="center">
 	<table  width="500" border="1" cellspacing="0" cellpadding="3" bordercolor="#999999" style='border-collapse:collapse'>
 		<tr>
-			<th>회원아이디</th><th>차종</th><th>제목</th><th>입력일</th><th>조회수</th>
+			<th>회원아이디</th><th>차종</th><th>제목</th><th>입력일</th><th>조회수</th><th>평점</th>
 		</tr>
 		
 		<!-- ---------------------------------------------------------------------------------- -->
 		
 		
 		<c:forEach var="review" items="${listAll }">
-		<tr>
-			<td>${review.memid }</td>
+		<tr onclick="reviewdetail(${review.revNum})">
+			<td>${review.memId }</td>
 			<td>${review.carname }</td>
-			<!--  <td><a href="board.do?cmd=boardDetail&boanum=${board.boanum }&memid=${board.memid}">${board.boatitle }</a></td>-->
-			
-			<td>${review.revtitle }</td>
-			<td>${review.revregd}</td>
-			<td>${review.revhit}</td>
+			<%--<td><a href="board.do?cmd=boardDetail&boanum=${board.boanum }&memid=${board.memid}">${board.boatitle }</a></td>--%>
+			<td>${review.revTitle }</td>
+			<td>${review.revRegd}</td>
+			<td>${review.revHit}</td>
+			<td><c:forEach var="score" begin="1" end="${review.revScore }">★</c:forEach></td>
 		</tr>
 		</c:forEach>
 	</table><br>
@@ -85,13 +85,7 @@
 	var searchValue=document.getElementById("searchValue");
 	var choice=document.getElementById("choice");
 	
-	function schClick(num){
-		var url="board.do?cmd=boardlist&pageNum="+num;
-		if(searchValue.value !=""){
-			url+="&search="+search.value+"&searchValue="+searchValue.value;
-		}
-		location.href=url;
-	}
+	//나중에 검색조건들어올 자리
 	window.onload=function(){
 		for(var i=0;i<search.length;i++){
 			console.log(choice.value);
@@ -100,5 +94,9 @@
 				search[i].selected="selected";
 			}
 		}
+	}
+	
+	function reviewdetail(revnum){
+		location.href="review.do?cmd=reviewdetaile&revnum="+revnum;
 	}
 </script>

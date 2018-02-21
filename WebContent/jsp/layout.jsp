@@ -8,7 +8,7 @@
 <title>Burung</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/layout.css">
 </head>
-<body>
+<body> 
 <c:choose>
 	<c:when test="${param.spage == null || param.spage == '' }">
 		<c:set var="spage" value="main.jsp"/> 

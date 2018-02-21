@@ -84,11 +84,11 @@ public class BoardController extends HttpServlet {
 		
 		 //hit업데이트
 		 int n=dao.boardhitupdate(boanum);
-		 System.out.println(boanum+","+n);
+		 //System.out.println(boanum+","+n);
 		 if(n>0) {
 			 //내용보기
 			 BoardVo  listdetail=dao.detaillist(boanum);
-			 System.out.println(listdetail);
+			 //System.out.println(listdetail);
 			 request.setAttribute("listdetail", listdetail);
 			 request.getRequestDispatcher("jsp/layout.jsp?spage=Board/boardDetail.jsp").forward(request, response);
 		 }

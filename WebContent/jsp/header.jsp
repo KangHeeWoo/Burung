@@ -32,7 +32,7 @@
 	<li><a href="#">게시판</a>
 		<ul>
 			<li><a href="#">공지</a></li>
-			<li><a href="#">후기</a></li>
+			<li><a href="${pageContext.request.contextPath }/review.do?cmd=reviewlist">후기</a></li>
 			<li><a href="${pageContext.request.contextPath }/board.do?cmd=boardlist">자유</a></li>
 		</ul></li>
 </ul>

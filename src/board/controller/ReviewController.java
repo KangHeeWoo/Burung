@@ -15,6 +15,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import board.dao.RevImgDao;
 import board.dao.ReviewDao;
 import board.vo.ReviewVo;
+import board.vo.Review_ImgVo;
 import members.dao.MembersDao;
 
 @WebServlet("/review.do")
@@ -36,9 +37,36 @@ public class ReviewController extends HttpServlet{
 	      case "reviewinsertOk": reviewinsertOk(request,response);
 	      	break;
 	      case "reviewlist":reviewlist(request,response);
+	      	break;
+	      case "reviewdetaile":reviewdetail(request,response);
 	      
 	      }
 	 
+	}
+	protected void reviewdetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		 int revnum=Integer.parseInt(request.getParameter("revnum"));
+		// String memid=request.getParameter("memid");
+		 
+		 ReviewDao dao=ReviewDao.getInstance();
+		 // hit 업데이트
+		 int n=dao.reviewhitupdate(revnum);
+
+		 if(n>0) {
+			 //기본 carimgname 이외의 정보들 가져오기
+			 Review_ImgVo reviewdetail=dao.detail(revnum);
+			 // revnum에 따른 carimgname들 불러오기
+			 ArrayList<String> recarimglist=dao.imglist(revnum);
+			 
+			 System.out.println("carlist이름들:"+recarimglist);
+			 
+			 request.setAttribute("reviewdetail", reviewdetail);
+			 request.setAttribute("recarimglist", recarimglist);
+			 request.getRequestDispatcher("jsp/layout.jsp?spage=Board/reviewDetail.jsp").forward(request, response);
+			 
+		 }
+		 
+		 
 	}
 	protected void reviewlist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String spageNum=request.getParameter("pageNum");
@@ -55,7 +83,7 @@ public class ReviewController extends HttpServlet{
 		
 		ReviewDao dao=ReviewDao.getInstance();
 		ArrayList<ReviewVo> listAll=dao.listAll(startRow, endRow);
-		//listAll null값 나옵!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		
 		System.out.println("listAll:"+listAll);
 		
 		int pageCount=(int)Math.ceil(dao.getCount()/10.0);
