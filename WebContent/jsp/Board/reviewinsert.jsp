@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/board/reviewinsert.css?ver=11" >
+	
 	<c:set var="cnt" value="0"/>
 	
 	<c:if test="${param.cnt!=null}">
@@ -16,54 +17,58 @@
 		<c:set var="title" value=""/>
 		<c:set var="content" value=""/>
 	</c:if>
-	
-<form method="post" action="${pageContext.request.contextPath }/review.do?cmd=reviewinsertOk"  onsubmit="return setData()"  enctype="multipart/form-data">
 
-	<table border="1" width="500">
-		<tr>
-			<td>점수</td>
-			<td><input type="number" min="1" max="5" name="revscore" value="${param.revscore }"></td>
-		</tr>
-		<tr>
-			<td>작성자</td>
-			<td><input type="text" name="memid" value="${sessionScope.id }"  readonly="readonly">
-					<input type="hidden"  name="memnum" value="${memnum }">
-			</td>
-		</tr>
-		<tr>
+<br>
+<h3 id="mainfontsize" align="center">&lt; 리뷰 게시판 &gt;</h3>
+<div id="setfont" align="center">
+
+<form method="post" action="${pageContext.request.contextPath }/review.do?cmd=reviewinsertOk"  onsubmit="return setData()"  enctype="multipart/form-data">
+<table >
+	<tr>
+		<td>점&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;수</td>
+		<td>&nbsp;&nbsp;<input type="number" min="1" max="5" name="revscore" value="${param.revscore }" id="score"></td>
+	</tr>
+	<tr>
+		<td>작&nbsp;&nbsp;&nbsp;성&nbsp;&nbsp;자</td>
+		<td>&nbsp;&nbsp;<input type="text" name="memid" value="${sessionScope.id }"  readonly="readonly" id="id">
+		<input type="hidden"  name="memnum" value="${memnum }">
+		</td>
+	</tr>
+	<tr>
 		<!-- 구매 렌트에 따라 다른 차종으로 불러와야함 1.구매 2.렌트 -->
-		<c:choose>
-			<c:when test="${param.carname==null}">
-				<td>차종</td>
-				<td><input type="text" name="carname" value="${carname }"  readonly="readonly"></td>
-			</c:when>
-			<c:otherwise>
-				<td>차종</td>
-				<td><input type="text" name="carname" value="${param.carname }"  readonly="readonly"></td>
-			</c:otherwise>
-		</c:choose>
-		</tr>
+	<c:choose>
+		<c:when test="${param.carname==null}">
+			<td>차&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종</td>
+			<td>&nbsp;&nbsp;<input type="text" name="carname" value="${carname }"  readonly="readonly" id="carname"></td>
+	</c:when>
+	<c:otherwise>
+		<td>차&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종</td>
+		<td>&nbsp;&nbsp;<input type="text" name="carname" value="${param.carname }"  readonly="readonly" id="carname"></td>
+	</c:otherwise>
+	</c:choose>
+	</tr>
+	<tr>
+		<td>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</td>
+		<td>&nbsp;&nbsp;<input type="text" name="title"  id="title"></td>
+	</tr>
 		<tr>
-			<td>제목</td>
-			<td><input type="text" name="title" ></td>
-		</tr>
-			<tr>
-			<td>내용</td>
-			<td><textarea name="content" rows="5" cols="50"></textarea></td>
-		</tr>
-			<tr>
-			<td>첨부파일갯수</td>
-			<td><input type="text" name="cnt" value="${cnt }">
-				<input type="button" value="확인" onclick="filescore()">
-			</td>
-		</tr>
-	</table>
-	<div id="div">
+		<td>내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용</td>
+		<td>&nbsp;&nbsp;<textarea name="content" rows="5" cols="150" id="content"></textarea></td>
+	</tr>
+		<tr>
+		<td>첨부파일</td>
+		<td>&nbsp;&nbsp;<input type="text" name="cnt" value="${cnt }" id="file">
+			<input type="button" value="확인" onclick="filescore()">
+		</td>
+	</tr>
+</table>
+<div id="div">
 	
-	</div>
+</div>
 
 	
 </form>
+</div>
 <html>
 <script type="text/javascript">
 

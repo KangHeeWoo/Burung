@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+@font-face{
+	font-family: "jeju";
+	src : url('../font/JejuMyeongjo-Regular.ttf') format('truetype');
+}
+#setfont{
+	font-family: "jeju";
+	font-size: 16px;
+	
+}
+#mainfontsize{
+	font-size: 23px;
+	font-family: "jeju";
+}
+#id, #score, #carname, #content, #title{
+	width: 719px; 
+}
+#file{
+	width: 650px;
+}
