@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="../css/sales.css"/>
-<script src="../js/sales.js"></script> 
+<link rel="stylesheet" href="../css/sales.css?ver=6"/>
+<script src="../js/sales.js?ver=4"></script> 
 <c:choose>
 	<c:when test="${param.name != null && param.name != ''}">
 		<c:set var="name" value="${param.name }"/>
@@ -41,35 +41,36 @@
 			<h3>옵션 선택</h3>
 			<br><hr><br>
 			<span class="type">Color</span>
-			<span><input type="radio" name="color" value="white : 100000" checked="checked"> White</span>
-			<span><input type="radio" name="color" value="black : 200000"> Black</span>
-			<span><input type="radio" name="color" value="red : 500000"> Red</span>
+			<span><input type="radio" name="color" value="White : 100000" checked="checked" onclick="showOpt()"> White</span>
+			<span><input type="radio" name="color" value="Black : 200000" onclick="showOpt()"> Black</span>
+			<span><input type="radio" name="color" value="Red : 500000" onclick="showOpt()"> Red</span>
 			<br>
 			
 			<span class="type">Wheel</span>
-			<span><input type="radio" name="wheel" value="Steel Wheel : 100000" checked="checked"> Steel Wheel</span>
-			<span><input type="radio" name="wheel" value="Alloy Wheel : 300000"> Alloy Wheel</span>
-			<span><input type="radio" name="wheel" value="Flow Forming Wheel : 600000"> Flow Forming Wheel</span>
+			<span><input type="radio" name="wheel" value="Steel Wheel : 100000" checked="checked" onclick="showOpt()"> Steel Wheel</span>
+			<span><input type="radio" name="wheel" value="Alloy Wheel : 300000" onclick="showOpt()"> Alloy Wheel</span>
+			<span><input type="radio" name="wheel" value="Flow Forming Wheel : 600000" onclick="showOpt()"> Flow Forming Wheel</span>
 			<br>
 			
 			<span class="type">Seet</span>
-			<span><input type="radio" name="seet" value="Corrected Grain : 2000000" checked="checked"> Corrected Grain</span>
-			<span><input type="radio" name="seet" value="Full Grain : 2500000"> Full Grain</span>
-			<span><input type="radio" name="seet" value="Split Leather : 5000000"> Split Leather</span>
+			<span><input type="radio" name="seet" value="Corrected Grain : 2000000" checked="checked" onclick="showOpt()"> Corrected Grain</span>
+			<span><input type="radio" name="seet" value="Full Grain : 2500000" onclick="showOpt()"> Full Grain</span>
+			<span><input type="radio" name="seet" value="Split Leather : 5000000" onclick="showOpt()"> Split Leather</span>
 			<br>
 			
 			<span class="type">Light</span>
-			<span><input type="radio" name="light" value="HID : 200000" checked="checked"> HID</span>
-			<span><input type="radio" name="light" value="Hollogen : 500000"> Hollogen</span>
-			<span><input type="radio" name="light" value="LED : 600000"> LED</span>
+			<span><input type="radio" name="light" value="HID : 200000" checked="checked" onclick="showOpt()"> HID</span>
+			<span><input type="radio" name="light" value="Hollogen : 500000" onclick="showOpt()"> Hollogen</span>
+			<span><input type="radio" name="light" value="LED : 600000" onclick="showOpt()"> LED</span>
 			<br>
 			
 			<span class="type">Audio</span>
-			<span><input type="radio" name="audio" value="JBL : 1500000" checked="checked"> JBL</span>
-			<span><input type="radio" name="audio" value="BOSS : 2200000"> BOSS</span>
-			<span><input type="radio" name="audio" value="B&O : 1800000"> B&O</span>
+			<span><input type="radio" name="audio" value="JBL : 1500000" checked="checked" onclick="showOpt()"> JBL</span>
+			<span><input type="radio" name="audio" value="BOSS : 2200000" onclick="showOpt()"> BOSS</span>
+			<span><input type="radio" name="audio" value="B&O : 1800000" onclick="showOpt()"> B&O</span>
 			<br>
-			<br><hr><br>
+			<br><hr>
+			<p id="selectOpt"></p><br><br>
 			<input id="optSub" type="submit" value="구매하기">
 		</form>
 	</div>

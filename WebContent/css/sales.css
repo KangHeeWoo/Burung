@@ -40,6 +40,13 @@
 	width : 100px;
 }
 
+#selectOpt{
+	width : 900px;
+	display: inline-block;
+	color : #b50000;
+	font-weight: bold;
+}
+
 #optSub{
 	float: right;
 	background-color: #555555;
@@ -49,3 +56,4 @@
     height: 40px;
     font-size: 15px;
 }
+

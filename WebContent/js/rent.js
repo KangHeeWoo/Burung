@@ -34,3 +34,21 @@ function setPrice(){
 	document.getElementById("oPrice").firstChild.nodeValue = oPrice + "원";
 	document.getElementById("tPrice").firstChild.nodeValue = tPrice + "원";
 }
+
+function rent(){
+	var id = frm.id.value;
+
+	if(id == '' || id == null){
+		alert('로그인 후 이용해주시기 바랍니다.');
+		return false;
+	}
+	
+	var con = confirm('해당 옵션으로 렌트하시겠습니까?');
+	
+	if(con == true){
+		alert('렌트가 완료되었습니다');
+		return true;
+	}else{
+		return false;
+	}		
+}

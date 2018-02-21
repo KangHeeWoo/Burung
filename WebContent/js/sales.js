@@ -15,6 +15,7 @@ window.onload = function(){
 	subImg	= document.getElementById("subImg");
 	
 	loadData();
+	showOpt();
 }
 
 function loadData(){
@@ -76,4 +77,15 @@ function buy(){
 			return false;
 		}		
 	}
+}
+
+function showOpt(){
+	var color = frm.color.value;
+	var wheel = frm.wheel.value;
+	var seet = frm.seet.value;
+	var light = frm.light.value;
+	var audio = frm.audio.value;
+	
+	var selectOpt = document.getElementById("selectOpt");
+	selectOpt.innerHTML = color + " | " + wheel + " | "  + seet + " | "  + light + " | " + audio;
 }

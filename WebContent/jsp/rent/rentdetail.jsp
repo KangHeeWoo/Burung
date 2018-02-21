@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/rent.css?ver=24" />
-<script src="${pageContext.request.contextPath }/js/rent.js?ver=4"></script>
+<script src="${pageContext.request.contextPath }/js/rent.js?ver=6"></script>
 <div id="rentinfo">
 	<div id="rentdate" align="center">
 		<div align="center">
@@ -25,9 +25,11 @@
 	</div>
 </div>
 <div id="rdetail">
-	<form name="frm" method="post" action="${pageContext.request.contextPath }/rent.do">
+	<form name="frm" method="post" action="${pageContext.request.contextPath }/rent.do"
+	onsubmit="return rent()">
+		<input type="hidden" name="id" value="${sessionScope.id }">
 		<input type="hidden" name="cmd" value="rent">
-		<input type="hidden" name="carname" value="${cName }">
+		<input type="hidden" name="cName" value="${cName }">
 		<input type="hidden" name="sDate" value="${sDate }">
 		<input type="hidden" name="eDate" value="${eDate }">
 		<input type="hidden" name="price" value="${price }">

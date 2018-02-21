@@ -38,6 +38,9 @@ public class SalesController extends HttpServlet {
 		case "buy":
 			buy(request, response);
 			break;
+		case "main":
+			response.sendRedirect(request.getContextPath() + "/jsp/layout.jsp");
+			break;
 		}
 	}
 	

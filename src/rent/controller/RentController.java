@@ -1,6 +1,7 @@
 package rent.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import rent.dao.RentDao;
+import rent.vo.RentListVo;
 import rent.vo.RentVo;
+import sales.dao.SalesDao;
 
 @WebServlet("/rent.do")
 public class RentController extends HttpServlet{
@@ -40,7 +43,28 @@ public class RentController extends HttpServlet{
 	}
 	
 	private void rent  (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("·»Æ®ÇÏÀÚ");
+		String id = (String)request.getSession().getAttribute("id");
+		String cName = request.getParameter("cName");
+		String sDate = request.getParameter("sDate");
+		String eDate = request.getParameter("eDate");
+		Date strDate = null;
+		Date endDate = null;
+		try {
+			strDate = new Date(new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(sDate).getTime());
+			endDate = new Date(new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(eDate).getTime());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int price = Integer.parseInt(request.getParameter("price"));
+		
+		RentDao rDao = RentDao.getInstance();
+		SalesDao dao = SalesDao.getInstance();
+		int sMemNum = dao.sMemNum(id);
+		int rCarNum = rDao.getCarNum(cName, sDate, eDate);
+		rDao.addRentList(new RentListVo(0, strDate, endDate, price, null, sMemNum, rCarNum));
+		
+		response.sendRedirect(request.getContextPath() + "/jsp/layout.jsp");
 	}
 	
 	private void rentDetail (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
