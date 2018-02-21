@@ -1,6 +1,7 @@
 package members.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,6 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
+import org.omg.CORBA.PrincipalHolder;
 
 import admin.dao.RentListDao;
 import admin.dao.SaleListDao;
@@ -46,6 +50,10 @@ public class MembersController extends HttpServlet {
 			updateOk(request, response);
 		} else if (cmd.equals("listpage")) {
 			list(request, response);
+		}  else if (cmd.equals("findId")) {
+			findId(request, response);
+		} else if ( cmd.equals("addrInquiry")) {
+			addr(request,response);
 		}
 	}
 
@@ -163,22 +171,53 @@ public class MembersController extends HttpServlet {
 	 * rd.forward(request, response); }
 	 */
 	private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. 세션이 가지고있는 memId 정보 가져오기
+		
 		String memId = (String) request.getSession().getAttribute("id"); 
-		// 2. DB 연결	
+	
 		MembersDao Mdao = MembersDao.getInstance();
 		RentListDao Rdao = new RentListDao();
 		SaleListDao Sdao = new SaleListDao();
-		// 3. DB값을 VO로 대입
+		
 		MembersVo membersvo = Mdao.list(memId);
 		ArrayList<RentListVo> rentlistvo = Rdao.rentDetail1(membersvo.getMemNum());
 		ArrayList<SaleListVo> salelistvo = Sdao.saleDetatil(membersvo.getMemNum());
-		// 4. 스코프에 값 담기
+		
 		request.setAttribute("members", membersvo);
 		request.setAttribute("rentlist", rentlistvo);
 		request.setAttribute("salelist", salelistvo);
-		// 5. 해당값을 페이지로 이동하여 출력
+		
 		request.getRequestDispatcher("/jsp/layout.jsp?spage=members/list.jsp").forward(request, response);
 	}
+	private void findId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		JSONObject json = new JSONObject();
+		
+		String id=request.getParameter("memId");
+		
+		MembersDao dao = MembersDao.getInstance();
+		boolean using = dao.findId(id);
+		
+		json.put("using", using); // json 안에 키값 벨류값을 넣는다.
+		
+		response.setContentType("text/plain;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		pw.print(json); // 해당객체에 json을 담는다.
+		pw.close(); // 종료 
+	}
+	 private void addr(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 
+		JSONObject json = new JSONObject();
+		MembersDao dao = MembersDao.getInstance();
+		
+		String addr1 = request.getParameter("addr1");
+		String getAddr = dao.addr(addr1);
+		// System.out.println("받아오니"+getAddr);
+		json.put("addr1",getAddr);
+		
+		response.setContentType("text/plain;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		pw.print(json);
+		pw.close(); 
+		
+	} 
 }
-// 회원번호 가져오는 메소드

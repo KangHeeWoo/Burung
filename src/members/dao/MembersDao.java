@@ -6,17 +6,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 
-import board.dao.BoardDao;
 import burung.dbcp.DbcpBean;
 import members.vo.MembersVo;
 
 public class MembersDao {
-	  private static MembersDao instance=new MembersDao();
-	   private MembersDao() {}
-	   public static MembersDao getInstance() {
-	      return instance;
-	   }
+	private static MembersDao instance = new MembersDao();
+
+	private MembersDao() {
+	}
+
+	public static MembersDao getInstance() {
+		return instance;
+	}
+
 	public int insert(MembersVo user) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -110,7 +114,8 @@ public class MembersDao {
 				String memEmail = rs.getString("memEmail");
 				String memBirth = rs.getString("memBirth");
 				String memName = rs.getString("memName");
-				MembersVo members = new MembersVo(memNum, memId, memPwd, memAddr, memPhone, memEmail, memBirth, memName);
+				MembersVo members = new MembersVo(memNum, memId, memPwd, memAddr, memPhone, memEmail, memBirth,
+						memName);
 				return members;
 			}
 			return null;
@@ -122,58 +127,110 @@ public class MembersDao {
 		}
 	}
 
-	public ArrayList<MembersVo> listAll(){
-		
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
+	public ArrayList<MembersVo> listAll() {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
-			con=DbcpBean.getConn();
-			String sql="select * from members";
-			pstmt=con.prepareStatement(sql);
-			rs=pstmt.executeQuery();
-			ArrayList<MembersVo> list=new ArrayList<>();
-			while(rs.next()) {
-				String memId=rs.getString("memId");
-				String memPwd=rs.getString("memPwd");
-				String memAddr=rs.getString("memAddr");
-				String memPhone=rs.getString("memPhone");
-				String memEmail=rs.getString("memEmail");
-				String memBirth=rs.getString("memBirth");
-				String memName=rs.getString("memName");
-				
-				MembersVo user=new MembersVo(memId, memPwd, memAddr, memPhone, memEmail, memBirth, memName);
+			con = DbcpBean.getConn();
+			String sql = "select * from members";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			ArrayList<MembersVo> list = new ArrayList<>();
+			while (rs.next()) {
+				String memId = rs.getString("memId");
+				String memPwd = rs.getString("memPwd");
+				String memAddr = rs.getString("memAddr");
+				String memPhone = rs.getString("memPhone");
+				String memEmail = rs.getString("memEmail");
+				String memBirth = rs.getString("memBirth");
+				String memName = rs.getString("memName");
+
+				MembersVo user = new MembersVo(memId, memPwd, memAddr, memPhone, memEmail, memBirth, memName);
 				list.add(user);
 			}
 			return list;
-		}catch(SQLException se) {
+		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return null;
-		}finally {
+		} finally {
 			DbcpBean.close(con, pstmt, rs);
 		}
 	}
-	
-	//세션아이디로 회원번호 리턴
+
+	// 세션아이디로 회원번호 리턴
 	public int memnum(String id) {
-		Connection conn=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
-			conn=DbcpBean.getConn();
-			String sql="select memnum from members where memid=?";
-			pstmt=conn.prepareStatement(sql);
+			conn = DbcpBean.getConn();
+			String sql = "select memnum from members where memid=?";
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
 				return rs.getInt("memnum");
 			}
 			return -1;
-		}catch(SQLException se) {
+		} catch (SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
-		}finally {
+		} finally {
 			DbcpBean.close(conn, pstmt, rs);
 		}
 	}
-}
+
+	public boolean findId(String id) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean using = false;
+		
+		try {
+			con = DbcpBean.getConn();
+			String sql = "select * from members where memId=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				using = true;
+			}
+			return using;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return false; 
+		} finally {
+			DbcpBean.close(con, pstmt, rs);
+		}
+	}
+
+	
+	 public String addr(String address) {
+		 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = DbcpBean.getConn();
+			String sql = "select address from addr where address like ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,"%" + address + "%");
+			rs = pstmt.executeQuery();
+		
+			if(rs.next()) { 
+				return rs.getString("address");
+			}else{
+				return null;
+			}
+			} catch (SQLException se) {
+				System.out.println(se.getMessage());
+				return null;
+			} finally {
+				DbcpBean.close(con, pstmt, rs);
+			}
+		}	
+	}
