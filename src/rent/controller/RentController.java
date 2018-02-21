@@ -33,7 +33,14 @@ public class RentController extends HttpServlet{
 		case "rentDetail":
 			rentDetail(request, response);
 			break;
+		case "rent":
+			rent(request, response);
+			break;
 		}
+	}
+	
+	private void rent  (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("·»Æ®ÇÏÀÚ");
 	}
 	
 	private void rentDetail (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -58,13 +65,8 @@ public class RentController extends HttpServlet{
 		
 		rentTime = rentTime/(1000 * 60 * 60);
 		
-		System.out.println("ÃÑ ´ë¿©½Ã°£ : " + rentTime);
-		System.out.println("ÃÑ ´ë¿©°¡°Ý : " + (rentTime*rentCar.getTimePay()));
-		
-		request.setAttribute("sDate", sDate);
-		request.setAttribute("eDate", eDate);
-		request.setAttribute("sTime", sTime);
-		request.setAttribute("eTime", eTime);
+		request.setAttribute("sDate", sDate + " " + sTime);
+		request.setAttribute("eDate", eDate + " " + eTime);
 		request.setAttribute("cName", cName);
 		request.setAttribute("price", rentTime*rentCar.getTimePay());
 		request.getRequestDispatcher("/jsp/layout.jsp?spage=rent/rentdetail.jsp").forward(request, response);
@@ -93,7 +95,6 @@ public class RentController extends HttpServlet{
 		
 		RentDao dao = RentDao.getInstance();
 		ArrayList<String> list = dao.rentList(sDate + " " + sTime, eDate + " " + eTime, model);
-		System.out.println("list : " + list);
 		request.setAttribute("sDate", sDate);
 		request.setAttribute("eDate", eDate);
 		request.setAttribute("sTime", sTime);

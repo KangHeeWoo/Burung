@@ -14,3 +14,23 @@ function checkDate(){
 		return false;
 	}
 }
+
+function setPrice(){
+	var insu = frm.insu;
+	var option = frm.option;
+	var tPrice = parseInt(document.getElementById("cPrice").firstChild.nodeValue.replace("원", ""));
+	var oPrice = 0;
+	
+	tPrice += parseInt(insu.value);
+	
+	for(var i=0;i<option.length;i++){
+		if(option[i].checked == true){
+			tPrice += parseInt(option[i].value);
+			oPrice += parseInt(option[i].value);
+		}
+	}
+	
+	document.getElementById("iPrice").firstChild.nodeValue = insu.value + "원";
+	document.getElementById("oPrice").firstChild.nodeValue = oPrice + "원";
+	document.getElementById("tPrice").firstChild.nodeValue = tPrice + "원";
+}
