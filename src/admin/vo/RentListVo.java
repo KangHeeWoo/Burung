@@ -11,6 +11,21 @@ public class RentListVo {
 	private String renState;
 	private int renNum;
 	private String rCarName;
+	private int memNum;
+
+
+	public RentListVo(int rListNum, Date rStartDate, Date rEndDate, int rTotPrice, String renState, int renNum,
+			String rCarName, int memNum) {
+		super();
+		this.rListNum = rListNum;
+		this.rStartDate = rStartDate;
+		this.rEndDate = rEndDate;
+		this.rTotPrice = rTotPrice;
+		this.renState = renState;
+		this.renNum = renNum;
+		this.rCarName = rCarName;
+		this.memNum = memNum;
+	}
 
 	public RentListVo(int rListNum, Date rStartDate, Date rEndDate, int rTotPrice, String renState,int renNum) {
 		super();
@@ -36,6 +51,14 @@ public class RentListVo {
 
 	public RentListVo() {
 		super();
+	}
+	
+	public int getMemNum() {
+		return memNum;
+	}
+	
+	public void setMemNum(int memNum) {
+		this.memNum = memNum;
 	}
 	
 	public String getrCarName() {

@@ -66,4 +66,24 @@ public class RentCarDao {
 			DbcpBean.close(conn, pstmt, rs);
 		}
 	}
+	
+	public int insert(RentCarVo vo) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		String sql="insert into rentcar values(SEQ_rentCar_renNum.nextval,?,?,?,?)";
+		try {
+			conn=DbcpBean.getConn();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getRcarName());
+			pstmt.setString(2, vo.getRcarModel());
+			pstmt.setInt(3, vo.getTimePay());
+			pstmt.setString(4, "Á¤»ó");
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DbcpBean.close(conn, pstmt, null);
+		}
+	}
 }

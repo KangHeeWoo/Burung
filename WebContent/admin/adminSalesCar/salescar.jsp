@@ -6,6 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!--  나중에 다운받아서 로컬에넣으세여 -->
+
+<!-- modal Start -->
+<link rel="stylesheet" href="<%=request.getContextPath() %>/admin/css/remodal.css">
+<script src="<%=request.getContextPath() %>/admin/js/remodal.js"></script>
+<!-- modal End -->
+
 <style type="text/css">
 table.type11 {
     border-collapse: separate;
@@ -30,27 +38,69 @@ table.type11 td {
     background: #eee;
 }
  img{width:120px;height: 60px;vertical-align:middle;} 
-
+	#caradd{
+	position: absolute;
+	top: 300px;
+	left: 700px;
+	background-color: white;
+	}
 </style>
 <script type="text/javascript">
 	function addCar(){
-		var div=document.getElementById("caradd");
-		div.style.display="block";
+		window.location ='#modal';
+		console.log("asd");
 	}
 	function showAdd(){
 		window.open("<%=request.getContextPath()%>/semi/sales.do?cmd=carinsert","add","width=250,height=500,left=100,top=50");
 	}
+	
+	$(document).ready(function(){
+		 $('.remodal-confirm').click(function(){
+			 if(confirm("등록하시겠습니까?")){
+				 $('form[name="test"]').submit();
+			 }
+		 })
+	})
 </script>
 </head>
 <body>
-<span style="margin-left: 90%;"><button onclick="showAdd()">신규차량등록</button></span>
+
+
+
+<div id="insModal" class="remodal" data-remodal-id="modal" style="max-width:800px;">
+	<div class="modalTop" style="margin-bottom:10px;">
+		<span class="modalTitle">신규차량등록</span>
+	</div>
+	<form name="test" action="<%=request.getContextPath() %>/semi/sales.do?cmd=insertOk" method="post" enctype="multipart/form-data">
+	<div>
+		차량이름<br>
+		<input type="text" name="scarName"><br>
+		차량모델<br>
+		<input type="text" name="scarModel"><br>
+		수량<br>
+		<input type="text" name="salCnt"><br>
+		차량가격<br>
+		<input type="text" name="scarPrice"><br><br>
+		메인이미지<input type="file" name="main"><br>
+		서브이미지<input type="file" name="sub"><br><br>
+	</div>
+		<div style="margin:10px;">
+			<button  data-remodal-action="confirm" class="remodal-confirm">확인</button>
+			<button data-remodal-action="cancel" class="remodal-cancel">닫기</button>
+		</div>
+	</form>
+</div>
+
+
+<span style="margin-left: 90%;"><button onclick="addCar()">신규차량등록</button></span>
 <!-- 
 <span style="margin-left: 90%;"><button onclick="location.href='<%=request.getContextPath()%>/semi/sales.do?cmd=carinsert'">신규차량등록</button></span>
  -->
 <!-- 
 <input type="button" value="차량등록" onclick="location.href='<%=request.getContextPath()%>/semi/sales.do?cmd=carinsert'">
  -->
- <div id="caradd" style="display: none">
+
+<div id="caradd" style="display: none">
 <h2>신규차량등록</h2>
 <form action="<%=request.getContextPath() %>/semi/sales.do?cmd=insertOk" method="post" enctype="multipart/form-data">
 차량이름<br>
@@ -66,6 +116,7 @@ table.type11 td {
 <input type="submit" value="등록">
 </form>
  </div>
+ 
 <form>
 <h2>등록된차량</h2>
 <table class="type11">
@@ -176,7 +227,7 @@ table.type11 td {
 	<a href="<%=request.getContextPath()%>/semi/sales.do?lpageNum=${lendPage+1}">[다음]</a>
 	</c:when>
 	<c:otherwise>
-		[다음]
+		[다음] 
 	</c:otherwise>
 	</c:choose>
 </div>

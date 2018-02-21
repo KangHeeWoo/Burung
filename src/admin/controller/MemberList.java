@@ -99,7 +99,7 @@ public class MemberList extends HttpServlet{
 			request.setAttribute("rendPage", rendPage);//렌트끝페이지
 			request.setAttribute("sendPage", sendPage);//구매끝페이지
 			request.setAttribute("pageNum", pageNum);//구매
-			request.setAttribute("rpageNum", rpageNum);//렌트
+			request.setAttribute("rpageNum", pageNum2);//렌트
 			request.setAttribute("detail", detail);
 			request.setAttribute("rentlist", rentdetail);
 			request.setAttribute("salelist", saledetail);

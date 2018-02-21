@@ -55,7 +55,7 @@ public class SaleListDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		//order by »èÁ¦ÇÔ
-		String sql="select * from (select sl.*,rownum rnum from(select * from saleslist)sl)sl, salescar sc where memnum=? and sl.salnum=sc.salnum and rnum>=? and rnum<=?";
+		String sql="select * from (select sl.*,rownum rnum from(select * from saleslist where memnum=? order by slistnum desc)sl)sl, salescar sc where sl.salnum=sc.salnum and rnum>=? and rnum<=? order by slistnum desc";
 		try {
 			con=DbcpBean.getConn();
 			pstmt=con.prepareStatement(sql);
