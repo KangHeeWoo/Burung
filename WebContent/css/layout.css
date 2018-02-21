@@ -9,3 +9,8 @@
 	width:95%;
 	margin:auto;
 }
+
+#footer{
+	float: none;
+	display: block;
+}

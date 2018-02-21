@@ -10,6 +10,74 @@
 	display: inline-block;
 }
 
+#rentdate{
+	width:370px;
+	height : 120px;
+	background: #eeeeee;
+}
+
+#rentdate div{
+	display: inline-block;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+#arrow{
+	width: 10px;
+	margin-bottom : 30px;
+}
+
+#rentinfo{
+	width:370px;
+	display: inline-block;
+	margin : 50px;
+	float : left;
+}
+
+#carimg{
+	width : 360px;
+}
+
+#rentinfo span{
+	font-family: 'DXme';
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#rentinfo h3{
+	font-family: 'DXme';
+}
+
+.price{
+	float: right;
+	display: inline-block; 
+}
+
+#rentdate div h3{
+	color: #454545;
+	font-family: 'DXme';
+}
+
+#rentdate div h4{
+	color: #454545;
+	font-family: 'DXme';
+}
+
+#rdetail{
+	width : 1200px;
+	display: inline-block;
+	margin : 50px;
+}
+
+#rdetail{
+	margin-left: 30px;
+}
+
+#rdetail span{
+	margin-right: 70px;
+	font-size: 15px;
+}
+
 #rentList div{
 	width:500px;
 	display: inline-block;
