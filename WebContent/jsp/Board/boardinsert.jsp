@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/board/boardinsert.css?ver=2" >
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/board/boardinsert.css?ver=4" >
 <br>
 <h3 id="mainfontsize" align="center">&lt; 자유 게시판 &gt;</h3>
 <div id="setfont" align="center">

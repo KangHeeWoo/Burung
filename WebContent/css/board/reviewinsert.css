@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-@font-face{
-	font-family: "jeju";
-	src : url('../font/JejuMyeongjo-Regular.ttf') format('truetype');
-}
 #setfont{
 	font-family: "jeju";
 	font-size: 16px;
@@ -18,4 +14,8 @@
 }
 #file{
 	width: 650px;
+}
+
+#setfont table{
+	height : 500px;
 }

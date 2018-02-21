@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/board/reviewinsert.css?ver=11" >
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/board/reviewinsert.css?ver=15" >
 	
 	<c:set var="cnt" value="0"/>
 	
@@ -26,11 +26,11 @@
 <table >
 	<tr>
 		<td>점&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;수</td>
-		<td>&nbsp;&nbsp;<input type="number" min="1" max="5" name="revscore" value="${param.revscore }" id="score"></td>
+		<td><input type="number" min="1" max="5" name="revscore" value="${param.revscore }" id="score"></td>
 	</tr>
 	<tr>
 		<td>작&nbsp;&nbsp;&nbsp;성&nbsp;&nbsp;자</td>
-		<td>&nbsp;&nbsp;<input type="text" name="memid" value="${sessionScope.id }"  readonly="readonly" id="id">
+		<td><input type="text" name="memid" value="${sessionScope.id }"  readonly="readonly" id="id">
 		<input type="hidden"  name="memnum" value="${memnum }">
 		</td>
 	</tr>
@@ -39,25 +39,25 @@
 	<c:choose>
 		<c:when test="${param.carname==null}">
 			<td>차&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종</td>
-			<td>&nbsp;&nbsp;<input type="text" name="carname" value="${carname }"  readonly="readonly" id="carname"></td>
+			<td><input type="text" name="carname" value="${carname }"  readonly="readonly" id="carname"></td>
 	</c:when>
 	<c:otherwise>
 		<td>차&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종</td>
-		<td>&nbsp;&nbsp;<input type="text" name="carname" value="${param.carname }"  readonly="readonly" id="carname"></td>
+		<td><input type="text" name="carname" value="${param.carname }"  readonly="readonly" id="carname"></td>
 	</c:otherwise>
 	</c:choose>
 	</tr>
 	<tr>
 		<td>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</td>
-		<td>&nbsp;&nbsp;<input type="text" name="title"  id="title"></td>
+		<td><input type="text" name="title"  id="title"></td>
 	</tr>
 		<tr>
 		<td>내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용</td>
-		<td>&nbsp;&nbsp;<textarea name="content" rows="5" cols="150" id="content"></textarea></td>
+		<td><textarea name="content" rows="20" cols="100" id="content"></textarea></td>
 	</tr>
-		<tr>
+	<tr>
 		<td>첨부파일</td>
-		<td>&nbsp;&nbsp;<input type="text" name="cnt" value="${cnt }" id="file">
+		<td><input type="text" name="cnt" value="${cnt }" id="file">
 			<input type="button" value="확인" onclick="filescore()">
 		</td>
 	</tr>
@@ -69,7 +69,6 @@
 	
 </form>
 </div>
-<html>
 <script type="text/javascript">
 
 	function filescore(){
@@ -108,7 +107,6 @@
 	}
 
 </script>
-</html>
 
 
 
