@@ -1,5 +1,6 @@
 package board.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import board.dao.BoardDao;
 import board.dao.RevImgDao;
 import board.dao.ReviewDao;
 import board.vo.ReviewVo;
@@ -39,14 +41,44 @@ public class ReviewController extends HttpServlet{
 	      case "reviewlist":reviewlist(request,response);
 	      	break;
 	      case "reviewdetaile":reviewdetail(request,response);
+	      	break;
+	      case "reviewdelete":reviewdelete(request,response);
+	      	break;
 	      
 	      }
 	 
 	}
+	 protected void reviewdelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 int revnum=Integer.parseInt(request.getParameter("revnum"));
+		 
+		//-------------------저장되어있는 이미지 삭제
+		 
+		//파일번호로 이름 가져오기
+		 RevImgDao imgdao=RevImgDao.getInstance();
+		 ArrayList<String> imgnamelist=imgdao.imgname(revnum);
+		 
+		 System.out.println(imgnamelist+"이미지 이름들 가져오기");
+		//File f=new File(application.getRealPath("/경로")+"\\"+저장파일명);
+		String uploadPath=request.getServletContext().getRealPath("/jsp/Board/img");
+		
+		
+		ReviewDao dao=ReviewDao.getInstance();
+		int n=dao.reviewdelete(revnum);
+		
+		if(n>0) {
+			for(int i=0;i<imgnamelist.size();i++) {
+				File f=new File(uploadPath+"\\"+imgnamelist.get(i));
+				f.delete();
+			}
+			reviewlist(request, response);
+		}else {
+			response.sendRedirect("#");
+		}
+	 }
 	protected void reviewdetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		 int revnum=Integer.parseInt(request.getParameter("revnum"));
-		// String memid=request.getParameter("memid");
+		
 		 
 		 ReviewDao dao=ReviewDao.getInstance();
 		 // hit 업데이트
@@ -58,6 +90,7 @@ public class ReviewController extends HttpServlet{
 			 // revnum에 따른 carimgname들 불러오기
 			 ArrayList<String> recarimglist=dao.imglist(revnum);
 			 
+			 System.out.println("reviewdetail:"+reviewdetail);
 			 System.out.println("carlist이름들:"+recarimglist);
 			 
 			 request.setAttribute("reviewdetail", reviewdetail);

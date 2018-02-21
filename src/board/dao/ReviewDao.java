@@ -39,7 +39,29 @@ public class ReviewDao {
 			DbcpBean.close(conn, pstmt, rs);
 		}
 	}
-
+	 public int reviewdelete(int revnum) {
+		   Connection conn=null;
+		   PreparedStatement pstmt=null;
+		   PreparedStatement pstmt1=null;
+		   try {
+			   conn=DbcpBean.getConn();
+			   String sql1="delete from revimg where revnum=?";
+			   pstmt1=conn.prepareStatement(sql1);
+			   pstmt1.setInt(1, revnum);
+			   pstmt1.executeUpdate();
+			   
+			   String sql="delete from review where revnum=?";
+			   pstmt=conn.prepareStatement(sql);
+			   pstmt.setInt(1, revnum);
+			   int n=pstmt.executeUpdate();
+			   return n;
+		   }catch(SQLException se) {
+			   System.out.println(se.getMessage());
+			   return -1;
+		   }finally {
+			   DbcpBean.close(conn, pstmt, null);
+		   }
+	   }
 	public int getCount() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -201,6 +223,7 @@ public class ReviewDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, revnum);
 			rs=pstmt.executeQuery();
+			rs.next();
 			Review_ImgVo vo=new Review_ImgVo(rs.getInt("revnum"), rs.getString("revcontent"), rs.getString("revtitle"),	rs.getInt("revscore"),
 					rs.getDate("revregd"),rs.getString("memid"), rs.getString("carname"), rs.getInt("revHit"), rs.getInt("memNum"));
 			

@@ -4,9 +4,6 @@
 
 <h1 align="center">후기게시판</h1><br><br>
 
-
-//등록시 마이페이지로 이동
-
 <h5 align="right"><a href="${pageContext.request.contextPath }/members.do?cmd=listpage">글 등록</a></h5>
 
 
