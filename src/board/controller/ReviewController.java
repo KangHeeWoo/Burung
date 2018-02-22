@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import board.dao.BoardDao;
 import board.dao.RevImgDao;
 import board.dao.ReviewDao;
 import board.vo.ReviewVo;
@@ -38,7 +37,9 @@ public class ReviewController extends HttpServlet{
 	        break;
 	      case "reviewinsertOk": reviewinsertOk(request,response);
 	      	break;
-	      case "reviewlist":reviewlist(request,response);
+	      case "reviewlist":
+	    	  System.out.println("rev LIst 호출");
+	    	  reviewlist(request,response);
 	      	break;
 	      case "reviewdetaile":reviewdetail(request,response);
 	      	break;
@@ -116,6 +117,12 @@ public class ReviewController extends HttpServlet{
 		String spageNum=request.getParameter("pageNum");
 		//검색기능넣기
 		
+		String search=request.getParameter("search");
+		String searchValue=request.getParameter("searchValue");
+		String searchBy=request.getParameter("searchBy");
+		
+		System.out.println("search : "+search+"	searchValue : "+searchValue+"		searchBy : " + searchBy);
+		
 		int pageNum=1;
 		if(spageNum!=null) {
 			pageNum=Integer.parseInt(spageNum);
@@ -124,9 +131,20 @@ public class ReviewController extends HttpServlet{
 		int endRow=startRow+9;
 		
 		//검색 조건검사
+		if(search==null || searchValue==null) {
+			search="1";
+			searchValue="1";
+		}else {
+			request.setAttribute("search", search);
+			request.setAttribute("searchValue", searchValue);
+		}
+		
+		if(searchBy == null) searchBy = "revnum";
+		
+		//검색조건 dao에 넣기
 		
 		ReviewDao dao=ReviewDao.getInstance();
-		ArrayList<ReviewVo> listAll=dao.listAll(startRow, endRow);
+		ArrayList<ReviewVo> listAll=dao.listAll(startRow, endRow,search,searchValue, searchBy);
 		
 		System.out.println("listAll:"+listAll);
 		

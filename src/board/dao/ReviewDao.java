@@ -39,6 +39,7 @@ public class ReviewDao {
 			DbcpBean.close(conn, pstmt, rs);
 		}
 	}
+
 	 public int reviewdelete(int revnum) {
 		   Connection conn=null;
 		   PreparedStatement pstmt=null;
@@ -155,19 +156,34 @@ public class ReviewDao {
 			DbcpBean.close(conn, pstmt, null);
 		}
 	}
-	public ArrayList<ReviewVo> listAll(int startRow,int endRow){
+	public ArrayList<ReviewVo> listAll(int startRow,int endRow, String search,String searchValue,String searchBy){
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		ArrayList<ReviewVo> list=new ArrayList<>();
 		
+		
+		System.out.println(startRow);
+		System.out.println(endRow);
+		System.out.println(search);
+		System.out.println(searchValue);
+		System.out.println(searchBy);
+		
 		try {
 			conn=DbcpBean.getConn();
-			String sql="select * from(select aa.*,rownum rnum from(select carname,revnum,revcontent,revscore, revtitle,revhit,revRegd,m.memid memid ,m.memnum memnum from review r,members m where m.memNum=r.memNum order by revregd desc)aa)where rnum>=? and rnum<=?";
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-			
+			String sql="";
+			if(search.equals("1")) {
+				sql="select * from(select aa.*,rownum rnum from(select carname,revnum,revcontent,revscore, revtitle,revhit,revRegd,m.memid memid ,m.memnum memnum from review r,members m where m.memNum=r.memNum order by " + searchBy + " desc)aa)where rnum>=? and rnum<=?";
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+			}else {
+				sql="select * from(select aa.*,rownum rnum from(select carname,revnum,revcontent,revscore,revtitle,revhit,revregd,m.memid memid, m.memnum memnum from review r, members m where m.memnum=r.memnum and "+search+" like ? order by " + searchBy + " desc)aa)where rnum>=? and rnum<=? ";
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, "%"+searchValue+"%");
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+			}
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				int revnum=rs.getInt("revnum");
@@ -183,9 +199,7 @@ public class ReviewDao {
 				ReviewVo vo=new ReviewVo(revnum, revtitle, revcontent, revscore, revhit, revregd, memnum, memid, carname);
 				list.add(vo);
 				
-				
 				System.out.println("¸®ºä vo:"+vo);
-				
 			}
 			return list;
 		}catch(SQLException se) {
