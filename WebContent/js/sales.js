@@ -60,12 +60,6 @@ function buy(){
 		var tot = parseInt(color[1], 10) + parseInt(wheel[1], 10) + parseInt(seet[1], 10) + parseInt(light[1], 10) + parseInt(audio[1], 10) + price;
 		
 		var msg = "선택하신 차량 >> " + mName
-		+ "\n\tPrice >> " + price
-		+ "\n\tColor >> " + color[0]
-		+ "\n\tWheel >> " + wheel[0]
-		+ "\n\tSeet  >> " + seet[0]
-		+ "\n\tLight >> " + light[0]
-		+ "\n\tAudio >> " + audio[0]
 		+ "\n\t총액 >> " + tot
 		+ "\n구매하시겠습니까?";
 		var con = confirm(msg);
