@@ -18,12 +18,12 @@ for(var i=0; i<checked.length; i++){
 <form name="checkbox" method="post"  style="width: 800px">
 <!--  carlistFont 스타일-->
 	<span id="carlistFont">&lt;차종&gt;</span><br>
-	<input name="ch_box" type="checkbox" value="0" checked="checked" onclick="carsearch()" />전체<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="718" onclick="carsearch()"/>718<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="911" onclick="carsearch()"/>911<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="panamera" onclick="carsearch()"/>panamera<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="macan" onclick="carsearch()"/>macan<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="cayenne" onclick="carsearch()"/>cayenne<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="0" checked="checked" onclick="carAll()" />전체<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="718" checked="checked" onclick="carsearch()"/>718<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="911" checked="checked" onclick="carsearch()"/>911<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="panamera" checked="checked" onclick="carsearch()"/>panamera<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="macan" checked="checked" onclick="carsearch()"/>macan<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="cayenne" checked="checked" onclick="carsearch()"/>cayenne<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 </form>
 <div align="right">
 <select id="searchBy" onchange="orderby(1)">
@@ -66,12 +66,7 @@ for(var i=0; i<checked.length; i++){
 		</tr>
 		</c:forEach>
 	</table><br>
-	
-	
-	
-	
-	
-	
+
 	<!-- 페이징 처리 -->
 	
 	<div>
@@ -123,6 +118,7 @@ for(var i=0; i<checked.length; i++){
 	
 	var choiceBy=document.getElementById("choiceBy");
 	var searchBy=document.getElementById("searchBy");
+	var cheCar = "";
 	
 	function orderby(num){
 		var url="review.do?cmd=reviewlist&pageNum="+num;
@@ -149,16 +145,12 @@ for(var i=0; i<checked.length; i++){
 	
 	window.onload=function(){
 		for(var i=0;i<search.length;i++){
-			console.log(choice.value);
-			console.log(search[i].value);
 			if(search[i].value==choice.value){
 				search[i].selected="selected";
 			}
 		}
 		
 		for(var i=0;i<searchBy.length;i++){
-			console.log(choiceBy.value)
-			console.log(searchBy[i].value);
 			if(searchBy[i].value==choiceBy.value){
 				searchBy[i].selected="selected";
 			}
@@ -169,28 +161,54 @@ for(var i=0; i<checked.length; i++){
 		location.href="review.do?cmd=reviewdetaile&revnum="+revnum;
 	}
 	
+	//전체 체크박스
+	function carAll(){
+		var ch_box=document.getElementsByName("ch_box");
+		cheCar = "All";
+		
+		if(ch_box[0].checked == true){
+			for(var i=1;i<ch_box.length;i++){
+				ch_box[i].checked = true;
+			}
+		}else{
+			for(var i=1;i<ch_box.length;i++){
+				ch_box[i].checked = false;
+			}
+		}
+		
+		console.log(cheCar);
+	}
 	
 	//체크박스 
 	function carsearch(){
 		var ch_box=document.getElementsByName("ch_box");
-		var cheCar = "";
+		var cnt = 0;
+		var valCnt = 0;
+		cheCar = "";
 		
-		if(ch_box[0].checked == true){
-			for(var i=1;i<ch_box.length;i++){
-				if(ch_box[i].checked == true){
-					ch_box[0].checked = false;
-				}	
-			}
+		for(var i=1;i<ch_box.length;i++){
+			if(ch_box[i].checked == true){
+				cnt++;
+			}	
 		}
 		
-		for(var i=0;i<ch_box.length;i++){
-			if(ch_box[i].checked == true){
-				cheCar += ch_box[i].value;
-				
-				if(i != ch_box.length){
-					cheCar +=":";
+		if(cnt == 5) ch_box[0].checked = true;
+		else ch_box[0].checked = false;
+		
+		
+		if(ch_box[0].checked == true){
+			cheCar = "All";
+		}else{
+			for(var i=1;i<ch_box.length;i++){
+				if(ch_box[i].checked == true){					
+					cheCar += ch_box[i].value;
+					if(++valCnt != cnt){
+						cheCar += ":";
+					}
 				}
 			}
 		}
+		
+		console.log(cheCar);
 	}
 </script>

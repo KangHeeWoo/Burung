@@ -43,8 +43,8 @@
 
 #menu li {
 	float: left;
-	/*padding: 5px 5px 5px 5px;*/
 	position: relative;
+	height : 40px;
 }
 
 #menu a {
