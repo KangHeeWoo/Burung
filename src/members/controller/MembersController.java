@@ -61,16 +61,17 @@ public class MembersController extends HttpServlet {
 
 		String memId = request.getParameter("memId");
 		String memPwd = request.getParameter("memPwd");
-		String memAddr = request.getParameter("addr3")+request.getParameter("addr4");
-		String memPhone = request.getParameter("memPhone");
-		String memEmail = request.getParameter("memEmail");
-		String memBirth = request.getParameter("memBirth");
+		String memAddr = request.getParameter("addr3") + request.getParameter("addr4");
+		String memPhone = request.getParameter("phone1") + request.getParameter("phone2") + request.getParameter("phone3");
+		String memEmail = request.getParameter("email1") + request.getParameter("email2");
+		String memBirth = request.getParameter("Birth1") + request.getParameter("Birth2") + request.getParameter("Birth3");
 		String memName = request.getParameter("memName");
 	
 		
 		members.vo.MembersVo members = new MembersVo(0,memId, memPwd, memAddr, memPhone, memEmail, memBirth, memName);
 
 		MembersDao dao = MembersDao.getInstance();
+
 		int n=dao.insert(members);
 		// int n = dao.insert(members);
 		// System.out.println("n°ª"+n);
@@ -121,16 +122,17 @@ public class MembersController extends HttpServlet {
 	private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String memId = (String) request.getSession().getAttribute("id");
-		String memAddr = (String) request.getSession().getAttribute("memAddr");
-		String memPhone = (String) request.getSession().getAttribute("memPhone");
-		String memEmail = (String) request.getSession().getAttribute("memEmail");
-		String memBirth = (String) request.getSession().getAttribute("memBirth");
-		String memName = (String) request.getSession().getAttribute("memName");
 
 		MembersDao dao = MembersDao.getInstance();
 
 		members.vo.MembersVo members = dao.list(memId);
-
+		request.setAttribute("pwd", members.getMemPwd());
+		request.setAttribute("Addr", members.getMemAddr());
+		request.setAttribute("Phone", members.getMemPhone());
+		request.setAttribute("Email", members.getMemEmail());
+		request.setAttribute("Birth", members.getMemBirth());
+		request.setAttribute("Name", members.getMemName());
+		
 		request.setAttribute("members", members);
 		request.getRequestDispatcher("/jsp/layout.jsp?spage=members/update.jsp").forward(request, response);
 	}
@@ -172,6 +174,7 @@ public class MembersController extends HttpServlet {
 	 * request.getRequestDispatcher("/jsp/layout.jsp?/list.jsp");
 	 * rd.forward(request, response); }
 	 */
+	
 	private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String memId = (String) request.getSession().getAttribute("id"); 
@@ -220,6 +223,5 @@ public class MembersController extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		pw.print(json);
 		pw.close(); 
-		
 	} 
 }
