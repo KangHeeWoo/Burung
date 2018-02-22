@@ -61,24 +61,26 @@ public class MembersController extends HttpServlet {
 
 		String memId = request.getParameter("memId");
 		String memPwd = request.getParameter("memPwd");
-		String memAddr = request.getParameter("memAddr");
+		String memAddr = request.getParameter("addr3")+request.getParameter("addr4");
 		String memPhone = request.getParameter("memPhone");
 		String memEmail = request.getParameter("memEmail");
 		String memBirth = request.getParameter("memBirth");
 		String memName = request.getParameter("memName");
-
-		members.vo.MembersVo members = new MembersVo(memId, memPwd, memAddr, memPhone, memEmail, memBirth, memName);
+	
+		
+		members.vo.MembersVo members = new MembersVo(0,memId, memPwd, memAddr, memPhone, memEmail, memBirth, memName);
 
 		MembersDao dao = MembersDao.getInstance();
-
-		int n = dao.insert(members);
+		int n=dao.insert(members);
+		// int n = dao.insert(members);
+		// System.out.println("n°ª"+n);
 		if (n > 0) {
-			request.setAttribute("result", "success");
+			response.sendRedirect(request.getContextPath() + "/jsp/layout.jsp");
+			//request.setAttribute("result", "success");
 		} else {
 			request.setAttribute("result", "fail");
+			request.getRequestDispatcher("/jsp/layout.jsp?spage=members/login.jsp").forward(request, response);
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/layout.jsp");
-		rd.forward(request, response);
 	}
 
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

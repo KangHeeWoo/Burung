@@ -25,7 +25,7 @@ public class MembersDao {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
-		String sql = "insert into members values(user_seq.nextval,?,?,?,?,?,?,?)";
+		String sql = "insert into members values(0,?,?,?,?,?,?,?)";
 		try {
 			con = DbcpBean.getConn();
 			pstmt = con.prepareStatement(sql);
@@ -38,6 +38,7 @@ public class MembersDao {
 			pstmt.setString(7, user.getMemName());
 			return pstmt.executeUpdate();
 		} catch (SQLException se) {
+			se.printStackTrace();
 			return -1;
 		} finally {
 			DbcpBean.close(con, pstmt, null);

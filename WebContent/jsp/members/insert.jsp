@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
 
 var xhr=null;
@@ -96,10 +97,12 @@ function callback2(){
 	버튼 클릭<input type="button" name="memAddr" id="addr1" onclick ="addrInquiry()" value= "주소검색"> 
 	<span id = "Inquiry" style="font-size:10px; color :red"></span> <br>
 	
-	검색결과<input type ="text" id ="addr3" ><br>
-	상세주소<input type ="text" id ="addr4"><br><br><br>
+	검색결과<input type ="text" id ="addr3" name="addr3"><br>
+	상세주소<input type ="text" id ="addr4" name="addr4"><br><br><br>
 	<%-- 주소입력란에 입력한 주소값과 버튼클릭란(DB저장되있는 주소값)을  비교하여 검색결과란에 출력 --%>
-
+	
+	
+	
 	전화번호<input type="text" name ="memPhone"><br>
 	이메일<input type="text" name="memEmail"><br>
 	생년월일<input type="text" name = "memBirth"><br>

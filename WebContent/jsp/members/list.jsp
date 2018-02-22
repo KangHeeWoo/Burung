@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <h1>< 마이페이지 ></h1>
-<table border="1" width="700" name="Mylist">
+<table border="1" width="1000" name="Mylist">
 	<h3>1) 상세정보</h3>
 	<tr>
 		<th>아이디</th>
