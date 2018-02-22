@@ -2,6 +2,7 @@ package sales.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,9 +83,7 @@ public class SalesController extends HttpServlet {
 		if (name != null) {
 			path += "&name=" + name;
 		}
-		response.sendRedirect(request.getContextPath() + path);
 
-		System.out.println(name);
 		if (name == null) {
 			if (model.equals("718")) {
 				name = "718 Cayman Models";
@@ -99,13 +98,22 @@ public class SalesController extends HttpServlet {
 			}
 		}
 		
+		
 		// 최근 본 상품 쿠키에 추가하기
 		String item = URLEncoder.encode(name,"utf-8");
 		Cookie cook = new Cookie("Models", item);
+		cook.setPath("/");
 		cook.setMaxAge(60 * 60);
 		response.addCookie(cook);
-		System.out.println(name);
-		System.out.println(item);
+		
+		Cookie[] cookies = request.getCookies();
+		
+		for(int i=0;i<cookies.length;i++) {
+			if(!cookies[i].getName().equals("JSESSIONID")) {
+				//ArrayList에 저장
+				//URLDecoder
+			}
+		}
 
 //		String Models = null;
 //		for(int i=0;i<1;i++) {
@@ -115,6 +123,10 @@ public class SalesController extends HttpServlet {
 //			cook.setMaxAge(60 * 60);
 //			response.addCookie(cook);
 //		}
+		
+		//request ArrayList 담기
+		//forword 방식으로 페이지 이동
+		response.sendRedirect(request.getContextPath() + path);
 	}
 
 	private void loadData(HttpServletRequest request, HttpServletResponse response)

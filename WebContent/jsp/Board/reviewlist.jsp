@@ -182,6 +182,7 @@ for(var i=0; i<checked.length; i++){
 				}	
 			}
 		}
+		
 		for(var i=0;i<ch_box.length;i++){
 			if(ch_box[i].checked == true){
 				cheCar += ch_box[i].value;

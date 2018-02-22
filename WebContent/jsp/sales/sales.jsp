@@ -82,7 +82,7 @@
 	</div>
 </div>
 <div id="cook">
-		<h2>최근본구매상품</h2>
+		<h2>최근본구매상품</h2>		
 	<ul>
 		<%
 			Cookie[] cooks = request.getCookies();
@@ -104,8 +104,6 @@
 		%>
 	</ul>
 	
-	<c:forEach var="cook" items="${responseScope.cook }">
-		${cook.value }
-	</c:forEach>
+	${cookie.Models.value.replaceAll("\\+", " ")}
 </div>
 
