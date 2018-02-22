@@ -112,7 +112,7 @@ img {
 <!-- 렌트차량 페이징처리 -->
 <div>
 	<c:choose>
-		<c:when test="${rstartPage>3 }">
+		<c:when test="${rstartPage>5 }">
 		<a href="<%=request.getContextPath()%>/semi/rent.do?rpagenum=${rstartPage-1}&cmd=rentlist&rlpagenum=${rlpagenum2}">[이전]</a>
 		</c:when>
 		<c:otherwise>
@@ -170,7 +170,7 @@ img {
 <!-- 최근 렌트된 차량 페이징처리 -->
 <div>
 	<c:choose>
-		<c:when test="${rlstartPage>3 }">
+		<c:when test="${rlstartPage>5 }">
 		<a href="<%=request.getContextPath()%>/semi/rent.do?rlpagenum=${rlstartPage-1}&cmd=rentlist&rpagenum=${rpagenum2}">[이전]</a>
 		</c:when>
 		<c:otherwise>

@@ -81,11 +81,12 @@ public class NoticeController extends HttpServlet{
 		String notContent=vo.getNotContent();
 		Date notRegd=vo.getNotRegd();
 		int notHit=vo.getNotHit();
-		
+		String memName=vo.getMemName();
 		request.setAttribute("notTitle", notTitle);
 		request.setAttribute("notContent", notContent);
 		request.setAttribute("notRegd", notRegd);
 		request.setAttribute("notHit", notHit);
+		request.setAttribute("memName", memName);
 		request.getRequestDispatcher("/admin/layout.jsp?spage=/admin/adminNotice/noticedetail.jsp").forward(request, response);
 		
 	}

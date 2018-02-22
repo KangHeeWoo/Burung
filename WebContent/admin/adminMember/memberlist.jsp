@@ -60,7 +60,7 @@ table.type11 td {
 <!-- 페이징처리 -->
 <div>
 	<c:choose>
-		<c:when test="${startPage>3 }">
+		<c:when test="${startPage>5 }">
 		<a href="<%=request.getContextPath()%>/semi/list.do?pageNum=${startPage-1}">[이전]</a>
 		</c:when>
 		<c:otherwise>

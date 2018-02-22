@@ -109,7 +109,7 @@ public class NoticeDao {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from notice where notnum=?";
+		String sql="select * from notice nt,members ms where nt.memnum=ms.memnum and notnum=?";
 		hit(notNum);
 		try {
 			conn=DbcpBean.getConn();
@@ -123,7 +123,8 @@ public class NoticeDao {
 				int notHit=rs.getInt("notHit");
 				Date notRegd=rs.getDate("notRegd");
 				int memNum=rs.getInt("memNum");
-				NoticeVo vo=new NoticeVo(notNum, notTitle, notContent, notHit, notRegd, memNum);
+				String memName=rs.getString("memName");
+				NoticeVo vo=new NoticeVo(notNum, notTitle, notContent, notHit, notRegd, memNum,memName);
 				return vo;
 			}
 			return null;

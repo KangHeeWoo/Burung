@@ -199,7 +199,7 @@ table.type11 td {
 <!-- 구매내역 페이징처리 -->
 <div>
 	<c:choose>
-		<c:when test="${sstartPage>3 }">
+		<c:when test="${sstartPage>5 }">
 		<a href="<%=request.getContextPath()%>/semi/list.do?pageNum=${sstartPage-1}">[이전]</a>
 		</c:when>
 		<c:otherwise>

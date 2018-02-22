@@ -33,6 +33,7 @@ margin: 0.7em 0 0 0;
 #article-content {
     font-size: 0.9em;
     color: #333;
+    height: 400px;
 }
 .attach-file {
     font-size: 11px;
@@ -46,9 +47,25 @@ margin: 0.7em 0 0 0;
     color: #555;
     text-align: right;
 }
+#view-menu {
+    height: 22px;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
 </style>
 </head>
 <body>
+<div class="view-menu">
+ <div class="fr">
+        <input type="button" value="다음 글" onclick=""/>
+        <input type="button" value="이전 글" onclick=""/>
+        <input type="button" value="목록" onclick="location.href='<%=request.getContextPath()%>/semi/notice.do?cmd=noticelist'"/>
+ </div>
+ </div>
 <table class="bbs-table">
 <tr>
     <th style="width: 47px;text-align: left;vertical-align: top;font-size: 1em;">TITLE</th>
@@ -57,7 +74,7 @@ margin: 0.7em 0 0 0;
 </tr>
 </table>
 <div id="detail">
-    <div id="date-writer-hit">${notRegd } by 홍길동 hit ${notHit }</div>
+    <div id="date-writer-hit">${notRegd } by ${memName} hit ${notHit }</div>
     <div id="article-content">
     ${notContent }
     </div>

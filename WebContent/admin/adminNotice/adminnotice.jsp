@@ -54,7 +54,7 @@ a[class*="btn"] {
     display: inline-block;
     text-align: center;
     color: white;
-    left: 550px;
+    left: 650px;
 }
 .btn.small, .btn-two.small, .btn-gradient.small, .btn-effect.small {
     padding: 8px 18px;
@@ -66,6 +66,7 @@ a[class*="btn"] {
 * {
     box-sizing: border-box;
 }
+
 </style>
 </head>
 <body>
@@ -94,7 +95,7 @@ a[class*="btn"] {
 <!-- 페이징처리 -->
 <div>
 	<c:choose>
-		<c:when test="${startPage>4 }">
+		<c:when test="${startPage>5 }">
 			<a href="<%=request.getContextPath()%>/semi/notice.do?cmd=noticelist&pagenum=${startPage-1}">[이전]</a>
 		</c:when>
 		<c:otherwise>
@@ -105,7 +106,7 @@ a[class*="btn"] {
 		<c:choose>
 		<c:when test="${pagenum==i }">
 			<a href="<%=request.getContextPath() %>/semi/notice.do?pagenum=${i}&cmd=noticelist">
-			<span style="color: blue">[${i }]</span>
+			<span style="color: blue">${i }</span>
 			</a>
 		</c:when>
 		<c:otherwise>

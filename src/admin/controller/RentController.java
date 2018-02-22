@@ -100,7 +100,7 @@ public class RentController extends HttpServlet{
 		RentListDao rldao=new RentListDao();
 		ArrayList<RentListVo> rllist= rldao.rentlist(rlstartRow, rlendRow);
 		int rlpageCount=(int)Math.ceil(rldao.getCount()/5.0);
-		int rlstartPage=((rlpagenum2-1)/4*4)+1;
+		int rlstartPage=((rlpagenum2-1)/5*5)+1;
 		int rlendPage=rlstartPage+4;
 		if(rlendPage>rlpageCount) {
 			rlendPage=rlpageCount;
