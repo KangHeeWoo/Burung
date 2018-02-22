@@ -60,6 +60,7 @@ public class ReviewDao {
 			   System.out.println(se.getMessage());
 			   return -1;
 		   }finally {
+			   DbcpBean.close(pstmt1);
 			   DbcpBean.close(conn, pstmt, null);
 		   }
 	   }
@@ -153,6 +154,7 @@ public class ReviewDao {
 			System.out.println(se.getMessage());
 			return -1;
 		}finally {
+			DbcpBean.close(pstmt2);
 			DbcpBean.close(conn, pstmt, null);
 		}
 	}

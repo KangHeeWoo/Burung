@@ -62,12 +62,12 @@
 		</td>
 	</tr>
 </table>
-<div id="div">
-	
-</div>
 
 	
 </form>
+</div>
+<div id="div">
+	
 </div>
 <script type="text/javascript">
 
@@ -82,13 +82,16 @@
 			var td=document.createElement("td");
 			var td2=document.createElement("td");
 			var input=document.createElement("input");
-			td.innerHTML="첨부파일"+(i+1);
+			td.innerHTML="파일"+(i+1);
 			input.type="file";
 			input.name="file"+i;
 			td2.appendChild(input);
 			tr.appendChild(td);
 			tr.appendChild(td2);
 			table.appendChild(tr);
+			tr.style.height="20px";
+			tr.style.fontSize="15px";
+			tr.style.fontFamily="jeju";
 		}
 		
 		var tr2=document.createElement("tr");
@@ -97,10 +100,12 @@
 		td3.colspan=2;
 		input2.type="submit";
 		input2.value="등록";
+
 		td3.appendChild(input2);
 		tr2.appendChild(td3);
 		table.appendChild(tr2);
 		
+
 		var div=document.getElementById("div");
 		div.innerHTML="";
 		div.appendChild(table);

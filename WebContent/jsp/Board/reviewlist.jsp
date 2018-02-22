@@ -15,15 +15,15 @@ for(var i=0; i<checked.length; i++){
 <h1 align="center">후기게시판</h1><br><br>
 
 
-<form name="checkbox" method="post" onsubmit="return chBox();" style="width: 800px">
+<form name="checkbox" method="post"  style="width: 800px">
 <!--  carlistFont 스타일-->
 	<span id="carlistFont">&lt;차종&gt;</span><br>
-	<input name="ch_box" type="checkbox" value="0" checked="checked"/>전체<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="1"/>718<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="2"/>911<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="3"/>paramera<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="4"/>marcan<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="5"/>cayenne<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="0" checked="checked" onclick="carsearch()" />전체<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="718" onclick="carsearch()"/>718<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="911" onclick="carsearch()"/>911<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="panamera" onclick="carsearch()"/>panamera<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="macan" onclick="carsearch()"/>macan<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="cayenne" onclick="carsearch()"/>cayenne<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 </form>
 <div align="right">
 <select id="searchBy" onchange="orderby(1)">
@@ -138,6 +138,9 @@ for(var i=0; i<checked.length; i++){
 	//나중에 검색조건들어올 자리
 	function schClick(num){
 		var url="review.do?cmd=reviewlist&pageNum="+num;
+		if(searchBy.value!=""){
+			url+="&searchBy="+searchBy.value;
+		}
 		if(searchValue.value !=""){
 			url+="&search="+search.value+"&searchValue="+searchValue.value;
 		}
@@ -164,5 +167,29 @@ for(var i=0; i<checked.length; i++){
 	
 	function reviewdetail(revnum){
 		location.href="review.do?cmd=reviewdetaile&revnum="+revnum;
+	}
+	
+	
+	//체크박스 
+	function carsearch(){
+		var ch_box=document.getElementsByName("ch_box");
+		var cheCar = "";
+		
+		if(ch_box[0].checked == true){
+			for(var i=1;i<ch_box.length;i++){
+				if(ch_box[i].checked == true){
+					ch_box[0].checked = false;
+				}	
+			}
+		}
+		for(var i=0;i<ch_box.length;i++){
+			if(ch_box[i].checked == true){
+				cheCar += ch_box[i].value;
+				
+				if(i != ch_box.length){
+					cheCar +=":";
+				}
+			}
+		}
 	}
 </script>

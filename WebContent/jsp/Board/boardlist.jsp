@@ -1,20 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<h1 align="center">자유게시판</h1><br><br>
-<h5 align="right"><a href="board.do?cmd=boardinsert">글 등록</a></h5>
-<div align="center">
-	<table  width="500" border="1" cellspacing="0" cellpadding="3" bordercolor="#999999" style='border-collapse:collapse'>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/board/boardlist.css?ver=19" >
+<br>
+<div align="center" id="setfont">
+<h1 align="center">&lt;자유게시판&gt;</h1>
+<h4 align="right"><a href="board.do?cmd=boardinsert">글 등록</a></h4>
+	<table class="type09">
 		<tr>
-			<th>회원아이디</th><th>제목</th><th>입력일</th><th>조회수</th>
+			<th class="cols"  id="id">아이디</th><th class="cols" id="title" >제목</th><th class="cols"  id="regd" align="center">입력일</th><th class="cols" id="hit" align="center">조회수</th>
 		</tr>
 		<c:forEach var="board" items="${listAll }">
-		<tr>
-			<td>${board.memid }</td>
-			<td><a href="board.do?cmd=boardDetail&boanum=${board.boanum }&memid=${board.memid}">${board.boatitle }</a></td>
-			<td>${board.boaRegd }</td>
-			<td>${board.boahit }</td>
+		<tr onclick="boarddetail(${board.boanum},'${board.memid}')" onmouseover="fontborder(event)" onmouseout="fontout(event)">
+			<td scope="row">${board.memid }</td>
+			<td scope="row">${board.boatitle }</td>
+			<td scope="row"  align="center">${board.boaRegd }</td>
+			<td scope="row"  align="center">${board.boahit }</td>
 		</tr>
 		</c:forEach>
 	</table><br>
@@ -31,10 +32,10 @@
 		<c:forEach var="i" begin="${startPage }" end="${endPage }">
 			<c:choose>
 				<c:when test="${pageNum==i }">
-					<span style="color:black;">${i } | </span>
+					<span style="color:black;">${i } </span>
 				</c:when>
 				<c:otherwise>
-					<span style="color:gray;"><a href="<%=request.getContextPath()%>/board.do?cmd=boardlist&pageNum=${i }">${i } | </a></span>
+					<span style="color:gray;"><a href="<%=request.getContextPath()%>/board.do?cmd=boardlist&pageNum=${i }">${i } </a></span>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
@@ -81,5 +82,18 @@
 				search[i].selected="selected";
 			}
 		}
+	}
+	
+	function boarddetail(boanum,memid){
+		location.href="board.do?cmd=boardDetail&boanum="+boanum+"&memid="+memid;
+	}
+	
+	function fontborder(event){
+		event.target.parentElement.style.fontWeight="bold";
+		
+	}
+	function fontout(event){
+		event.target.parentElement.style.fontWeight="normal";
+		
 	}
 </script>
