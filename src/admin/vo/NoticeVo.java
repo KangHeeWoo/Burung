@@ -9,6 +9,19 @@ public class NoticeVo {
 	private int notHit;
 	private Date notRegd;
 	private int memNum;
+	private String memName;
+	
+	public NoticeVo(int notNum, String notTitle, String notContent, int notHit, Date notRegd, int memNum,
+			String memName) {
+		super();
+		this.notNum = notNum;
+		this.notTitle = notTitle;
+		this.notContent = notContent;
+		this.notHit = notHit;
+		this.notRegd = notRegd;
+		this.memNum = memNum;
+		this.memName = memName;
+	}
 	public NoticeVo(int notNum, String notTitle, String notContent, int notHit, Date notRegd, int memNum) {
 		super();
 		this.notNum = notNum;
@@ -57,4 +70,11 @@ public class NoticeVo {
 	public void setMemNum(int memNum) {
 		this.memNum = memNum;
 	}
+	public String getMemName() {
+		return memName;
+	}
+	public void setMemName(String memName) {
+		this.memName = memName;
+	}
+	
 }

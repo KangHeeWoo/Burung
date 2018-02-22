@@ -47,7 +47,6 @@ public class NoticeDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getNotTitle());
 			pstmt.setString(2, vo.getNotContent());
-			pstmt.setInt(3, vo.getMemNum());
 			return pstmt.executeUpdate();
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
@@ -60,7 +59,7 @@ public class NoticeDao {
 	public int hit(int notnum) {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
-		String sql="update set notice hit=hit+1 where notnum=?";
+		String sql="update notice set nothit=nothit+1 where notnum=?";
 		try {
 			conn=DbcpBean.getConn();
 			pstmt=conn.prepareStatement(sql);
@@ -78,7 +77,7 @@ public class NoticeDao {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from (select aa.*,rownum rnum from(select * from notice order by notnum desc)aa) where rnum>=? and rnum<=?";
+		String sql="select * from (select aa.*,rownum rnum from(select * from notice order by notnum desc)aa)aa,members ms where ms.memnum=aa.memnum and rnum>=? and rnum<=?";
 		try {
 			conn=DbcpBean.getConn();
 			pstmt=conn.prepareStatement(sql);
@@ -93,7 +92,8 @@ public class NoticeDao {
 				int notHit=rs.getInt("notHit");
 				Date notRegd=rs.getDate("notRegd");
 				int memNum=rs.getInt("memNum");
-				NoticeVo vo=new NoticeVo(notNum, notTitle, notContent, notHit, notRegd, memNum);
+				String memName=rs.getString("memName");
+				NoticeVo vo=new NoticeVo(notNum, notTitle, notContent, notHit, notRegd, memNum,memName);
 				list.add(vo);
 			}
 			return list;
@@ -105,7 +105,7 @@ public class NoticeDao {
 		}
 	}
 	
-	public ArrayList<NoticeVo> detail(int notNum){
+	public NoticeVo detail(int notNum){
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -124,9 +124,9 @@ public class NoticeDao {
 				Date notRegd=rs.getDate("notRegd");
 				int memNum=rs.getInt("memNum");
 				NoticeVo vo=new NoticeVo(notNum, notTitle, notContent, notHit, notRegd, memNum);
-				list.add(vo);
+				return vo;
 			}
-			return list;
+			return null;
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
 			return null;

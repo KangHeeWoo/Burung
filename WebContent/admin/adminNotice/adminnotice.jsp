@@ -75,19 +75,21 @@ a[class*="btn"] {
 	<tr>
 		<th>번호</th>
 		<th>제목</th>
+		<th>작성자</th>
 		<th>조회수</th>
 		<th>등록일</th>
 	</tr>
 	<c:forEach var="notice" items="${list}">
 		<tr>
 			<td>${notice.notNum }</td>
-			<td><a href="#">${notice.notTitle }</a></td>
+			<td><a href="<%=request.getContextPath()%>/semi/notice.do?cmd=detail&notNum=${notice.notNum}">${notice.notTitle }</a></td>
+			<td>${notice.memName }</td>
 			<td>${notice.notHit }</td>
 			<td>${notice.notRegd }</td>
 		</tr>
 	</c:forEach>
 </table>
-<a href="#" class="btn red small">글쓰기</a>
+<a href="<%=request.getContextPath() %>/semi/notice.do?cmd=write" class="btn red small">글쓰기</a>
 </div>
 <!-- 페이징처리 -->
 <div>
