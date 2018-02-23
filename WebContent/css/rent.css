@@ -102,6 +102,22 @@
 	font-weight: bold;
 }
 
+#rentList div a:link{
+	color : black;
+}
+
+#rentList div a:visited{
+	color : black;
+}
+
+#rentList div a:active{
+	color: #8e0000;
+}
+
+#rentList div a:hover{
+	color: #8e0000;
+}
+
 #listSearch {
 	background-color: #555555;
 	border: none;

@@ -16,6 +16,7 @@
 	</div>
 	<h3>${cName }</h3>
 	<img src="${pageContext.request.contextPath }/img/${cName}_rent.png" id="carimg">
+	<br><br>
 	<div>
 	<span>· 대여 금액 :</span><span class="price" id="cPrice">${price }원</span><br><br>
 	<span>· 보험 금액 :</span><span class="price" id="iPrice">0원</span><br><br>
