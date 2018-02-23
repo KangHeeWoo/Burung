@@ -21,12 +21,12 @@ for(var i=0; i<checked.length; i++){
 <form name="checkbox" method="post"  style="width: 800px">
 <!--  carlistFont 스타일-->
 	
-	<input name="ch_box" type="checkbox" value="0" checked="checked" onclick="carAll()" />전체<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="718" checked="checked" onclick="carsearch()"/>718<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="911" checked="checked" onclick="carsearch()"/>911<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="panamera" checked="checked" onclick="carsearch()"/>panamera<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="macan" checked="checked" onclick="carsearch()"/>macan<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="cayenne" checked="checked" onclick="carsearch()"/>cayenne<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="0" checked="checked" onclick="carAll(1)" />전체<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="718" checked="checked" onclick="carsearch(1)"/>718<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="911" checked="checked" onclick="carsearch(1)"/>911<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="panamera" checked="checked" onclick="carsearch(1)"/>panamera<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="macan" checked="checked" onclick="carsearch(1)"/>macan<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="cayenne" checked="checked" onclick="carsearch(1)"/>cayenne<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 </form>
 <div align="right">
 <select id="searchBy" onchange="orderby(1)">
@@ -176,7 +176,7 @@ for(var i=0; i<checked.length; i++){
 	
 	
 	//전체 체크박스
-	function carAll(){
+	function carAll(num){
 		var ch_box=document.getElementsByName("ch_box");
 		cheCar = "All";
 		
@@ -189,12 +189,12 @@ for(var i=0; i<checked.length; i++){
 				ch_box[i].checked = false;
 			}
 		}
-		
-		console.log(cheCar);
+		var url="review.do?cmd=reviewlist&pageNum="+num+"&cheCar="+cheCar;
+		//console.log(cheCar);
 	}
 	
 	//체크박스 
-	function carsearch(){
+	function carsearch(num){
 		var ch_box=document.getElementsByName("ch_box");
 		var cnt = 0;
 		var valCnt = 0;
@@ -210,7 +210,7 @@ for(var i=0; i<checked.length; i++){
 		else ch_box[0].checked = false;
 		
 		
-		if(ch_box[0].checked == true){
+		if(ch_box[0].checked == true || cnt==0){
 			cheCar = "All";
 		}else{
 			for(var i=1;i<ch_box.length;i++){
@@ -222,7 +222,9 @@ for(var i=0; i<checked.length; i++){
 				}
 			}
 		}
+		var url="review.do?cmd=reviewlist&pageNum="+num+"&cheCar="+cheCar;
 		
-		console.log(cheCar);
+		location.href=url;
+		//console.log(cheCar);
 	}
 </script>

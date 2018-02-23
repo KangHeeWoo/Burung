@@ -19,7 +19,7 @@
 	</tr>
 	<tr><td colspan="2"><hr></td></tr>
 	<tr><td colspan="2"><div align="right" id="name">입력일 _ ${listdetail.boaRegd}&nbsp;&nbsp;/&nbsp;&nbsp;작성자 _  ${param.memid}</div></td></tr>
-	
+	<tr><td colspan="2"></td></tr>
 	<tr>
 		<td colspan="2"><div align="center"><textarea cols="100" rows="20" name="boacontent"
 				readonly="readonly">${listdetail.boaContent }</textarea></div></td>

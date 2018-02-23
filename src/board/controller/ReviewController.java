@@ -121,7 +121,8 @@ public class ReviewController extends HttpServlet{
 		String searchValue=request.getParameter("searchValue");
 		String searchBy=request.getParameter("searchBy");
 		
-		System.out.println("search : "+search+"	searchValue : "+searchValue+"		searchBy : " + searchBy);
+		//System.out.println("search : "+search+"	searchValue : "+searchValue+"		searchBy : " + searchBy);
+		
 		
 		int pageNum=1;
 		if(spageNum!=null) {
@@ -144,9 +145,19 @@ public class ReviewController extends HttpServlet{
 		//검색조건 dao에 넣기
 		
 		ReviewDao dao=ReviewDao.getInstance();
-		ArrayList<ReviewVo> listAll=dao.listAll(startRow, endRow,search,searchValue, searchBy);
+		ArrayList<ReviewVo> listAll=null;
 		
-		System.out.println("listAll:"+listAll);
+		String cheCar=request.getParameter("cheCar");
+		if(cheCar == null ||cheCar.equals("All")) {
+			listAll=dao.listAll(startRow, endRow,search,searchValue, searchBy);
+		}else {
+			String[] carValue=cheCar.split(":");
+			listAll=dao.carValueList(startRow, endRow, carValue);
+			
+		}
+		
+		
+		//System.out.println("listAll:"+listAll);
 		
 		int pageCount=(int)Math.ceil(dao.getCount()/10.0);
 		int startPage=((pageNum-1)/10*10)+1;
