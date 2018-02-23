@@ -6,6 +6,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -98,35 +99,96 @@ public class SalesController extends HttpServlet {
 			}
 		}
 		
-		
 		// 최근 본 상품 쿠키에 추가하기
 		String item = URLEncoder.encode(name,"utf-8");
-		Cookie cook = new Cookie("Models", item);
-		cook.setPath("/");
-		cook.setMaxAge(60 * 60);
-		response.addCookie(cook);
 		
-		Cookie[] cookies = request.getCookies();
-		
-		for(int i=0;i<cookies.length;i++) {
-			if(!cookies[i].getName().equals("JSESSIONID")) {
-				//ArrayList에 저장
-				//URLDecoder
+		//System.out.println(Models);
+		Cookie[] cookies1 = request.getCookies();
+		boolean cheCook = true;
+		// ArrayList 생성
+		System.out.println(cookies1.length);
+
+		for (int i = 0; i < cookies1.length; i++) {
+			if (cookies1[i].getName().startsWith("Models")) {
+				if(cookies1[i].getValue().equals(item)) {
+					cheCook = false;
+				}
 			}
 		}
-
-//		String Models = null;
-//		for(int i=0;i<1;i++) {
-//			//ArrayList<String> Models = new ArrayList<>();
-//			//Models += "Models"+i;
-//			Cookie cook = new Cookie(Models+i, item);
-//			cook.setMaxAge(60 * 60);
-//			response.addCookie(cook);
-//		}
 		
+		if(cheCook) {
+			String Models = null;
+			String ckindex="1";
+			while(true) {
+				Cookie[] cookies = request.getCookies();
+				for(int j=0;j<cookies.length;j++) {
+					if(cookies[j].getName().equals("ckIndex")) {
+						String value = cookies[j].getValue();
+						//URLDecoder
+						ckindex = URLDecoder.decode(value,"utf-8");
+					}
+				}
+				if(ckindex.equals("4")) {
+					ckindex = "1";
+				}
+				Models = "Models"+ckindex;
+				System.out.println("index:"+ckindex);
+				Cookie cook = new Cookie(Models, item);
+				int ckin=Integer.parseInt(ckindex)+1;
+				ckindex=String.valueOf(ckin);
+				Cookie ckIndex = new Cookie("ckIndex", ckindex);
+				cook.setPath("/");
+				cook.setMaxAge(-1);
+				response.addCookie(cook);
+				response.addCookie(ckIndex);
+				break;
+			}
+		}
+		
+		//System.out.println(Models);
+		Cookie[] cookies = request.getCookies();
+		//ArrayList 생성
+		ArrayList<String> cooks = new ArrayList<>();
+		System.out.println(cookies.length);
+		
+		for(int j=0;j<cookies.length;j++) {
+			if(cookies[j].getName().startsWith("Models")) {
+				String value = cookies[j].getValue();
+				//URLDecoder
+				String models = URLDecoder.decode(value,"utf-8");
+				//ArrayList에 저장
+				cooks.add(models);
+			}
+		}
+	
+		/*
+		for(int j=0;j<cookies.length;j++) {
+			if(cookies[j].getName().startsWith("Models")) {
+				String value = cookies[j].getValue();
+				System.out.println("value:"+value);
+				for(int k=j+1;k<cookies.length;k++) {
+					String value1 = cookies[k].getValue();
+					System.out.println("value1:"+value1);
+					if(value.equals(value1)) {
+						String name1 = cookies[j].getName();
+						Cookie cook=new Cookie(name1,"");
+						cook.setMaxAge(0);
+						response.addCookie(cook);
+						System.out.println("name:"+cook.getName());
+					}
+					//URLDecoder
+					String models = URLDecoder.decode(value,"utf-8");
+					//ArrayList에 저장
+					cooks.add(models);
+				}
+			}
+		}
+		*/
 		//request ArrayList 담기
+		request.setAttribute("cooks",cooks);
+		
 		//forword 방식으로 페이지 이동
-		response.sendRedirect(request.getContextPath() + path);
+		request.getRequestDispatcher(path).forward(request, response);;
 	}
 
 	private void loadData(HttpServletRequest request, HttpServletResponse response)

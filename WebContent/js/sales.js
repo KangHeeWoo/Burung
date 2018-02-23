@@ -4,6 +4,7 @@ var modelList 	= null;
 var mainImg	= null;
 var subImg 	= null;
 var price = null;
+var path = null;
 
 var xhr = null;
 
@@ -14,6 +15,8 @@ window.onload = function(){
 	mainImg	= document.getElementById("mainImg");
 	subImg	= document.getElementById("subImg");
 	
+	
+	
 	loadData();
 	showOpt();
 }
@@ -21,7 +24,7 @@ window.onload = function(){
 function loadData(){
 	xhr = new XMLHttpRequest();
 	xhr.onreadystatechange=getData;
-	xhr.open('get', '../sales.do?cmd=loadData&model='
+	xhr.open('get', '/Burung/sales.do?cmd=loadData&model='
 			+ model + '&mName=' + mName, true);
 	xhr.send();
 }
@@ -34,14 +37,14 @@ function getData(){
 			var li = document.createElement("li");
 			var a = document.createElement("a");
 			a.innerHTML = data.list[i];
-			a.href = "../sales.do?cmd=choiceName&model=" + model + "&name=" + data.list[i];
+			a.href = "/Burung/sales.do?cmd=choiceName&model=" + model + "&name=" + data.list[i];
 			if(data.name == data.list[i]) a.style.fontWeight = "bold";
 			li.appendChild(a);
 			modelList.appendChild(li);
 		}
 		
-		mainImg.src = "../img/" + data.mainImg;
-		subImg.src = "../img/" + data.subImg;
+		mainImg.src = "/Burung/img/" + data.mainImg;
+		subImg.src = "/Burung/img/" + data.subImg;
 		price = data.price;
 	}
 }

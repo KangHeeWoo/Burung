@@ -2,8 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" href="../css/sales.css?ver=6" />
-<script src="../js/sales.js?ver=4"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/sales.css?ver=6" />
+<script src="${pageContext.request.contextPath }/js/sales.js?ver=8"></script>
 <c:choose>
 	<c:when test="${param.name != null && param.name != ''}">
 		<c:set var="name" value="${param.name }" />
@@ -30,6 +30,7 @@
 </c:choose>
 <span style="display: none;" id="model">${param.model }</span>
 <span style="display: none;" id="mName">${name }</span>
+<span style="display: none;" id="path">${pageContext.request.contextPath }</span>
 <div id="sales">
 	<ul id="modelList"></ul>
 	<img id="mainImg">
@@ -82,28 +83,21 @@
 	</div>
 </div>
 <div id="cook">
-		<h2>최근본구매상품</h2>		
-	<ul>
-		<%
-			Cookie[] cooks = request.getCookies();
-			if(cooks==null){
-		%>
-		<li>상품없음</li>
-		<%
-			}else{
-				for(Cookie ck:cooks){
-					String name = ck.getName();
-					String value = ck.getValue();
-					value = URLDecoder.decode(value,"utf-8");		
-		%>
-		<li><%=value %></li>		
-		<%
-					}
-				}
-			
-		%>
-	</ul>
-	
-	${cookie.Models.value.replaceAll("\\+", " ")}
+	<h2>최근본상품</h2>		
+		<c:forEach var = "cooks" items = "${requestScope.cooks }">
+			<c:choose>
+				<c:when test = "${cooks == null }">
+					상품없음<br>
+				</c:when>
+				<c:otherwise>
+					<img class="ad" src="/Burung/img/${cooks }_rent.png"><br>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
 </div>
+
+
+
+
+
 
