@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/board/reviewlist.css?ver=8" >
 <!--
 
  var checked = document.querySelectorAll("#checks input[type='checkbox']:checked");
@@ -11,26 +11,29 @@ for(var i=0; i<checked.length; i++){
 
  -->
  
+<br>
+<div align="center" id="setfont">
+<h1 align="center">&lt;후기게시판&gt;</h1><br>
 
-<h1 align="center">후기게시판</h1><br><br>
-
+<!-- 세션 아이디의 마이페이지 : 물어보아요!!!!!!-->
+<h4 align="right"><a href="members.do?cmd=listpage">글 등록</a></h4>
 
 <form name="checkbox" method="post"  style="width: 800px">
 <!--  carlistFont 스타일-->
-	<span id="carlistFont">&lt;차종&gt;</span><br>
-	<input name="ch_box" type="checkbox" value="0" checked="checked" onclick="carAll()" />전체<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="718" checked="checked" onclick="carsearch()"/>718<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="911" checked="checked" onclick="carsearch()"/>911<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="panamera" checked="checked" onclick="carsearch()"/>panamera<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="macan" checked="checked" onclick="carsearch()"/>macan<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="cayenne" checked="checked" onclick="carsearch()"/>cayenne<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	
+	<input name="ch_box" type="checkbox" value="0" checked="checked" onclick="carAll(1)" />전체<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="718" checked="checked" onclick="carsearch(1)"/>718<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="911" checked="checked" onclick="carsearch(1)"/>911<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="panamera" checked="checked" onclick="carsearch(1)"/>panamera<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="macan" checked="checked" onclick="carsearch(1)"/>macan<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="cayenne" checked="checked" onclick="carsearch(1)"/>cayenne<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 </form>
 <div align="right">
 <select id="searchBy" onchange="orderby(1)">
 		<option value="revnum">==정렬==</option>
 		<option value="revhit">조횟수</option>
 		<option value="revscore">후기점수</option>
-</select>
+</select><br>
 <c:choose>
 	<c:when test="${param.searchBy != null || param.searchBy != ''}">
 		<c:set var="searchBy" value="${param.searchBy }"/>
@@ -41,28 +44,26 @@ for(var i=0; i<checked.length; i++){
 </c:choose>
 <input type="hidden" id="choiceBy" value="${searchBy }">
 </div>
-
-<h5 align="right"><a href="${pageContext.request.contextPath }/review.do?cmd=loginOk">글 등록</a></h5>
-
+<br>
 
 <div align="center">
-	<table border="1" >
+	<table class="type09">
 		<tr>
-			<th>회원아이디</th><th>차종</th><th>제목</th><th>입력일</th><th>조회수</th><th>평점</th>
+			<th class="cols" id="id">아이디</th><th  class="cols" id="car">차종</th><th  class="cols" id="title">제목</th><th  class="cols" id="regd">입력일</th><th  class="cols" id="hit">조회수</th><th  class="cols" id="score">평점</th>
 		</tr>
 		
-		<!-- ---------------------------------------------------------------------------------- -->
+
 		
 		
 		<c:forEach var="review" items="${listAll }">
-		<tr onclick="reviewdetail(${review.revNum})">
-			<td>${review.memId }</td>
-			<td>${review.carname }</td>
+		<tr onclick="reviewdetail(${review.revNum})" onmouseover="fontborder(event)" onmouseout="fontout(event)">
+			<td  class="row">${review.memId }</td>
+			<td class="row">${review.carname }</td>
 			<%--<td><a href="board.do?cmd=boardDetail&boanum=${board.boanum }&memid=${board.memid}">${board.boatitle }</a></td>--%>
-			<td>${review.revTitle }</td>
-			<td>${review.revRegd}</td>
-			<td>${review.revHit}</td>
-			<td><c:forEach var="score" begin="1" end="${review.revScore }">★</c:forEach></td>
+			<td class="row">${review.revTitle }</td>
+			<td class="row" >${review.revRegd}</td>
+			<td class="row" >&nbsp;&nbsp;&nbsp;&nbsp;${review.revHit}</td>
+			<td class="row"><c:forEach var="score" begin="1" end="${review.revScore }">★</c:forEach></td>
 		</tr>
 		</c:forEach>
 	</table><br>
@@ -107,6 +108,8 @@ for(var i=0; i<checked.length; i++){
 	<input type="hidden" id="choice" value="${search }">
 </div>
 
+
+</div>
 
 
 
@@ -161,8 +164,19 @@ for(var i=0; i<checked.length; i++){
 		location.href="review.do?cmd=reviewdetaile&revnum="+revnum;
 	}
 	
+	
+	function fontborder(event){
+		event.target.parentElement.style.fontWeight="bold";
+		
+	}
+	function fontout(event){
+		event.target.parentElement.style.fontWeight="normal";
+		
+	}
+	
+	
 	//전체 체크박스
-	function carAll(){
+	function carAll(num){
 		var ch_box=document.getElementsByName("ch_box");
 		cheCar = "All";
 		
@@ -175,12 +189,12 @@ for(var i=0; i<checked.length; i++){
 				ch_box[i].checked = false;
 			}
 		}
-		
-		console.log(cheCar);
+		var url="review.do?cmd=reviewlist&pageNum="+num+"&cheCar="+cheCar;
+		//console.log(cheCar);
 	}
 	
 	//체크박스 
-	function carsearch(){
+	function carsearch(num){
 		var ch_box=document.getElementsByName("ch_box");
 		var cnt = 0;
 		var valCnt = 0;
@@ -196,7 +210,7 @@ for(var i=0; i<checked.length; i++){
 		else ch_box[0].checked = false;
 		
 		
-		if(ch_box[0].checked == true){
+		if(ch_box[0].checked == true || cnt==0){
 			cheCar = "All";
 		}else{
 			for(var i=1;i<ch_box.length;i++){
@@ -208,7 +222,9 @@ for(var i=0; i<checked.length; i++){
 				}
 			}
 		}
+		var url="review.do?cmd=reviewlist&pageNum="+num+"&cheCar="+cheCar;
 		
-		console.log(cheCar);
+		location.href=url;
+		//console.log(cheCar);
 	}
 </script>

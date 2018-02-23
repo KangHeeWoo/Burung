@@ -51,7 +51,10 @@
 
 	<c:if test="${sessionScope.id==reviewdetail.memId}">
 		<div id="updatebnt" align="center">
-			<a href="javascript:reviewupdate()">수정</a>
+		
+		
+			<!-- <a href="javascript:reviewupdate()">수정</a> -->
+			
 			<a href="javascript:reviewdelete()">삭제</a>
 		</div>
 	</c:if>
@@ -81,15 +84,15 @@
 		}
 	}
 	
-	function reviewupdate() {
-		var memid=document.getElementById("memid").value;
-		var con = confirm("해당 게시물을 수정하시겠습니까?");
-		var num = document.getElementById("num").value;
-		console.log(con);
-		if (con == true) {
-			location.href="<%=request.getContextPath()%>/review.do?cmd=reviewupdate&memid="+memid+"&revnum=" + num;
-		}
-	}
+	//function reviewupdate() {
+	//	var memid=document.getElementById("memid").value;
+	//	var con = confirm("해당 게시물을 수정하시겠습니까?");
+	//	var num = document.getElementById("num").value;
+	//	console.log(con);
+	//	if (con == true) {
+	<%--		location.href="<%=request.getContextPath()%>/review.do?cmd=reviewupdate&memid="+memid+"&revnum=" + num;--%>
+	//	}
+	//}
 	
 	//댓글달기
 	var xhr=null;

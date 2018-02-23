@@ -158,18 +158,66 @@ public class ReviewDao {
 			DbcpBean.close(conn, pstmt, null);
 		}
 	}
+	public ArrayList<ReviewVo> carValueList(int startRow,int endRow,String[] carValue){
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<ReviewVo> list=new ArrayList<>();
+		try {
+			conn=DbcpBean.getConn();
+			String sql="select * from(select aa.*,rownum rnum from(select carname,revnum,revcontent,revscore, revtitle,revhit,revRegd,m.memid memid ,m.memnum memnum from review r,members m, salescar s where m.memNum=r.memNum and scarmodel in(";
+				for(int i=0;i<carValue.length;i++) {
+					sql+="?";
+					if(carValue.length!=i+1) {
+						sql+=",";
+					}
+				}
+			sql+=") and carname = scarname order by revnum desc)aa)where rnum>=? and rnum<=?";
+			
+			pstmt=conn.prepareStatement(sql);
+			System.out.println(sql);
+			for(int i=0;i<carValue.length;i++) {
+				pstmt.setString(i+1, carValue[i]);
+			}
+			pstmt.setInt(carValue.length+1, startRow);
+			pstmt.setInt(carValue.length+2, endRow);
+			
+		
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				int revnum=rs.getInt("revnum");
+				String revtitle=rs.getString("revtitle");
+				String revcontent=rs.getString("revcontent");
+				int revhit=rs.getInt("revhit");
+				int revscore=rs.getInt("revscore");
+				Date revregd=rs.getDate("revregd");
+				int memnum=rs.getInt("memnum");
+				String memid=rs.getString("memid");
+				String carname=rs.getString("carname");
+				
+				ReviewVo vo=new ReviewVo(revnum, revtitle, revcontent, revscore, revhit, revregd, memnum, memid, carname);
+				list.add(vo);
+				
+				System.out.println("체크박스 vo:"+vo);
+			}
+			return list;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			se.printStackTrace();
+			return null;
+		}finally {
+			DbcpBean.close(conn, pstmt, rs);
+		}
+	}
+	
+	
 	public ArrayList<ReviewVo> listAll(int startRow,int endRow, String search,String searchValue,String searchBy){
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		ArrayList<ReviewVo> list=new ArrayList<>();
 		
-		
-		System.out.println(startRow);
-		System.out.println(endRow);
-		System.out.println(search);
-		System.out.println(searchValue);
-		System.out.println(searchBy);
+
 		
 		try {
 			conn=DbcpBean.getConn();
