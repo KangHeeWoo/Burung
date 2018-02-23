@@ -50,8 +50,8 @@ public class RentController extends HttpServlet{
 		Date strDate = null;
 		Date endDate = null;
 		try {
-			strDate = new Date(new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(sDate).getTime());
-			endDate = new Date(new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(eDate).getTime());
+			strDate = new Date(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(sDate).getTime());
+			endDate = new Date(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(eDate).getTime());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,8 +80,8 @@ public class RentController extends HttpServlet{
 		long rentTime = 0l;
 		
 		try {
-			rentTime = new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(eDate + " " + eTime).getTime()
-					- new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(sDate + " " + sTime).getTime();
+			rentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(eDate + " " + eTime).getTime()
+					- new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(sDate + " " + sTime).getTime();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
