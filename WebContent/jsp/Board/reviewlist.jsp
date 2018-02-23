@@ -20,13 +20,13 @@ for(var i=0; i<checked.length; i++){
 
 <form name="checkbox" method="post"  style="width: 800px">
 <!--  carlistFont 스타일-->
-	
-	<input name="ch_box" type="checkbox" value="0" checked="checked" onclick="carAll(1)" />전체<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="718" checked="checked" onclick="carsearch(1)"/>718<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="911" checked="checked" onclick="carsearch(1)"/>911<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="panamera" checked="checked" onclick="carsearch(1)"/>panamera<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="macan" checked="checked" onclick="carsearch(1)"/>macan<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-	<input name="ch_box" type="checkbox" value="cayenne" checked="checked" onclick="carsearch(1)"/>cayenne<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input type="hidden" name="cheCar" value="${param.cheCar }">
+	<input name="ch_box" type="checkbox" value="0" onclick="carAll(1)" />전체<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="718" onclick="carsearch(1)"/>718<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="911" onclick="carsearch(1)"/>911<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="panamera" onclick="carsearch(1)"/>panamera<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="macan" onclick="carsearch(1)"/>macan<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	<input name="ch_box" type="checkbox" value="cayenne" onclick="carsearch(1)"/>cayenne<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 </form>
 <div align="right">
 <select id="searchBy" onchange="orderby(1)">
@@ -156,6 +156,23 @@ for(var i=0; i<checked.length; i++){
 		for(var i=0;i<searchBy.length;i++){
 			if(searchBy[i].value==choiceBy.value){
 				searchBy[i].selected="selected";
+			}
+		}
+		
+		var cheValue = checkbox.cheCar.value;
+		var ch_box = checkbox.ch_box;
+		
+		console.log(cheValue);
+		
+		if(cheValue == 'All' || cheValue == '' || cheValue == null){
+			for(var i=0;i<ch_box.length;i++){
+				ch_box[i].checked = "checked";
+			}
+		}else{
+			for(var i=0;i<ch_box.length;i++){
+				if(cheValue.indexOf(ch_box[i].value) != -1){
+					ch_box[i].checked = "checked";
+				}
 			}
 		}
 	}
