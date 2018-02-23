@@ -103,6 +103,7 @@ public class RentController extends HttpServlet{
 		String eTime = request.getParameter("eTime");
 		String model = request.getParameter("model");
 
+		
 		//최초 진입시 기본 날짜 지정
 		if(sDate == null) {
 			Calendar cal = Calendar.getInstance();
