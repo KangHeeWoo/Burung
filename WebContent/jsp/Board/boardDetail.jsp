@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>
-	/css/board/boarddetail.css?ver=14" >
+	/css/board/boarddetail.css?ver=25" >
 
 <div align="center" id="detail">
 
@@ -34,9 +34,9 @@
 			<a href="javascript:boardupdate()">수정 | </a>
 			<a href="javascript:boarddelete()">삭제</a>
 		</div>
-		<br><br><br><br>
-		<hr width="800px">
+		<br><br><br>
 	</c:if>
+	<hr width="750px">
 	
 <!--  댓글 리스트 -->
 <div id="comments">
@@ -46,10 +46,11 @@
 <!--  댓글 입력 -->
 
 <div >
-	<textarea rows="5" cols="30"  id="comment"></textarea>
-	<input type="button" value="댓글"   onclick="addBoardComm()">
+<table><tr><td id="ccco">
+	<textarea rows="5" cols="97"  id="comment"  placeholder="30자 이내로 작성해주세요."></textarea></td>
+	<td><input type="button" value="등록"   onclick="addBoardComm()" id="bnt"></td></tr>
+</table>
 </div>
-
 
 </div>
 
@@ -78,9 +79,15 @@
 	//댓글달기
 	var xhr=null;
 	function addBoardComm(){
+		
 		var comment=document.getElementById("comment").value;
 		var boanum=document.getElementById("num").value;
-		
+		if(comment.length>=30){
+			alert("댓글 사이즈를 준수해 주십시오");
+			document.getElementById("comment").value="";
+			return;
+			
+		}
 		xhr=new XMLHttpRequest();
 		xhr.onreadystatechange=insertComm;
 		xhr.open("post", "<%=request.getContextPath()%>/boardcomment.do?cmd=comminsert", true);
@@ -94,7 +101,7 @@
 			var xml=xhr.responseXML;
 			var code=xml.getElementsByTagName("code")[0].firstChild.nodeValue;
 			if(code=="success"){
-				alert("댓글등록");
+				//alert("댓글등록");
 				//입력된 댓글 지우기
 				document.getElementById("comment").value="";
 				//댓글 목록 불러오기
@@ -132,19 +139,27 @@
 				var div=document.createElement("div");
 				var n=bcomnum[i].firstChild.nodeValue;
 				
-				var wId = id[i].firstChild.nodeValue ;
-				var html="아이디"+ wId +"<br>"+
-		         "댓글:" + comcon[i].firstChild.nodeValue +"<br>" +
-		         "날짜:" + comregd[i].firstChild.nodeValue +"<br>";
+				var ddiv=document.createElement("div");
+				var span=document.createElement("span");
 				
+				var wId = id[i].firstChild.nodeValue ;
+				var html="아이디: "+ wId +"<br>"+
+		          comcon[i].firstChild.nodeValue +"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+		          span.innerHTML="날짜:" + comregd[i].firstChild.nodeValue +"&nbsp;&nbsp;&nbsp;&nbsp;";
+				span.className="Date";
 		         //세션아이디와 비교해 삭제여부
 		         var id1 = "<%=session.getAttribute("id")%>";
-		         if(id1==wId){
-		         	html += "<a href='javascript:remove(" + n +")'>삭제</a>";
-		         }
 		         div.innerHTML=html;
+		         if(id1==wId){
+		         	span.innerHTML += "<a href='javascript:remove(" + n +")'>삭제</a>";
+		         }
+		         ddiv.appendChild(span);
+		         div.appendChild(ddiv);
+		         ddiv.className="div";
 		         div.className="comm";
+		         div.align="left";
 				 comments.appendChild(div);
+				 comments.innerHTML+="<hr width='750px'>"
 			}
 			///////////////////////////////////////////////////////////////////////////////////////////////////////
 			
