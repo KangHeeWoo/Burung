@@ -1,42 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>
+	/css/board/boarddetail.css?ver=14" >
 
+<div align="center" id="detail">
 
-<style>
-	.comm{width:400px;height: 100px;border:1px solid #aaa;padding: 2px;margin-top: 3px;}
-</style>
-
-
-<h2>자유게시판</h2>
+<br>
 <h4 align="right">
 	<a href="${pageContext.request.contextPath}/board.do?cmd=boardlist">글목록</a>
 </h4>
 
-<table border="solid 1px">
+<table id="table">
+
 	<tr>
-		<td>작성자</td>
-		<td>${param.memid}</td>
+		<td class="title" id="title">&nbsp;&nbsp;제&nbsp;&nbsp;&nbsp;목</td>
+		<td id="content">${listdetail.boaTitle }</td>
 	</tr>
+	<tr><td colspan="2"><hr></td></tr>
+	<tr><td colspan="2"><div align="right" id="name">입력일 _ ${listdetail.boaRegd}&nbsp;&nbsp;/&nbsp;&nbsp;작성자 _  ${param.memid}</div></td></tr>
+	
 	<tr>
-		<td>제목</td>
-		<td>${listdetail.boaTitle }</td>
-	</tr>
-	<tr>
-		<td>내용</td>
-		<td><textarea cols="50" rows="20" name="boacontent"
-				readonly="readonly">${listdetail.boaContent }</textarea></td>
+		<td colspan="2"><div align="center"><textarea cols="100" rows="20" name="boacontent"
+				readonly="readonly">${listdetail.boaContent }</textarea></div></td>
 	</tr>
 
 </table>
 <input type="hidden" id="num" value="${listdetail.boaNum }">
 <input type="hidden" id="memid" value="${param.memid}">
-
+<br><br><br>
 	<c:if test="${sessionScope.id== param.memid}">
 		<div id="updatebnt" align="center">
-			<a href="javascript:boardupdate()">수정</a>
+			<a href="javascript:boardupdate()">수정 | </a>
 			<a href="javascript:boarddelete()">삭제</a>
 		</div>
+		<br><br><br><br>
+		<hr width="800px">
 	</c:if>
 	
 <!--  댓글 리스트 -->
@@ -51,6 +50,8 @@
 	<input type="button" value="댓글"   onclick="addBoardComm()">
 </div>
 
+
+</div>
 
 <script type="text/javascript">
 	window.onload = getcommlist;

@@ -16,3 +16,15 @@
 #setfont table{
 	height : 450px;
 }
+h4 a:link{
+	color: black;
+}
+h4 a:visited{
+	color: black;
+}
+h4 a:active{
+	color: #8e0000;
+}
+h4 a:hover{
+	color: #8e0000;
+}
