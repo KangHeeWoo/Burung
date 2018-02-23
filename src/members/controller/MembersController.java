@@ -49,12 +49,14 @@ public class MembersController extends HttpServlet {
 			updateOk(request, response);
 		} else if (cmd.equals("listpage")) {
 			list(request, response);
-		}  else if (cmd.equals("findId")) {
+		} else if (cmd.equals("findId")) {
 			findId(request, response);
-		} else if ( cmd.equals("addrInquiry")) {
-			addr(request,response);
-		} else if ( cmd.equals("updatepage")) {
-			updatepage (request, response);
+		} else if (cmd.equals("addrInquiry")) {
+			addr(request, response);
+		} else if (cmd.equals("updatepage")) {
+			updatepage(request, response);
+		} else if (cmd.equals("find")) {
+			find(request, response);
 		}
 	}
 
@@ -63,22 +65,23 @@ public class MembersController extends HttpServlet {
 		String memId = request.getParameter("memId");
 		String memPwd = request.getParameter("memPwd");
 		String memAddr = request.getParameter("addr3") + request.getParameter("addr4");
-		String memPhone = request.getParameter("phone1") + request.getParameter("phone2") + request.getParameter("phone3");
+		String memPhone = request.getParameter("phone1") + request.getParameter("phone2")
+				+ request.getParameter("phone3");
 		String memEmail = request.getParameter("email1") + request.getParameter("email2");
-		String memBirth = request.getParameter("Birth1") + request.getParameter("Birth2") + request.getParameter("Birth3");
+		String memBirth = request.getParameter("Birth1") + request.getParameter("Birth2")
+				+ request.getParameter("Birth3");
 		String memName = request.getParameter("memName");
-	
-		
-		members.vo.MembersVo members = new MembersVo(0,memId, memPwd, memAddr, memPhone, memEmail, memBirth, memName);
+
+		members.vo.MembersVo members = new MembersVo(0, memId, memPwd, memAddr, memPhone, memEmail, memBirth, memName);
 
 		MembersDao dao = MembersDao.getInstance();
 
-		int n=dao.insert(members);
+		int n = dao.insert(members);
 		// int n = dao.insert(members);
 		// System.out.println("n값"+n);
 		if (n > 0) {
 			response.sendRedirect(request.getContextPath() + "/jsp/layout.jsp");
-			//request.setAttribute("result", "success");
+			// request.setAttribute("result", "success");
 		} else {
 			request.setAttribute("result", "fail");
 			request.getRequestDispatcher("/jsp/layout.jsp?spage=members/login.jsp").forward(request, response);
@@ -133,106 +136,131 @@ public class MembersController extends HttpServlet {
 		request.setAttribute("Email", members.getMemEmail());
 		request.setAttribute("Birth", members.getMemBirth());
 		request.setAttribute("Name", members.getMemName());
-		
+
 		request.setAttribute("members", members);
 		request.getRequestDispatcher("/jsp/layout.jsp?spage=members/update.jsp").forward(request, response);
 	}
 
 	private void updateOk(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String memId = request.getParameter("memId");
 		String memPwd = request.getParameter("memPwd");
 		String memAddr = request.getParameter("addr4");
-		String memPhone = request.getParameter("phone1") + "-" + request.getParameter("phone2") + "-" + request.getParameter("phone3");
-		String memEmail = request.getParameter("email1") + "@"  + request.getParameter("email2");
+		String memPhone = request.getParameter("phone1") + "-" + request.getParameter("phone2") + "-"
+				+ request.getParameter("phone3");
+		String memEmail = request.getParameter("email1") + "@" + request.getParameter("email2");
 		String memBirth = request.getParameter("birth");
 		String memName = request.getParameter("memName");
 
 		MembersDao dao = MembersDao.getInstance();
-		
+
 		System.out.println("dao : " + dao);
-		
+
 		members.vo.MembersVo members = new MembersVo(memId, memPwd, memAddr, memPhone, memEmail, memBirth, memName);
-		
+
 		System.out.println("members : " + members);
-		
+
 		int n = dao.update(members);
-		
+
 		list(request, response);
 	}
-	
+
 	private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String memId = (String) request.getSession().getAttribute("id"); 
-	
+
+		String memId = (String) request.getSession().getAttribute("id");
+
 		MembersDao Mdao = MembersDao.getInstance();
 		RentListDao Rdao = new RentListDao();
 		SaleListDao Sdao = new SaleListDao();
-		
+
 		MembersVo membersvo = Mdao.list(memId);
 		ArrayList<MemRentListVo> rentlistvo = Rdao.rentDetail1(membersvo.getMemNum());
 		ArrayList<SaleListVo> salelistvo = Sdao.saleDetatil(membersvo.getMemNum());
-		
+
 		request.setAttribute("members", membersvo);
 		request.setAttribute("rentlist", rentlistvo);
 		request.setAttribute("salelist", salelistvo);
-		
+
 		request.getRequestDispatcher("/jsp/layout.jsp?spage=members/list.jsp").forward(request, response);
 	}
+
 	private void findId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		JSONObject json = new JSONObject();
-		
-		String id=request.getParameter("memId");
-		
+
+		String id = request.getParameter("memId");
+
 		MembersDao dao = MembersDao.getInstance();
 		boolean using = dao.findId(id);
-		
-		json.put("using", using); // json 안에 키값 벨류값을 넣는다.
-		
-		response.setContentType("text/plain;charset=utf-8");
-		PrintWriter pw = response.getWriter();
-		pw.print(json); // 해당객체에 json을 담는다.
-		pw.close(); // 종료 
-	}
-	 private void addr(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
-		JSONObject json = new JSONObject();
-		MembersDao dao = MembersDao.getInstance();
-		
-		String addr1 = request.getParameter("addr1");
-		String getAddr = dao.addr(addr1);
-		// System.out.println("받아오니"+getAddr);
-		json.put("addr1",getAddr);
-		
+
+		json.put("using", using);
+
 		response.setContentType("text/plain;charset=utf-8");
 		PrintWriter pw = response.getWriter();
 		pw.print(json);
-		pw.close(); 
-	} 
-	 
-	 private void updatepage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-	
-			String memId = (String) request.getSession().getAttribute("id");
-			
-			MembersDao dao = MembersDao.getInstance();
-			members.vo.MembersVo members = dao.list(memId);
-			
-			String[] phone = members.getMemPhone().split("-");
-			String[] email = members.getMemEmail().split("@");
-			
-			request.setAttribute("pwd", members.getMemPwd());
-			request.setAttribute("Addr", members.getMemAddr());
-			request.setAttribute("phone1", phone[0]);
-			request.setAttribute("phone2", phone[1]);
-			request.setAttribute("phone3", phone[2]);
-			request.setAttribute("Email", email[0]);
-			request.setAttribute("domain", email[1]);
-			request.setAttribute("Birth", members.getMemBirth());
-			request.setAttribute("Name", members.getMemName());
+		pw.close();
+	}
 
-			 RequestDispatcher rd = request.getRequestDispatcher("/jsp/layout.jsp?spage=members/update.jsp");
-				rd.forward(request, response);
+	private void addr(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		JSONObject json = new JSONObject();
+		MembersDao dao = MembersDao.getInstance();
+
+		String addr1 = request.getParameter("addr1");
+		String getAddr = dao.addr(addr1);
+
+		json.put("addr1", getAddr);
+
+		response.setContentType("text/plain;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		pw.print(json);
+		pw.close();
+	}
+
+	private void updatepage(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String memId = (String) request.getSession().getAttribute("id");
+
+		MembersDao dao = MembersDao.getInstance();
+		members.vo.MembersVo members = dao.list(memId);
+
+		String[] phone = members.getMemPhone().split("-");
+		String[] email = members.getMemEmail().split("@");
+
+		request.setAttribute("pwd", members.getMemPwd());
+		request.setAttribute("Addr", members.getMemAddr());
+		request.setAttribute("phone1", phone[0]);
+		request.setAttribute("phone2", phone[1]);
+		request.setAttribute("phone3", phone[2]);
+		request.setAttribute("Email", email[0]);
+		request.setAttribute("domain", email[1]);
+		request.setAttribute("Birth", members.getMemBirth());
+		request.setAttribute("Name", members.getMemName());
+
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/layout.jsp?spage=members/update.jsp");
+		rd.forward(request, response);
+	}
+
+	private void find(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		JSONObject json = new JSONObject();
+		MembersDao dao = MembersDao.getInstance();
+		
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+
+		String getId = dao.find(name, email);
+
+		json.put("name", name);
+		json.put("email", email);
+		json.put("id", getId);
+
+		response.setContentType("text/plain;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		pw.print(json);
+		pw.close();
+
 	}
 }

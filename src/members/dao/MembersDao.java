@@ -105,7 +105,7 @@ public class MembersDao {
 			con = DbcpBean.getConn();
 			String sql = "select * from members where memId=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, memId); 
+			pstmt.setString(1, memId);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				int memNum = rs.getInt("memNum");
@@ -184,12 +184,12 @@ public class MembersDao {
 	}
 
 	public boolean findId(String id) {
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		boolean using = false;
-		
+
 		try {
 			con = DbcpBean.getConn();
 			String sql = "select * from members where memId=?";
@@ -202,36 +202,60 @@ public class MembersDao {
 			return using;
 		} catch (SQLException se) {
 			System.out.println(se.getMessage());
-			return false; 
+			return false;
 		} finally {
 			DbcpBean.close(con, pstmt, rs);
 		}
 	}
 
-	
-	 public String addr(String address) {
-		 
+	public String addr(String address) {
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			con = DbcpBean.getConn();
 			String sql = "select address from addr where address like ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1,"%" + address + "%");
+			pstmt.setString(1, "%" + address + "%");
 			rs = pstmt.executeQuery();
-		
-			if(rs.next()) { 
+
+			if (rs.next()) {
 				return rs.getString("address");
-			}else{
+			} else {
 				return null;
 			}
-			} catch (SQLException se) {
-				System.out.println(se.getMessage());
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+			DbcpBean.close(con, pstmt, rs);
+		}
+	}
+
+	public String find(String name, String email) {
+		
+			Connection con=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			
+			try{ 
+				con= DbcpBean.getConn();
+				String sql="select RPAD(substr(memId,1,3),length(memId),'*') as id from members where memName=? and memEmail=?";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1,name);
+				pstmt.setString(2,email);
+				rs=pstmt.executeQuery();
+				if(rs.next()){
+					return rs.getString("id");
+				} 
 				return null;
-			} finally {
+			}catch(SQLException se){ // ÄÁÆ®·²·¯
+				System.out.println(se.getMessage()); 
+				return null;
+			}finally{
 				DbcpBean.close(con, pstmt, rs);
 			}
-		}	
 	}
+}
