@@ -73,4 +73,4 @@
 
 <br>
 <br>
-<a href="members.do?cmd=update">[ 회원 정보 수정 ]</a>
+<a href="members.do?cmd=updatepage">[ 회원 정보 수정 ]</a>

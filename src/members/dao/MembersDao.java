@@ -105,7 +105,7 @@ public class MembersDao {
 			con = DbcpBean.getConn();
 			String sql = "select * from members where memId=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, memId);
+			pstmt.setString(1, memId); 
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				int memNum = rs.getInt("memNum");
