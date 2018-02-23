@@ -143,11 +143,11 @@ public class MembersController extends HttpServlet {
 		
 		String memId = request.getParameter("memId");
 		String memPwd = request.getParameter("memPwd");
-		String memAddr = request.getParameter("Addr");
-		String memPhone = request.getParameter("phone1") + request.getParameter("phone2") + request.getParameter("phone3");
-		String memEmail = request.getParameter("email1") + request.getParameter("email2");
-		String memBirth = request.getParameter("Birth");
-		String memName = request.getParameter("Name");
+		String memAddr = request.getParameter("addr4");
+		String memPhone = request.getParameter("phone1") + "-" + request.getParameter("phone2") + "-" + request.getParameter("phone3");
+		String memEmail = request.getParameter("email1") + "@"  + request.getParameter("email2");
+		String memBirth = request.getParameter("birth");
+		String memName = request.getParameter("memName");
 
 		MembersDao dao = MembersDao.getInstance();
 		
@@ -159,16 +159,7 @@ public class MembersController extends HttpServlet {
 		
 		int n = dao.update(members);
 		
-		System.out.println("n : " +n);
-		
-		if (n > 0) {
-			request.setAttribute("result", "success");
-		} else {
-			request.setAttribute("result", "fail");
-		}
-
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/layout.jsp?spage=members/updateOk.jsp");
-		rd.forward(request, response);
+		list(request, response);
 	}
 	
 	private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

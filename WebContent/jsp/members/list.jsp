@@ -7,7 +7,6 @@
 	<h3>1) 상세정보</h3>
 	<tr>
 		<th>아이디</th>
-		<th>비밀번호</th>
 		<th>주소</th>
 		<th>전화번호</th>
 		<th>이메일</th>
@@ -17,7 +16,6 @@
 
 	<tr>
 		<td>${members.memId }</td>
-		<td>${members.memPwd }</td>
 		<td>${members.memAddr }</td>
 		<td>${members.memPhone }</td>
 		<td>${members.memEmail }</td>

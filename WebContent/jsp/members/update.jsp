@@ -125,7 +125,7 @@ function insertCheck (){
 	<form method="post"	action="<%=request.getContextPath()%>/members.do?cmd=updateOk">
 
 	
-아이디 : <input type="text" name="memId" onkeyup="idcheck()" id="memId" placeholder="아이디"  value="${sessionScope.id}" disabled="disabled"> 
+아이디 : <input type="text" name="memId" onkeyup="idcheck()" id="memId" placeholder="아이디"  value="${sessionScope.id}" readonly="readonly"> 
 		<span id="idcheck" style="font-size: 10px; color: red"></span><br> 
 		
 		
@@ -147,7 +147,7 @@ function insertCheck (){
 
 이메일 : <input type="text" name="email1" onfocus="this.value=''" value="${Email}">
 
-		@ <input type="text" id="email2" value="${domain}"><br>
+		@ <input type="text" name="email2" value="${domain}"><br>
 
 		
 
