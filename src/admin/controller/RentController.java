@@ -23,6 +23,7 @@ import admin.vo.RentCarVo;
 import admin.vo.RentListVo;
 import admin.vo.SalesCarVo;
 import admin.vo.ScarImgVo;
+import members.vo.MemRentListVo;
 @WebServlet("/semi/rent.do")
 public class RentController extends HttpServlet{
 	@Override
@@ -99,6 +100,7 @@ public class RentController extends HttpServlet{
 		
 		RentListDao rldao=new RentListDao();
 		ArrayList<RentListVo> rllist= rldao.rentlist(rlstartRow, rlendRow);
+		//ArrayList<MemRentListVo> rllist=rldao.
 		int rlpageCount=(int)Math.ceil(rldao.getCount()/5.0);
 		int rlstartPage=((rlpagenum2-1)/5*5)+1;
 		int rlendPage=rlstartPage+4;
