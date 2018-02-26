@@ -20,11 +20,12 @@
 	display: inline-block;
 	margin-left: 15px;
 	margin-right: 15px;
+	margin-top : 35px;
 }
 
 #arrow{
 	width: 10px;
-	margin-bottom : 30px;
+	margin-bottom : 12px;
 }
 
 #rentinfo{

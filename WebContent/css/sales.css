@@ -11,6 +11,8 @@
 
 #modelList{
 	position: absolute;
+	top : 220px;
+	left : 70px;
 }
 
 #modelList li a{

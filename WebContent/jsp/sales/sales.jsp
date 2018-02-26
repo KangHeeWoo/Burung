@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/sales.css?ver=6" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/sales.css?ver=7" />
 <script src="${pageContext.request.contextPath }/js/sales.js?ver=8"></script>
 <c:choose>
 	<c:when test="${param.name != null && param.name != ''}">
@@ -34,7 +34,7 @@
 <div id="sales">
 	<ul id="modelList"></ul>
 	<img id="mainImg">
-	<hr>
+	<hr><br>
 	<img id="subImg">
 	<div id="selOpt">
 		<form name="frm" method="post" onsubmit="return buy()"

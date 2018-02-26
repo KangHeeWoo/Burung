@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/rent.css?ver=24" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/rent.css?ver=25" />
 <script src="${pageContext.request.contextPath }/js/rent.js?ver=6"></script>
 <div id="rentinfo">
 	<div id="rentdate" align="center">
@@ -14,6 +14,7 @@
 			<h4>${eDate }</h4>
 		</div>
 	</div>
+	<br>
 	<h3>${cName }</h3>
 	<img src="${pageContext.request.contextPath }/img/${cName}_rent.png" id="carimg">
 	<br><br>
@@ -35,7 +36,7 @@
 		<input type="hidden" name="eDate" value="${eDate }">
 		<input type="hidden" name="price" value="${price }">
 		<h3>자차 손해면책 제도</h3>
-		<hr><br>
+		<br><hr><br>
 		<input type="radio" name="insu" value="0" checked="checked" onclick="setPrice()">
 		<span>보험 미적용(0원)</span>
 		<input type="radio" name="insu" value="40000" onclick="setPrice()">
@@ -47,7 +48,7 @@
 		
 		<br><br><br>
 		<h3>기타 옵션</h3>
-		<hr><br>
+		<br><hr><br>
 		<input type="checkbox" name="option" value="0" checked="checked" disabled="disabled" onclick="setPrice()">
 		<span>네비게이션(0원)</span>
 		<input type="checkbox" name="option" value="2000" onclick="setPrice()">
@@ -57,7 +58,7 @@
 		
 		<br><br><br>
 		<h3>기본 약관</h3>
-		<hr><br>
+		<br><hr><br>
 		<fieldset id="terms">
 		<h4>Burung Burung 서비스 약관</h4>
 		<h5>최종 수정 날짜 : 2018년 02월 22일</h5><br>
