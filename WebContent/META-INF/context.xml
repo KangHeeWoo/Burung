@@ -3,6 +3,6 @@
 <Resource name="jdbc/myoracle" auth="Container"
               type="javax.sql.DataSource" driverClassName="oracle.jdbc.OracleDriver"
               url="jdbc:oracle:thin:@192.168.0.27:1521:xe"
-              username="burung" password="burung" maxTotal="20" maxIdle="10"
+              username="burung1" password="burung" maxTotal="20" maxIdle="10"
               maxWaitMillis="-1"/>
 </Context>

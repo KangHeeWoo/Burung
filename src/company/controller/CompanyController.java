@@ -40,6 +40,7 @@ public class CompanyController extends HttpServlet{
 	private void popup(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		CompanyDao dao = CompanyDao.getInstance();
 		String offNum = req.getParameter("offnum");
+		System.out.println(offNum);
 		CompanyVo vo = dao.popup(Integer.parseInt(offNum));
 		resp.setContentType("text/xml;charset=utf-8");
 		PrintWriter pw = resp.getWriter();
