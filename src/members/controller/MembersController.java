@@ -55,9 +55,11 @@ public class MembersController extends HttpServlet {
 			addr(request, response);
 		} else if (cmd.equals("updatepage")) {
 			updatepage(request, response);
-		} else if (cmd.equals("find")) {
-			find(request, response);
-		}
+		} else if (cmd.equals("findid")) {
+			findid(request, response);
+		} else if (cmd.equals("findpwd")) {
+			findpwd(request, response);
+			}
 	}
 
 	private void insert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -243,7 +245,7 @@ public class MembersController extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	private void find(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void findid(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		JSONObject json = new JSONObject();
 		MembersDao dao = MembersDao.getInstance();
@@ -251,12 +253,28 @@ public class MembersController extends HttpServlet {
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 
-		String getId = dao.find(name, email);
+		String getId = dao.findid(name, email);
 
-		json.put("name", name);
-		json.put("email", email);
 		json.put("id", getId);
 
+		response.setContentType("text/plain;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		pw.print(json);
+		pw.close();
+
+	}
+	private void findpwd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		JSONObject json = new JSONObject();
+		MembersDao dao = MembersDao.getInstance();
+		
+		String id = request.getParameter("id");
+		String email = request.getParameter("email");
+
+		String getpwd = dao.findpwd(id, email);
+
+		json.put("pwd", getpwd);
+			
 		response.setContentType("text/plain;charset=utf-8");
 		PrintWriter pw = response.getWriter();
 		pw.print(json);

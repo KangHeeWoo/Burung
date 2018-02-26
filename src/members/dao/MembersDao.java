@@ -12,6 +12,7 @@ import burung.dbcp.DbcpBean;
 import members.vo.MembersVo;
 
 public class MembersDao {
+
 	private static MembersDao instance = new MembersDao();
 
 	private MembersDao() {
@@ -234,28 +235,54 @@ public class MembersDao {
 		}
 	}
 
-	public String find(String name, String email) {
-		
-			Connection con=null;
-			PreparedStatement pstmt=null;
-			ResultSet rs=null;
-			
-			try{ 
-				con= DbcpBean.getConn();
-				String sql="select RPAD(substr(memId,1,3),length(memId),'*') as id from members where memName=? and memEmail=?";
-				pstmt=con.prepareStatement(sql);
-				pstmt.setString(1,name);
-				pstmt.setString(2,email);
-				rs=pstmt.executeQuery();
-				if(rs.next()){
-					return rs.getString("id");
-				} 
+	public String findid(String name, String email) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = DbcpBean.getConn();
+			String sql = "select RPAD(substr(memId,1,3),length(memId),'*') as id from members where memName=? and memEmail=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return rs.getString("id");
+			} else {
 				return null;
-			}catch(SQLException se){ // ÄÁÆ®·²·¯
-				System.out.println(se.getMessage()); 
-				return null;
-			}finally{
-				DbcpBean.close(con, pstmt, rs);
 			}
+		} catch (SQLException se) { // ÄÁÆ®·²·¯
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+			DbcpBean.close(con, pstmt, rs);
+		}
+	}
+	public String findpwd(String id, String email) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = DbcpBean.getConn();
+			String sql = "select RPAD(substr(memPwd,1,2),length(memPwd),'*') as pwd from members where memId=? and memEmail=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, email);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return rs.getString("pwd");
+			} else {
+				return null;
+			}
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		} finally {
+			DbcpBean.close(con, pstmt, rs);
+		}
 	}
 }
