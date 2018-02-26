@@ -135,7 +135,7 @@ public class MemberDao {
 			pstmt.setInt(3, endRow);
 			rs=pstmt.executeQuery();
 			ArrayList<MemberVo> list=new ArrayList<>();
-			if(rs.next()) {
+			while(rs.next()) {
 				int memNum=rs.getInt("memNum");
 				String memId=rs.getString("memId");
 				String memAddr=rs.getString("memAddr");
