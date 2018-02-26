@@ -101,6 +101,7 @@ function addrInquiry(){
 
 			if (json.addr1 != null) {
 				document.getElementById("addr3").value = json.addr1;
+				Inquiry.innerHTML = "";
 				check = true;
 			} else {
 				Inquiry.innerHTML = "해당 주소가 없습니다.";
@@ -271,11 +272,8 @@ function insertCheck (){
 	
 
 이름<input
-		type="text" name="memName" placeholder="가입자명"><br><br>
+		type="text" name="memName" placeholder="가입자명" required><br><br>
 		
-		
-귀하는 "이성준" 님을 찬양하십니까?<br><br> 찬양합니다.<input type="radio" name="receive"
-		value="동의한다">   앞으로 찬양하겠습니다. <input type="radio" name="receive"
-		value="거절한다"> <br>
+	
 	<br> <input type="submit" value="회원가입">
 </form>

@@ -157,10 +157,7 @@ function insertCheck (){
 
 이름<input
 		type="text" name="memName" value="${Name }"><br><br>
-		
-		귀하는 아직 "이성준" 님을 찬양하십니까?<br><br> 평생 찬양합니다.<input type="radio" name="receive"
-		value="동의한다">   다시 찬양하겠습니다. <input type="radio" name="receive"
-		value="거절한다"> <br><br>
+
 		
 			<input type="submit" value="수정완료">
 	</form>
