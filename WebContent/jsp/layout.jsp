@@ -21,6 +21,7 @@
 	<div id="header">
 		<jsp:include page="header.jsp"/>
 	</div>
+	<br>
 	<div id="content">
 		<jsp:include page="${spage }"/>
 	</div>
