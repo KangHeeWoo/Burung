@@ -7,8 +7,8 @@ body {
 
 .container {
     padding: 25px;
-   
- 
+   	width : 500px;
+   	margin : auto; 
 }
 
 .form-login {
@@ -22,6 +22,27 @@ body {
     border-width: 5px;
     box-shadow:0 1px 0 #cfcfcf;
   
+}
+
+.form-login a{
+	font-family: 'jeju';
+  	text-decoration : none;
+}
+
+.form-login a:link{
+	color : black;
+}
+
+.form-login a:visited{
+	color : black;
+}
+
+.form-login a:active{
+	color: #8e0000;
+}
+
+.form-login a:hover{
+	color: #8e0000;
 }
 
 h2 { 

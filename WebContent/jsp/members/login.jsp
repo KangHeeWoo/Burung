@@ -5,7 +5,7 @@
 
 
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/members/login.css?ver=1">
+	href="<%=request.getContextPath()%>/css/members/login.css?ver=2">
 
 
 
@@ -27,10 +27,6 @@
 	}
 </script>
 
-
-
-
-
 <div class="container" align="center">
 	<div class="row" >
 		<div class="col-md-offset-5 col-md-3">
@@ -50,14 +46,11 @@
 						<input type="submit" value="Sign in" class="btn btn-primary btn-md"> <br></span>
 						<br>
 						<div>${errMsg }</div>
-
+						<br>
 					</div>
 				</form>
+				<a href="javascript:findIdpopup()">아이디 찾기</a> &nbsp;&nbsp;&nbsp; <a href="javascript:findPwdpopup()">비밀번호 찾기</a>
 			</div>
 		</div>
 	</div>
 </div>
-<ul>
-	<li><a href="javascript:findIdpopup()">아이디 찾기</a></li>
-	<li><a href="javascript:findPwdpopup()">비밀번호 찾기</a></li>
-</ul>

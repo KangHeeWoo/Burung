@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/members/insert.css?ver=1">
+	href="<%=request.getContextPath()%>/css/members/insert.css?ver=5">
 
 <script type="text/javascript">
 
@@ -127,7 +127,7 @@ function insertCheck (){
 
 </script>
 
-<div class="container" align="center">
+<div class="container">
 	<div class="row" >
 		<div class="col-md-offset-5 col-md-3">
 		
@@ -135,29 +135,50 @@ function insertCheck (){
 <h2>[ 회원가입 ]</h2><br>
 <form method="post" name="frm" onsubmit = "return insertCheck()"
 	action="<%=request.getContextPath()%>/members.do?cmd=insertOk">
-	
-	
-<input type="text" name="memId" onkeyup="idcheck()" id="memId"
-		 placeholder="User ID" > <span id="idcheck"
-		style="font-size: 10px; color: red"></span> <br> <br>
-		
-		
-		
-<input type="password" name="memPwd" id="pwd1" onkeyup="passwordCheck1()"placeholder=Password> 
-		<span id="same1" style="font-size: 10px; color: red"></span> <br>  <br>
- <input type="password" name="memPwd2" id="pwd2" onkeyup="passwordCheck2()" placeholder="Password Check">
-		<span id="same2" style="font-size: 10px; color: red"></span> <br> <br>
-		
-		
-		
-<input type="text" id="addr2" placeholder="Addrs ('구'로 검색)">
-<input	type="button" name="memAddr" id="addr1" onclick="addrInquiry()"	value="Search">
-		<span id="Inquiry" style="font-size: 10px; color: red"></span> <br>
-		<input type="text" id="addr3" name="addr3" placeholder="Addrs Result"><br> 
-		<input type="text" id="addr4" name="addr4" placeholder="상세정보"><br> <br>
-      	<%-- 주소입력란에 입력한 주소값과 버튼클릭란(DB저장되있는 주소값)을  비교하여 검색결과란에 출력 --%>
 
- <select name="phone1" >
+<table class="insertForm">
+	<tr>
+		<td>아이디</td>
+		<td><input type="text" name="memId" onkeyup="idcheck()" id="memId"
+		 placeholder="User ID" > <span id="idcheck"
+		style="font-size: 10px; color: red"></span></td>
+	</tr>	
+	
+	<tr>
+		<td>비밀번호</td>
+		<td><input type="password" name="memPwd" id="pwd1" onkeyup="passwordCheck1()"placeholder=Password> 
+		<span id="same1" style="font-size: 10px; color: red"></span></td>
+	</tr>
+	
+	<tr>
+		<td>비밀번호 확인</td>
+		<td><input type="password" name="memPwd2" id="pwd2" onkeyup="passwordCheck2()" placeholder="Password Check">
+		<span id="same2" style="font-size: 10px; color: red"></span></td>
+	</tr>
+	
+	<tr>
+		<td>주소 검색</td>
+		<td><input type="text" id="addr2" placeholder="Addrs ('구'로 검색)">
+		<input	type="button" name="memAddr" id="addr1" onclick="addrInquiry()"	value="Search">
+		<span id="Inquiry" style="font-size: 10px; color: red"></span>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>검색된 주소</td>
+		<td><input type="text" id="addr3" name="addr3" placeholder="Addrs Result">
+		</td>
+	</tr>
+	
+	<tr>
+		<td>상세 주소</td>
+		<td><input type="text" id="addr4" name="addr4" placeholder="상세정보">
+		</td>
+	</tr>
+	
+	<tr>
+		<td>전화 번호</td>
+		<td> <select name="phone1" >
        <option value="010">010</option>
        <option value="011">011</option>
        <option value="016">016</option>
@@ -165,11 +186,13 @@ function insertCheck (){
        <option value="019">019</option>
      </select>
      - <input type="text" name="phone2" size="5" maxlength="4" placeholder="Phone"> - 
-     <input type="text" name="phone3" size="5" maxlength="4" placeholder="Number"><br> <br>
+     <input type="text" name="phone3" size="5" maxlength="4" placeholder="Number">
+		</td>
+	</tr>
 	
-	
-
-<input type="text" name="email1" onfocus="this.value=''" id="email1" placeholder="Email">
+	<tr>
+		<td>이메일</td>
+		<td><input type="text" name="email1" onfocus="this.value=''" id="email1" placeholder="Email">
 
 		@ <input type="text" id="email2" id="email2" placeholder="Domain">
 
@@ -191,9 +214,13 @@ function insertCheck (){
 		<option value="hanmir.com">hanmir.com</option>
 		<option value="paran.com">paran.com</option>
 
-		   </select><br> <br>
-
-<select name="Birth1">
+		   </select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>생년월일</td>
+		<td><select name="Birth1">
        <option value="2013">2013</option>
        <option value="2012">2012</option>
        <option value="2011">2011</option>
@@ -255,12 +282,17 @@ function insertCheck (){
        <option value="29">29</option>
        <option value="30">30</option>
        <option value="31">31</option>
-     </select>일<br> <br>
+     </select>일
+		</td>
+	</tr>
 	
-
-이름<input
-		type="text" name="memName" placeholder="User Name" required><br><br>
-		
-	
-	<br> <input type="submit" value="회원가입">
+	<tr>
+		<td>이름</td>
+		<td><input type="text" name="memName" placeholder="User Name" required>
+		</td>
+	</tr>
+</table>	
+<br>
+<input type="submit" value="회원가입" id="insertSub">
 </form>
+</div></div></div></div>

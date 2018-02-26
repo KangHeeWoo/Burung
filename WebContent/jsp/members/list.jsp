@@ -5,15 +5,15 @@
 
 
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/members/list.css?ver=1">
+	href="<%=request.getContextPath()%>/css/members/list.css?ver=3">
 
-<div class="container" align="center">
+<div class="container">
 	<div class="row" >
 		<div class="col-md-offset-5 col-md-3">
 		
 			<div class="form-login" >
-<h2>< 마이페이지 ></h2><br>
-<table border="1" width="1000" name="Mylist">
+<h2> &lt; 마이페이지 &gt; </h2><br>
+<table border="1" width="1000" class="Mylist">
 	<h3>1) 상세정보</h3>
 	<tr>
 		<th>아이디</th>
@@ -35,7 +35,7 @@
 </table>
 <br>
  
-<table border="1" width="700" name="rentList">
+<table border="1" width="700" class="rentList">
 	<h3> 2) 렌트 내역</h3>
 	<tr>
 		<th>렌트내역번호</th>
@@ -59,7 +59,7 @@
 	</c:forEach>
 </table>
 <br>
-<table border="1" width="500" name="salesList">
+<table border="1" width="500" class="salesList">
 	<h3>3) 구매 내역</h3>
 	<tr>
 		<th>구매내역번호</th>
@@ -82,3 +82,4 @@
 <br>
 <br>
 <a href="members.do?cmd=updatepage">[ 회원 정보 수정 ]</a>
+</div></div></div></div>
