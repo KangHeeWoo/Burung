@@ -86,4 +86,26 @@ public class RentCarDao {
 			DbcpBean.close(conn, pstmt, null);
 		}
 	}
+	
+	public int stateChange(int rennum,int state) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		String sql="";
+		if(state==1) {
+			sql="update rentcar set state='불량' where rennum=?";
+		}else {
+			sql="update rentcar set state='정상' where rennum=?";
+		}
+		try {
+			conn=DbcpBean.getConn();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, rennum);
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DbcpBean.close(conn, pstmt, null);
+		}
+	}
 }

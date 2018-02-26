@@ -60,9 +60,28 @@ public class RentController extends HttpServlet{
 			int n2=imgdao.insert(subvo);
 			if(n1>0 && n2>0) {
 				response.sendRedirect(request.getContextPath()+"/semi/rent.do?cmd=rentlist");
-			}else {
-					
+			}else {	
 			}
+		}else if(cmd.equals("state")) {
+			int state=Integer.parseInt(request.getParameter("state"));
+			int rennum=Integer.parseInt(request.getParameter("rennum"));
+			RentCarDao statedao=RentCarDao.getInstance();
+			int n=statedao.stateChange(rennum, state);
+			
+			request.getRequestDispatcher("/semi/rent.do?cmd=rentlist").forward(request, response);
+			
+		}else if(cmd.equals("renstate")) {
+			String srpagenum=request.getParameter("rpagenum");
+			String srlpagenum=request.getParameter("rlpagenum");
+			System.out.println("rpage:"+srpagenum);
+			int state=Integer.parseInt(request.getParameter("sel"));
+			int rlistnum=Integer.parseInt(request.getParameter("rlistnum"));
+			RentListDao renstatedao=new RentListDao();
+			int n=renstatedao.stateChange(rlistnum, state);
+			request.setAttribute("rpagenum", srpagenum);
+			request.setAttribute("rlpagenum", srlpagenum);
+			request.getRequestDispatcher("/semi/rent.do?cmd=rentlist").forward(request, response);
+			
 		}
 	}
 	private void rentcarlist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
