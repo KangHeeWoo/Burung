@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -61,7 +61,7 @@ table.type11 td {
 <div>
 	<c:choose>
 		<c:when test="${startPage>5 }">
-		<a href="<%=request.getContextPath()%>/semi/list.do?pageNum=${startPage-1}">[이전]</a>
+		<a href="<%=request.getContextPath()%>/semi/search.do?spageNum=${startPage-1}&search=${search}&find=${find}">[이전]</a>
 		</c:when>
 		<c:otherwise>
 			[이전]
@@ -69,13 +69,13 @@ table.type11 td {
 	</c:choose>
 	<c:forEach var="i" begin="${startPage }" end="${endPage }">
 		<c:choose>
-			<c:when test="${pageNum==i }">
-				<a href="<%=request.getContextPath() %>/semi/list.do?pageNum=${i}&cmd=memberlist">
+			<c:when test="${spageNum==i }">
+				<a href="<%=request.getContextPath() %>/semi/search.do?spageNum=${i}&search=${search}&find=${find}">
 				<span style="color:blue">[${i }]</span>
 				</a>
 			</c:when>
 			<c:otherwise>
-				<a href="<%=request.getContextPath() %>/semi/list.do?pageNum=${i}&cmd=memberlist">
+				<a href="<%=request.getContextPath() %>/semi/search.do?spageNum=${i}&search=${search}&find=${find}">
 				<span style="color:gray">[${i }]</span>
 				</a>
 			</c:otherwise>
@@ -83,23 +83,34 @@ table.type11 td {
 	</c:forEach>
 	<c:choose>
 	<c:when test="${pageCount>endPage }">
-	<a href="<%=request.getContextPath()%>/semi/list.do?pageNum=${endPage+1}">[다음]</a>
+	<a href="<%=request.getContextPath()%>/semi/search.do?spageNum=${endPage+1}&search=${search}&find=${find}">[다음]</a>
 	</c:when>
 	<c:otherwise>
 		[다음]
 	</c:otherwise>
 	</c:choose>
 </div>
-<br>
 <div>
 <form action="<%=request.getContextPath()%>/semi/search.do">
-<select name="find">
+<select name="find" id="type">
 	<option value="1">회원이름</option>
 	<option value="2">회원아이디</option>
 </select>
-<input type="text" name="search">
+<input type="text" name="search" value="${search }">
 <input type="submit" value="검색">
+<input type="hidden" id="choicefind" value="${find }">
 </form>
 </div>
 </body>
+<script type="text/javascript">
+var type=document.getElementById("type");
+var choicefind=document.getElementById("choicefind");
+window.onload= function(){
+	for(var i=0;i<type.length;i++){
+		if(type[i].value==choicefind.value){
+			type[i].selected="selected";
+		}
+	}
+}
+</script>
 </html>

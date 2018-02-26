@@ -91,7 +91,7 @@ public class MemberList extends HttpServlet{
 			if(spageCount<sendPage) {
 				sendPage=spageCount;
 			}
-			
+			System.out.println(rentdetail.size());
 			request.setAttribute("rpageCount", rpageCount);//렌트페이지전체
 			request.setAttribute("spageCount", spageCount);//구매페이지전체
 			request.setAttribute("sstartPage", sstartPage);//구매
@@ -105,6 +105,41 @@ public class MemberList extends HttpServlet{
 			request.setAttribute("salelist", saledetail);
 			request.setAttribute("memNum", memNum);
 			request.getRequestDispatcher("/admin/layout.jsp?spage=/admin/adminMember/memberdetail.jsp").forward(request, response);
+		}else if(cmd.equals("search")){//회원검색
+			request.setCharacterEncoding("utf-8");
+			String spagenum=request.getParameter("spagenum");
+			String search=request.getParameter("search");
+			int find=Integer.parseInt(request.getParameter("find"));
+			ArrayList<MemberVo> list=new ArrayList<>();
+			int pagenum=1;
+			if(spagenum!=null) {
+				pagenum=Integer.parseInt(spagenum);
+			}
+			int startRow=(pagenum-1)*10+1;//시작행번호
+			int endRow=startRow+9;//끝행번호
+			
+			
+			MemberDao dao=new MemberDao();
+			if(find==1) {
+				list=dao.searchmember(search,startRow,endRow);
+			}else if(find==2) {
+				list=dao.searchmemid(search,startRow,endRow);
+			}
+			
+			//전체페이지 갯수 구하기
+			int pageCount=(int)Math.ceil(dao.searchCount(search, find)/10.0);
+			int startPage=((pagenum-1)/4*4)+1;//시작페이지 번호
+			int endPage=startPage+3;// 끝페이지 번호	//4페이지
+			if(pageCount<endPage) {
+				endPage=pageCount;
+			}
+			
+			request.setAttribute("spageNum", spagenum);
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
+			request.setAttribute("pageCount", pageCount);
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("/admin/layout.jsp?spage=/admin/adminMember/membersearch.jsp").forward(request, response);
 		}
 	}
 }

@@ -91,7 +91,7 @@ public class RentListDao {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select * from (select rl.*,rownum rnum from(select * from rentlist order by rlistnum desc)rl)rl, rentcar rc where memnum=? and rl.rennum=rc.rennum and rnum>=? and rnum<=? order by rlistnum desc";
+		String sql="select * from (select rl.*,rownum rnum from(select * from rentlist where memnum=? order by rlistnum desc)rl)rl, rentcar rc where rl.rennum=rc.rennum and rnum>=? and rnum<=? order by rlistnum desc";
 		try {
 			con=DbcpBean.getConn();
 			pstmt=con.prepareStatement(sql);
@@ -154,6 +154,30 @@ public class RentListDao {
 			return null;
 		}finally {
 			DbcpBean.close(con, pstmt, rs);
+		}
+	}
+	
+	public int stateChange(int rlistnum,int state) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		String sql="";
+		if(state==1) {
+			sql="update rentlist set renstate='·»Æ®´ë±â' where rlistnum=?";
+		}else if(state==2) {
+			sql="update rentlist set renstate='·»Æ®Áß' where rlistnum=?";
+		}else {
+			sql="update rentlist set renstate='¹İ³³' where rlistnum=?";
+		}
+		try {
+			conn=DbcpBean.getConn();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, rlistnum);
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DbcpBean.close(conn, pstmt, null);
 		}
 	}
 }

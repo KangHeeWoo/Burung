@@ -192,7 +192,14 @@ table.type11 td {
 		<td>${sale.salState }</td>
 		<td>${sale.salDate }</td>
 		<td>${sale.sCarModel }</td>
-		<td><button onclick="location.href='<%=request.getContextPath()%>/semi/sales.do?cmd=stateChange&slistNum=${sale.sListNum }'">인수확인</button></td>
+		<c:choose>
+			<c:when test="${sale.salState=='인수완료' }">
+					<td><button>인수확인</button></td>
+			</c:when>
+			<c:otherwise>
+				<td><button onclick="location.href='<%=request.getContextPath()%>/semi/sales.do?cmd=stateChange&slistNum=${sale.sListNum }'">인수확인</button></td>
+			</c:otherwise>
+		</c:choose>
 	</tr>
 	</c:forEach>
 </table>
