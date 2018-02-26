@@ -4,8 +4,8 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/board/boardlist.css?ver=19" >
 <br>
 <div align="center" id="setfont">
-<h1 align="center">&lt;자유게시판&gt;</h1>
-<h4 align="right"><a href="board.do?cmd=boardinsert">글 등록</a></h4>
+<h1 align="center">&lt;자유게시판&gt;</h1><br><br>
+<h4 align="right"><a href="board.do?cmd=boardinsert">글 등록</a></h4><br>
 	<table class="type09">
 		<tr>
 			<th class="cols"  id="id">아이디</th><th class="cols" id="title" >제목</th><th class="cols"  id="regd" align="center">입력일</th><th class="cols" id="hit" align="center">조회수</th>

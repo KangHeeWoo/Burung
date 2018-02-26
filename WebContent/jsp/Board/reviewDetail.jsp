@@ -1,47 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>
+	/css/board/reviewdetail.css?ver=4" >
 
+<div align="center" id="detail">
 
-
-
-<style>
-	.comm{width:400px;height: 100px;border:1px solid #aaa;padding: 2px;margin-top: 3px;}
-	#img{width: 500px; height: auto;}
-</style>
-
-
-<h2>자유게시판</h2>
+<br>
 <h4 align="right">
 	<a href="${pageContext.request.contextPath}/review.do?cmd=reviewlist">글목록</a>
 </h4>
 
-<table border="solid 1px">
+<table  id="table">
 	<tr>
-		<td>작성자</td>
-		<td>${reviewdetail.memId}</td>
+		<td  class="title" id="title">&nbsp;&nbsp;제&nbsp;&nbsp;&nbsp;목</td>
+		<td id="content">${reviewdetail.revTitle }</td>
 	</tr>
 	<tr>
-		<td>차종</td>
-		<td>${reviewdetail.carName }</td>
+		<td class="title" >&nbsp;&nbsp;차&nbsp;&nbsp;&nbsp;종</td>
+		<td>${reviewdetail.carName }
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div class="title"  id="score">점&nbsp;&nbsp;&nbsp;수</div>&nbsp;&nbsp;&nbsp;&nbsp;${reviewdetail.revScore }
+		</td>
+	</tr>
+	
+	<tr><td colspan="2"><hr></td></tr>
+	
+	<tr><td colspan="2"><div align="right" id="name">입력일 _ ${reviewdetail.revRegd}&nbsp;&nbsp;/&nbsp;&nbsp;작성자 _  ${reviewdetail.memId}</div></td></tr>
+	<tr>
+		<td colspan="2"><div align="center"><textarea cols="100" rows="20" name="boacontent"
+				readonly="readonly">${reviewdetail.revContent }</textarea></div></td>
 	</tr>
 	<tr>
-		<td>점수</td>
-		<td>${reviewdetail.revScore }</td>
-	</tr>
-	<tr>
-		<td>제목</td>
-		<td>${reviewdetail.revTitle }</td>
-	</tr>
-	<tr>
-		<td>내용</td>
-		<td><textarea cols="50" rows="20" name="boacontent"
-				readonly="readonly">${reviewdetail.revContent }</textarea></td>
-	</tr>
-	<tr>
-		<td>이미지</td>
-		<td><c:forEach var="car" items="${recarimglist }">
-				<img id="img" src="<%=request.getContextPath() %>/jsp/Board/img/${car}"><br>
+		<td colspan="2" align="center"><c:forEach var="car" items="${recarimglist }">
+				<img id="img" src="<%=request.getContextPath() %>/jsp/Board/img/${car}" ><br><br>
 				</c:forEach></td>
 	</tr>
 
@@ -57,7 +51,9 @@
 			
 			<a href="javascript:reviewdelete()">삭제</a>
 		</div>
+		<br><br><br>
 	</c:if>
+	<hr width="750px">
 	
 <!--  댓글 리스트 -->
 <div id="comments">
@@ -65,12 +61,16 @@
 <div id="pageing">
 </div>
 <!--  댓글 입력 -->
-
+<br><br>
 <div >
-	<textarea rows="5" cols="30"  id="comment"></textarea>
-	<input type="button" value="댓글"   onclick="addReviewComm()">
+<table><tr><td id="ccco">
+	<textarea rows="5" cols="97"  id="comment"  placeholder="30자 이내로 작성해주세요."></textarea></td>
+	<td><input type="button" value="등록"   onclick="addBoardComm()" id="bnt"></td></tr>
+</table>
 </div>
 
+
+</div>
 
 <script type="text/javascript">
 	window.onload = getcommlist;
@@ -99,7 +99,12 @@
 	function addReviewComm(){
 		var comment=document.getElementById("comment").value;
 		var revnum=document.getElementById("num").value;
-		
+		if(comment.length>=30){
+			alert("댓글 사이즈를 준수해 주십시오");
+			document.getElementById("comment").value="";
+			return;
+			
+		}
 		xhr=new XMLHttpRequest();
 		xhr.onreadystatechange=insertComm;
 		xhr.open("post", "<%=request.getContextPath()%>/reviewcomment.do?cmd=comminsert", true);
@@ -151,19 +156,27 @@
 				var div=document.createElement("div");
 				var n=rcomnum[i].firstChild.nodeValue;
 				
-				var wId = id[i].firstChild.nodeValue ;
-				var html="아이디"+ wId +"<br>"+
-		         "댓글:" + comcon[i].firstChild.nodeValue +"<br>" +
-		         "날짜:" + comregd[i].firstChild.nodeValue +"<br>";
+				var ddiv=document.createElement("div");
+				var span=document.createElement("span");
 				
+				var wId = id[i].firstChild.nodeValue ;
+				var html="아이디: "+ wId +"<br>"+
+				  comcon[i].firstChild.nodeValue +"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+		          span.innerHTML="날짜:" + comregd[i].firstChild.nodeValue +"&nbsp;&nbsp;&nbsp;&nbsp;";
+				span.className="Date";
 		         //세션아이디와 비교해 삭제여부
 		         var id1 = "<%=session.getAttribute("id")%>";
-		         if(id1==wId){
-		         	html += "<a href='javascript:remove(" + n +")'>삭제</a>";
-		         }
 		         div.innerHTML=html;
+		         if(id1==wId){
+		        	 span.innerHTML += "<a href='javascript:remove(" + n +")'>삭제</a>";
+		         }
+		         ddiv.appendChild(span);
+		         div.appendChild(ddiv);
+		         ddiv.className="div";
 		         div.className="comm";
+		         div.align="left";
 				 comments.appendChild(div);
+				 comments.innerHTML+="<hr width='750px'>"
 			}
 			///////////////////////////////////////////////////////////////////////////////////////////////////////
 			

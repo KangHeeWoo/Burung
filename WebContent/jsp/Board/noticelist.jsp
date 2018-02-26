@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/board/noticelist.css?ver=3" >
 <br>
 <div align="center" id="setfont">
-<h1 align="center">&lt;공지사항&gt;</h1><br>
+<h1 align="center">&lt;공지사항&gt;</h1><br><br><br>
 	<table class="type09">
 		<tr>
 			<th class="cols" id="title" >제목</th><th class="cols"  id="regd" align="center">입력일</th><th class="cols" id="hit" align="center">조회수</th>

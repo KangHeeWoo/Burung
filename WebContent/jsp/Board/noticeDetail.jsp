@@ -1,32 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<h2>공지사항</h2>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>
+	/css/board/noticedetail.css?ver=1s" >
+<div align="center" id="detail">
+
 <h4 align="right">
-	<a href="${pageContext.request.contextPath}/board.do?cmd=noticelist">글목록</a>
+	<a href="${pageContext.request.contextPath}/notice.do?cmd=noticelist">글목록</a>
 </h4>
 
-<table border="solid 1px">
+<table id="table">
 	<tr>
-		<td>작성자</td>
-		<td>${param.memName}</td>
+		<td class="title" id="title">&nbsp;&nbsp;제&nbsp;&nbsp;&nbsp;목</td>
+		<td id="content">${detail.notTitle }</td>
 	</tr>
+	<tr><td colspan="2"><hr></td></tr>
+	<tr><td colspan="2"><div align="right" id="name">입력일 _ ${detail.notRegd}&nbsp;&nbsp;/&nbsp;&nbsp;작성자 _  ${param.memName}
+</div></td></tr>
+	<tr><td colspan="2"></td></tr>
 	<tr>
-		<td>제목</td>
-		<td>${detail.notTitle }</td>
-	</tr>
-	<tr>
-		<td>등록일</td>
-		<td>${detail.notRegd }</td>
-	</tr>
-	<tr>
-		<td>조회수</td>
-		<td>${detail.notHit }</td>
-	</tr>
-	<tr>
-		<td>내용</td>
-		<td><textarea cols="50" rows="20" name="boacontent"
-				readonly="readonly">${detail.notContent }</textarea></td>
+		<td colspan="2"><div align="center"><textarea cols="100" rows="20" name="boacontent"
+				readonly="readonly">${detail.notContent }</textarea></div></td>
 	</tr>
 
 </table>
@@ -37,7 +31,7 @@
 <div id="pageing">
 </div>
 
-
+</div>
 
 <script type="text/javascript">
 	window.onload = getcommlist;
