@@ -130,55 +130,89 @@ function insertCheck (){
 <div class="container" align="center">
 	<div class="row" >
 		<div class="col-md-offset-5 col-md-3">
-		
 			<div class="form-login" >
 
 <h2>[ 회원수정하기 ]</h2><br>
 	<form method="post"	action="<%=request.getContextPath()%>/members.do?cmd=updateOk">
 
+	<table class="updateForm">
+	<tr>
+	<td>아이디</td>
+	<td><input type="text" name="memId" onkeyup="idcheck()" id="memId" placeholder="아이디"  value="${sessionScope.id}" readonly="readonly"> 
+		<span id="idcheck" style="font-size: 10px; color: red"></span>
+	</td>
+	</tr>
 	
-아이디 : <input type="text" name="memId" onkeyup="idcheck()" id="memId" placeholder="아이디"  value="${sessionScope.id}" readonly="readonly"> 
-		<span id="idcheck" style="font-size: 10px; color: red"></span><br> <br>
-		
-		
-		
-비밀번호 : <input type="password" name="memPwd" id="pwd1" onkeyup="passwordCheck1()"placeholder="비밀번호" value=""> 
-		<span id="same1" style="font-size: 10px; color: red"></span> <br> 
-비밀번호 확인 : <input type="password" name="memPwd2" id="pwd2" onkeyup="passwordCheck2()" placeholder="비밀번호 재확인">
-		<span id="same2" style="font-size: 10px; color: red"></span> <br><br>
-		
-		
-		
-주소 입력 : <input type="text" id="addr4" name="addr4" value="${Addr}"><br><br>
-
-
+	<tr>
+	<td>비밀번호</td>
+	<td><input type="password" name="memPwd" id="pwd1" onkeyup="passwordCheck1()"placeholder="비밀번호" value=""> 
+		<span id="same1" style="font-size: 10px; color: red"></span> 
+	</td>
+	</tr>
 	
- 전화번호 : <input type="text" name="phone1" size="5" maxlength="4" value="${phone1}"> - 
+	<tr>
+	<td>비밀번호 확인</td>
+	<td><input type="password" name="memPwd2" id="pwd2" onkeyup="passwordCheck2()" placeholder="비밀번호 재확인">
+		<span id="same2" style="font-size: 10px; color: red"></span> 
+	</td>
+	</tr>
+	
+	<tr>
+	<td>주소 검색</td>
+	<td><input type="text" id="addr4" name="addr4" value="${Addr}">
+	</td>
+	</tr>
+	
+	<tr>
+	<td>검색된 주소</td>
+	<td><input type="text" name="memId" onkeyup="idcheck()" id="memId" placeholder="아이디"  value="${sessionScope.id}" readonly="readonly"> 
+		<span id="idcheck" style="font-size: 10px; color: red"></span>
+	</td>
+	</tr>
+	
+	<tr>
+	<td>상세 주소</td>
+	<td><input type="text" name="memId" onkeyup="idcheck()" id="memId" placeholder="아이디"  value="${sessionScope.id}" readonly="readonly"> 
+		<span id="idcheck" style="font-size: 10px; color: red"></span>
+	</td>
+	</tr>
+	
+	<tr>
+	<td>전화 번호</td>
+	<td> <input type="text" name="phone1" size="5" maxlength="4" value="${phone1}"> - 
  <input type="text" name="phone2" size="5" maxlength="4" value="${phone2}"> - 
- <input type="text" name="phone3" size="5" maxlength="4" value="${phone3}"><br><br>
+ <input type="text" name="phone3" size="5" maxlength="4" value="${phone3}">
+	</td>
+	</tr>
 	
+	<tr>
+	<td>이메일</td>
+	<td><input type="text" name="email1" onfocus="this.value=''" value="${Email}" id="email1">
+
+		@ <input type="text" name="email2" value="${domain}" id="email2">
+
+	</td>
+	</tr>
 	
-
-이메일 : <input type="text" name="email1" onfocus="this.value=''" value="${Email}" id="email1">
-
-		@ <input type="text" name="email2" value="${domain}" id="email2"><br><br>
-
-		
-
-생년월일 : <input type = "text" name="birth" value="${Birth }"><br><br>
-
+	<tr>
+	<td>생년월일</td>
+	<td><input type = "text" name="birth" value="${Birth }">
+	</td>
+	</tr>
 	
-
-이름 : <input
-		type="text" name="memName" value="${Name }"><br><br>
-
-		
-			<input type="submit" value="수정완료">
-			
-			</form>
-		</div>
-     </div>
- </div>
+	<tr>
+	<td>이름</td>
+	<td><input
+		type="text" name="memName" value="${Name }">
+	</td>
+	</tr>
+	</table>
+<br>
+<input type="submit" value="수정완료">
+</form>
+</div>
+</div>
+</div>
 </div>
 	
 	

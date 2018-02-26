@@ -7,8 +7,8 @@ body {
 
 .container {
     padding: 25px;
-   
- 
+   	width : 700px;
+   	margin : auto; 
 }
 
 .form-login {
@@ -22,6 +22,15 @@ body {
     border-width: 5px;
     box-shadow:0 1px 0 #cfcfcf;
   
+}
+
+.insertForm{
+	width : 500px;
+	margin-left : 150px;
+}
+
+#insertSub{
+	margin-left : 300px;
 }
 
 h2 { 
@@ -39,9 +48,16 @@ h2 {
     text-align: center;
 }
 #email1{
-	max-width: 80px;
+	max-width: 100px;
 	
 }
 #email2{
 	max-width: 100px;
+}
+#phone1{
+	max-width: 300px;
+	
+}
+#phone2{
+	max-width: 300px;
 }
