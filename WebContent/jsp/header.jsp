@@ -16,22 +16,24 @@
 	<span style="display: none;" id="path">${pageContext.request.contextPath }/sales.do?cmd=main</span>
 	<c:choose>
 		<c:when test="${empty sessionScope.id }">
-			<span><a href="${pageContext.request.contextPath }/members.do?cmd=loginpage">로그인</a> &nbsp&nbsp <a href="${pageContext.request.contextPath }/members.do?cmd=insert">회원가입</a></span>
+			<span><a href="${pageContext.request.contextPath }/members.do?cmd=loginpage">로그인</a> &nbsp;&nbsp; 
+			<a href="${pageContext.request.contextPath }/members.do?cmd=insert">회원가입</a></span>
 		</c:when>
 		<c:otherwise>
-			<span><a href="${pageContext.request.contextPath }/members.do?cmd=logout">로그아웃</a> &nbsp&nbsp <a href="${pageContext.request.contextPath }/members.do?cmd=listpage">마이페이지</a></span>
+			<span><a href="${pageContext.request.contextPath }/members.do?cmd=logout">로그아웃</a> &nbsp;&nbsp; 
+			<a href="${pageContext.request.contextPath }/members.do?cmd=listpage">마이페이지</a></span>
 		</c:otherwise>
 	</c:choose>
 </div>
 <hr>
 <ul id="menu">
-	<li><a href="#">회사</a> |&nbsp
+	<li><a href="#">회사</a> |&nbsp;
 		<ul>
 			<li><a href="${pageContext.request.contextPath }/company.do?cmd=introCompany">소개</a></li>
 			<li><a href="${pageContext.request.contextPath }/company.do?cmd=historyCompany">연혁</a></li>
 			<li><a href="${pageContext.request.contextPath }/company.do?cmd=mapCompany">오시는길</a></li>
 		</ul></li>
-	<li><a href="${pageContext.request.contextPath }/sales.do?cmd=choiceName&model=718">구매</a> |&nbsp
+	<li><a href="${pageContext.request.contextPath }/sales.do?cmd=choiceName&model=718">구매</a> |&nbsp;
 		<ul>
 			<li><a href="${pageContext.request.contextPath }/sales.do?cmd=choiceName&model=718">718</a></li>
 			<li><a href="${pageContext.request.contextPath }/sales.do?cmd=choiceName&model=911">911</a></li>
@@ -39,7 +41,7 @@
 			<li><a href="${pageContext.request.contextPath }/sales.do?cmd=choiceName&model=Macan">Macan</a></li>
 			<li><a href="${pageContext.request.contextPath }/sales.do?cmd=choiceName&model=Cayenne">Cayenne</a></li>
 		</ul></li>
-	<li><a href="${pageContext.request.contextPath }/rent.do?cmd=rentlist">렌트</a> |&nbsp</li>
+	<li><a href="${pageContext.request.contextPath }/rent.do?cmd=rentlist">렌트</a> |&nbsp;</li>
 	<li><a href="#">게시판</a>
 		<ul>
 			<li><a href="${pageContext.request.contextPath }/notice.do?cmd=noticelist">공지사항</a></li>
