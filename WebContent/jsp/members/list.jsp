@@ -2,7 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<h1>< 마이페이지 ></h1>
+
+
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/members/list.css?ver=1">
+
+<div class="container" align="center">
+	<div class="row" >
+		<div class="col-md-offset-5 col-md-3">
+		
+			<div class="form-login" >
+<h2>< 마이페이지 ></h2><br>
 <table border="1" width="1000" name="Mylist">
 	<h3>1) 상세정보</h3>
 	<tr>
@@ -26,7 +36,7 @@
 <br>
  
 <table border="1" width="700" name="rentList">
-	<h3>2) 렌트 내역</h3>
+	<h3> 2) 렌트 내역</h3>
 	<tr>
 		<th>렌트내역번호</th>
 		<th>대여시간</th>

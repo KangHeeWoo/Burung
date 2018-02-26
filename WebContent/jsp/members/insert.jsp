@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/members/insert.css?ver=1">
+
 <script type="text/javascript">
 
 var xhr=null;
@@ -122,74 +126,57 @@ function insertCheck (){
 
 
 </script>
-<h1>[ 회원가입 ]</h1>
+
+<div class="container" align="center">
+	<div class="row" >
+		<div class="col-md-offset-5 col-md-3">
+		
+			<div class="form-login" >
+<h2>[ 회원가입 ]</h2><br>
 <form method="post" name="frm" onsubmit = "return insertCheck()"
 	action="<%=request.getContextPath()%>/members.do?cmd=insertOk">
 	
 	
-아이디 : <input type="text" name="memId" onkeyup="idcheck()" id="memId"
-		placeholder="아이디"> <span id="idcheck"
-		style="font-size: 10px; color: red"></span> <br> 
+<input type="text" name="memId" onkeyup="idcheck()" id="memId"
+		 placeholder="User ID" > <span id="idcheck"
+		style="font-size: 10px; color: red"></span> <br> <br>
 		
 		
 		
-비밀번호 : <input type="password" name="memPwd" id="pwd1" onkeyup="passwordCheck1()"placeholder="비밀번호"> 
-		<span id="same1" style="font-size: 10px; color: red"></span> <br> 
-비밀번호 확인 : <input type="password" name="memPwd2" id="pwd2" onkeyup="passwordCheck2()" placeholder="비밀번호 재확인">
-		<span id="same2" style="font-size: 10px; color: red"></span> <br>
+<input type="password" name="memPwd" id="pwd1" onkeyup="passwordCheck1()"placeholder=Password> 
+		<span id="same1" style="font-size: 10px; color: red"></span> <br>  <br>
+ <input type="password" name="memPwd2" id="pwd2" onkeyup="passwordCheck2()" placeholder="Password Check">
+		<span id="same2" style="font-size: 10px; color: red"></span> <br> <br>
 		
 		
 		
-주소 입력 : <input type="text" id="addr2" placeholder="'구'로 입력해주세요.">
-		<input	type="button" name="memAddr" id="addr1" onclick="addrInquiry()"	value="구 검색">
+<input type="text" id="addr2" placeholder="Addrs ('구'로 검색)">
+<input	type="button" name="memAddr" id="addr1" onclick="addrInquiry()"	value="Search">
 		<span id="Inquiry" style="font-size: 10px; color: red"></span> <br>
-		검색결과 : <input type="text" id="addr3" name="addr3"><br> 
-		상세주소 : <input type="text" id="addr4" name="addr4" placeholder="나머지 상세 주소"><br>
+		<input type="text" id="addr3" name="addr3" placeholder="Addrs Result"><br> 
+		<input type="text" id="addr4" name="addr4" placeholder="상세정보"><br> <br>
       	<%-- 주소입력란에 입력한 주소값과 버튼클릭란(DB저장되있는 주소값)을  비교하여 검색결과란에 출력 --%>
 
-	
- 전화번호 : <select name="phone1">
+ <select name="phone1" >
        <option value="010">010</option>
        <option value="011">011</option>
        <option value="016">016</option>
        <option value="017">017</option>
        <option value="019">019</option>
      </select>
-     - <input type="text" name="phone2" size="5" maxlength="4"> - <input type="text" name="phone3" size="5" maxlength="4" ><br>
+     - <input type="text" name="phone2" size="5" maxlength="4" placeholder="Phone"> - 
+     <input type="text" name="phone3" size="5" maxlength="4" placeholder="Number"><br> <br>
 	
 	
 
-이메일 : <input type="text" name="email1" onfocus="this.value=''">
+<input type="text" name="email1" onfocus="this.value=''" id="email1" placeholder="Email">
 
-		@ <input type="text" id="email2">
+		@ <input type="text" id="email2" id="email2" placeholder="Domain">
 
 		<select name="email" onchange="email_change()">
 
 		    <option value="">직접입력</option>
 		
-		<option value="naver.com" >naver.com</option>
-		<option value="hanmail.net">hanmail.net</o0ption>
-		<option value="hotmail.com">hotmail.com</option>
-		<option value="nate.com">nate.com</option>
-		<option value="yahoo.co.kr">yahoo.co.kr</option>
-		<option value="empas.com">empas.com</option>
-		<option value="dreamwiz.com">dreamwiz.com</option>
-		<option value="freechal.com">freechal.com</option>
-		<option value="lycos.co.kr">lycos.co.kr</option>
-		<option value="korea.com">korea.com</option>
-		<option value="gmail.com">gmail.com</option>
-		<option value="hanmir.com">hanmir.com</option>
-		<option value="paran.com">paran.com</option>
-
-		   </select><br>
-<!-- 
-
-이메일 : <input type="text" name="email1"> 
-	@ <input type="text" name="email1">
-	
-	
-	<select style="width: 100px; margin-right: 10px" name="selectEmail"	id="selectEmail">
-		<option value="1">직접입력</option>
 		<option value="naver.com" >naver.com</option>
 		<option value="hanmail.net">hanmail.net</option>
 		<option value="hotmail.com">hotmail.com</option>
@@ -203,10 +190,10 @@ function insertCheck (){
 		<option value="gmail.com">gmail.com</option>
 		<option value="hanmir.com">hanmir.com</option>
 		<option value="paran.com">paran.com</option>
-	</select><br>
-	
- -->
-생년월일 : <select name="Birth1">
+
+		   </select><br> <br>
+
+<select name="Birth1">
        <option value="2013">2013</option>
        <option value="2012">2012</option>
        <option value="2011">2011</option>
@@ -268,11 +255,11 @@ function insertCheck (){
        <option value="29">29</option>
        <option value="30">30</option>
        <option value="31">31</option>
-     </select>일<br>
+     </select>일<br> <br>
 	
 
 이름<input
-		type="text" name="memName" placeholder="가입자명" required><br><br>
+		type="text" name="memName" placeholder="User Name" required><br><br>
 		
 	
 	<br> <input type="submit" value="회원가입">

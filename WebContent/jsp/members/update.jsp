@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+
+
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/members/updata.css?ver=1">
+
+
 <script type="text/javascript">
     
 	
@@ -121,44 +127,58 @@ function insertCheck (){
 
 </script>
 
-<h1>[ 회원수정하기 ]</h1>
+<div class="container" align="center">
+	<div class="row" >
+		<div class="col-md-offset-5 col-md-3">
+		
+			<div class="form-login" >
+
+<h2>[ 회원수정하기 ]</h2><br>
 	<form method="post"	action="<%=request.getContextPath()%>/members.do?cmd=updateOk">
 
 	
 아이디 : <input type="text" name="memId" onkeyup="idcheck()" id="memId" placeholder="아이디"  value="${sessionScope.id}" readonly="readonly"> 
-		<span id="idcheck" style="font-size: 10px; color: red"></span><br> 
+		<span id="idcheck" style="font-size: 10px; color: red"></span><br> <br>
 		
 		
 		
 비밀번호 : <input type="password" name="memPwd" id="pwd1" onkeyup="passwordCheck1()"placeholder="비밀번호" value=""> 
 		<span id="same1" style="font-size: 10px; color: red"></span> <br> 
 비밀번호 확인 : <input type="password" name="memPwd2" id="pwd2" onkeyup="passwordCheck2()" placeholder="비밀번호 재확인">
-		<span id="same2" style="font-size: 10px; color: red"></span> <br>
+		<span id="same2" style="font-size: 10px; color: red"></span> <br><br>
 		
 		
 		
-주소 입력 : <input type="text" id="addr4" name="addr4" value="${Addr}"><br>
+주소 입력 : <input type="text" id="addr4" name="addr4" value="${Addr}"><br><br>
 
 
 	
- 전화번호 : <input type="text" name="phone1" size="5" maxlength="4" value="${phone1}"> - <input type="text" name="phone2" size="5" maxlength="4" value="${phone2}"> - <input type="text" name="phone3" size="5" maxlength="4" value="${phone3}"><br>
+ 전화번호 : <input type="text" name="phone1" size="5" maxlength="4" value="${phone1}"> - 
+ <input type="text" name="phone2" size="5" maxlength="4" value="${phone2}"> - 
+ <input type="text" name="phone3" size="5" maxlength="4" value="${phone3}"><br><br>
 	
 	
 
-이메일 : <input type="text" name="email1" onfocus="this.value=''" value="${Email}">
+이메일 : <input type="text" name="email1" onfocus="this.value=''" value="${Email}" id="email1">
 
-		@ <input type="text" name="email2" value="${domain}"><br>
+		@ <input type="text" name="email2" value="${domain}" id="email2"><br><br>
 
 		
 
-생년월일 : <input type = "text" name="birth" value="${Birth }"><br>
+생년월일 : <input type = "text" name="birth" value="${Birth }"><br><br>
 
 	
 
-이름<input
+이름 : <input
 		type="text" name="memName" value="${Name }"><br><br>
 
 		
 			<input type="submit" value="수정완료">
-	</form>
+			
+			</form>
+		</div>
+     </div>
+ </div>
+</div>
+	
 	
