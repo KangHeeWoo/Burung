@@ -20,9 +20,9 @@
 
 <br>
 <h3 id="mainfontsize" align="center">&lt; 리뷰 게시판 &gt;</h3>
+<form method="post" action="${pageContext.request.contextPath }/review.do?cmd=reviewinsertOk"  onsubmit="return setData()"  enctype="multipart/form-data">
 <div id="setfont" align="center">
 
-<form method="post" action="${pageContext.request.contextPath }/review.do?cmd=reviewinsertOk"  onsubmit="return setData()"  enctype="multipart/form-data">
 <table >
 	<tr>
 		<td>점&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;수</td>
@@ -64,11 +64,11 @@
 </table>
 
 	
-</form>
 </div>
 <div id="div">
 	
 </div>
+</form>
 <script type="text/javascript">
 
 	function filescore(){
