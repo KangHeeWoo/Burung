@@ -68,8 +68,8 @@ function xy(event){
 			"전화번호 : " + tel + "<br>" + "이메일 : " + email + "<br>" + "매장정보 : " + info + "<br>" +
 			"<a href=javascript:outPopup()>닫기</a>";
 			
-			var por = document.getElementById("por");
-			por.style.display = "block";
+			//var por = document.getElementById("por");
+			//por.style.display = "block";
 		}	
 	}
 	function outPopup(){
@@ -103,9 +103,6 @@ function xy(event){
 		<img src = "../img/mark3.png" onclick="showPopup5()">
 	</div>
 	<div id = "popup"></div>
-	<div id = "por">
-		<img src = "../img/porsche-normal.jpg">
-	</div>
 </div>
 
 		

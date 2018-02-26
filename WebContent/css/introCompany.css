@@ -42,15 +42,15 @@
 	position : absolute;
 	z-index: 1;
 	left : 230px;
-	top : 1147px;
+	top : 1097px;
 	cursor : pointer;
 }
 
 #mapCompany #mark3{
 	position : absolute;
 	z-index: 1;
-	left : 713px;
-	top : 893px;
+	left : 710px;
+	top : 873px;
 	cursor : pointer;
 }
 
@@ -58,15 +58,15 @@
 	position : absolute;
 	z-index: 1;
 	left : 606px;
-	top : 1187px;
+	top : 1087px;
 	cursor : pointer;
 }
 
 #mapCompany #mark5{
 	position : absolute;
 	z-index: 1;
-	left : 183px;
-	top : 914px;
+	left : 223px;
+	top : 910px;
 	cursor : pointer;
 }
 
@@ -84,13 +84,13 @@
 	font-size:x-large;
 }
 
-#por {
+/*#por {
 	display : none;
 	left : 1111px;
 	top : 750px;
 }
 
-/*@-webkit-keyframes bounce {
+@-webkit-keyframes bounce {
     0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);}
     40% {-webkit-transform: translateY(-30px) }
     60% {-webkit-transform: translateY(-20px);}
