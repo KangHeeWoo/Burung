@@ -15,8 +15,8 @@ for(var i=0; i<checked.length; i++){
 <div align="center" id="setfont">
 <h1 align="center">&lt;후기게시판&gt;</h1><br>
 
-<!-- 세션 아이디의 마이페이지 : 물어보아요!!!!!!-->
-<h4 align="right"><a href="members.do?cmd=listpage">글 등록</a></h4>
+<!-- 세션 아이디의 마이페이지 -->
+<h4 align="right"><a href="<%=request.getContextPath()%>/review.do?cmd=loginOk">글 등록</a></h4>
 
 <form name="checkbox" method="post"  style="width: 800px">
 <!--  carlistFont 스타일-->
