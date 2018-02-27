@@ -8,7 +8,14 @@ public class BoardMemVo {
 	private int boahit;
 	private Date boaRegd;
 	private String memid;
+	private String boacontent;
 	
+	public String getBoacontent() {
+		return boacontent;
+	}
+	public void setBoacontent(String boacontent) {
+		this.boacontent=boacontent;
+	}
 	public int getBoanum() {
 		return boanum;
 	}
@@ -47,6 +54,14 @@ public class BoardMemVo {
 		this.boahit = boahit;
 		this.boaRegd = boaRegd;
 		this.memid = memid;
+	}
+	public BoardMemVo(int boanum, String boatitle, Date boaRegd, String memid, String boacontent) {
+		super();
+		this.boanum = boanum;
+		this.boatitle = boatitle;
+		this.boaRegd = boaRegd;
+		this.memid = memid;
+		this.boacontent = boacontent;
 	}
 	public BoardMemVo() {
 		super();

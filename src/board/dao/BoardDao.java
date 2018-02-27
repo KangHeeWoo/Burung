@@ -217,4 +217,34 @@ public class BoardDao {
          DbcpBean.close(conn, pstmt, rs);
       }
    }
+   public ArrayList<BoardMemVo> boardBatch(String date){
+	   Connection conn = null;
+	   PreparedStatement pstmt = null;
+	   ResultSet rs = null;
+	   ArrayList<BoardMemVo> batch = new ArrayList<>();
+	   try {
+		   conn = DbcpBean.getConn();
+		   String sql = "select boanum,boatitle,boacontent,boaregd,memid from board b,members m where m.memnum=b.memnum and boaregd between to_date(?, 'YYYYMMDD HH24:MI') and to_date(?, 'YYYYMMDD HH24:MI')";
+		   pstmt = conn.prepareStatement(sql);
+		   pstmt.setString(1, date+" 00:00");
+		   pstmt.setString(2, date+" 23:59");
+		   
+		   rs = pstmt.executeQuery();
+		   while(rs.next()) {
+			    int boanum=rs.getInt("boanum");
+	            String boatitle=rs.getString("boatitle");
+	            String boacontent=rs.getString("boacontent");
+	            Date boaRegd=rs.getDate("boaRegd");
+	            String memid=rs.getString("memid");
+	            BoardMemVo vo = new BoardMemVo(boanum, boatitle, boaRegd, memid, boacontent);
+	            batch.add(vo);
+		   }
+		   return batch;
+	   }catch(SQLException se){
+		   System.out.println(se.getMessage());
+		   return batch;
+	   }finally {
+		   DbcpBean.close(conn,pstmt,rs);
+	   }
+   }
 }
