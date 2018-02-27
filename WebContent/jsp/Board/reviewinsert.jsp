@@ -26,7 +26,7 @@
 <table >
 	<tr>
 		<td>점&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;수</td>
-		<td><input type="number" min="1" max="5" name="revscore" value="${param.revscore }" id="score"></td>
+		<td><input type="number" min="1" max="5" name="revscore" value="${param.revscore }" id="score"  ></td>
 	</tr>
 	<tr>
 		<td>작&nbsp;&nbsp;&nbsp;성&nbsp;&nbsp;자</td>

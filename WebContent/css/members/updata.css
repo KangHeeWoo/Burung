@@ -1,15 +1,12 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto:400);
-body {
-  background-color:#fff;
-  -webkit-font-smoothing: antialiased;
-  font: normal 14px Roboto,arial,sans-serif;
-}
+@charset "UTF-8";
 
 .container {
     padding: 25px;
    
- 
+	font-family: "jeju";
+	font-size: 16px;
 }
+
 
 .form-login {
     background-color: #EDEDED;

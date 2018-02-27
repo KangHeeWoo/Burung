@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/members/insert.css?ver=5">
+	href="<%=request.getContextPath()%>/css/members/insert.css?ver=6">
 
 <script type="text/javascript">
 
@@ -157,7 +157,7 @@ function insertCheck (){
 	</tr>
 	
 	<tr>
-		<td>주소 검색</td>
+		<td>주소검색</td>
 		<td><input type="text" id="addr2" placeholder="Addrs ('구'로 검색)">
 		<input	type="button" name="memAddr" id="addr1" onclick="addrInquiry()"	value="Search">
 		<span id="Inquiry" style="font-size: 10px; color: red"></span>
@@ -165,19 +165,19 @@ function insertCheck (){
 	</tr>
 	
 	<tr>
-		<td>검색된 주소</td>
+		<td>주소</td>
 		<td><input type="text" id="addr3" name="addr3" placeholder="Addrs Result">
 		</td>
 	</tr>
 	
 	<tr>
-		<td>상세 주소</td>
+		<td>상세주소</td>
 		<td><input type="text" id="addr4" name="addr4" placeholder="상세정보">
 		</td>
 	</tr>
 	
 	<tr>
-		<td>전화 번호</td>
+		<td>전화번호</td>
 		<td> <select name="phone1" >
        <option value="010">010</option>
        <option value="011">011</option>
