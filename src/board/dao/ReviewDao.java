@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import board.vo.ReviewVo;
 import board.vo.Review_ImgVo;
+import board.vo.reviewBatch;
 import burung.dbcp.DbcpBean;
 
 public class ReviewDao {
@@ -316,6 +317,38 @@ public class ReviewDao {
 				imglist.add(rs.getString("recarimgname"));
 			}
 			return imglist;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return null;
+		}finally {
+			DbcpBean.close(conn, pstmt, rs);
+		}
+	}
+	//해당 날짜에 저장된 글
+	public ArrayList<reviewBatch> reviewLog(String date){
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<reviewBatch> list=new ArrayList<>();
+		try {
+			conn=DbcpBean.getConn();
+			String sql="select revnum,revtitle,revcontent,revscore,revregd,memid,carname from review r,members m where r.memnum=m.memnum and revregd between to_date(?, 'YYYYMMDD HH24:MI') and to_date(?, 'YYYYMMDD HH24:MI')";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, date+" 00:00");
+			pstmt.setString(2, date+" 23:59");
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				int revnum=rs.getInt("revnum");
+				String revtitle=rs.getString("revtitle");
+				String revcontent=rs.getString("revcontent");
+				int revscore=rs.getInt("revscore");
+				Date revregd=rs.getDate("revregd");
+				String memid=rs.getString("memid");
+				String carname=rs.getString("carname");
+				reviewBatch vo=new reviewBatch(revnum, revtitle, revcontent, revscore, revregd, carname, memid);
+				list.add(vo);
+			}
+			return list;
 		}catch(SQLException se) {
 			se.printStackTrace();
 			return null;

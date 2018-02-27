@@ -33,6 +33,7 @@ for(var i=0; i<checked.length; i++){
 		<option value="revnum">==정렬==</option>
 		<option value="revhit">조횟수</option>
 		<option value="revscore">후기점수</option>
+		<option value="revregd">등록일</option>
 </select><br>
 <c:choose>
 	<c:when test="${param.searchBy != null || param.searchBy != ''}">
