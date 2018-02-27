@@ -26,7 +26,7 @@ public class MembersDao {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
-		String sql = "insert into members values(0,?,?,?,?,?,?,?)";
+		String sql = "insert into members values(0,?,?,?,?,?,?,?,sysdate)";
 		try {
 			con = DbcpBean.getConn();
 			pstmt = con.prepareStatement(sql);
