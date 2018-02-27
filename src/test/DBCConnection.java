@@ -11,7 +11,7 @@ public class DBCConnection {
 		Connection conn=null;
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
-			conn=DriverManager.getConnection("jdbc:oracle:thin:@192.168.0.10:1521:xe", "scott", "tiger");
+			conn=DriverManager.getConnection("jdbc:oracle:thin:@192.168.0.27:1521:xe", "burung1", "burung");
 			return conn;		
 		}catch(ClassNotFoundException ce) {
 			System.out.println("드라이버로딩 실패: "+ce.getMessage());
