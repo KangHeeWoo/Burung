@@ -68,8 +68,8 @@ public class reviewBatch {
 	}
 	@Override
 	public String toString() {
-		return "reviewBatch [revnum=" + revnum + ", revtitle=" + revtitle + ", revcontent=" + revcontent + ", revscore="
-				+ revscore + ", revregd=" + revregd + ", carname=" + carname + ", memid=" + memid + "]";
+		return "등록된 글 [ 글번호:" + revnum + ", 제목:" + revtitle + ", 내용:" + revcontent + ", 평점:"
+				+ revscore + ", 등록일:" + revregd + ", 차종:" + carname + ", 회원아이디:" + memid + "]";
 	}
 	
 	
