@@ -113,6 +113,7 @@ public class ReviewController extends HttpServlet{
 		 
 		 
 	}
+
 	protected void reviewlist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String spageNum=request.getParameter("pageNum");
 		//검색기능넣기
@@ -150,13 +151,13 @@ public class ReviewController extends HttpServlet{
 		String cheCar=request.getParameter("cheCar");
 		if(cheCar == null ||cheCar.equals("All")) {
 			listAll=dao.listAll(startRow, endRow,search,searchValue, searchBy);
+			
 		}else {
 			String[] carValue=cheCar.split(":");
 			listAll=dao.carValueList(startRow, endRow, carValue);
 			
 		}
-		
-		
+
 		//System.out.println("listAll:"+listAll);
 		
 		int pageCount=(int)Math.ceil(dao.getCount()/10.0);
