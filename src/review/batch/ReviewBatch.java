@@ -57,7 +57,7 @@ public class ReviewBatch {
 
 		Timer timer = new Timer(true);
 		Calendar cal = Calendar.getInstance();
-		cal.set(2018, 1, 27, 23, 59, 0);
+		cal.set(2018, 1, 25, 23, 59, 0);
 		timer.scheduleAtFixedRate(task, new Date(cal.getTimeInMillis()), 1000 * 60 * 60 * 24);
 	}
 }

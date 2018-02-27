@@ -1,4 +1,4 @@
-package sales.batch;
+package members.batch;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -8,18 +8,19 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import sales.dao.SalesDao;
-import sales.vo.SalesLogVo;
+import members.dao.MembersDao;
+import members.vo.MembersInsertVo;
+import sales.batch.SalesBatch;
 
-public class SalesBatch {
-	public SalesBatch() {
-		System.out.println("sales batch 호출");
+public class MembersBatch {
+	public MembersBatch() {
+		System.out.println("members batch 호출");
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
 				// 배치에서 실행될 메소드 호출
-				createSalesLog();
-				System.out.println("sales batch");
+				System.out.println("members batch");
+				membersInsertLog();
 			}
 		};
 
@@ -29,8 +30,7 @@ public class SalesBatch {
 		timer.scheduleAtFixedRate(task, new Date(cal.getTimeInMillis()), 1000 * 60 * 60 * 24);
 	}
 
-	// 배치에서 실행될 메소드 정의
-	public void createSalesLog() {
+	public void membersInsertLog() {
 		String path = SalesBatch.class.getResource("/").getPath();
 		path = path.replaceAll("/WEB-INF/classes/", "");
 
@@ -51,14 +51,15 @@ public class SalesBatch {
 		PrintWriter pw = null;
 
 		try {
-			pw = new PrintWriter(path + "/log/sales_log" + date + ".txt");
+			pw = new PrintWriter(path + "/log/members_log" + date + ".txt");
 
-			SalesDao dao = SalesDao.getInstance();
-			ArrayList<SalesLogVo> list = dao.logList(date);
-
-			for (SalesLogVo vo : list) {
+			MembersDao dao = MembersDao.getInstance();
+			ArrayList<MembersInsertVo> list = dao.memberList(date);
+			
+			for(MembersInsertVo vo : list) {
 				pw.println(vo);
 			}
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

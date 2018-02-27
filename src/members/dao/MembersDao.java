@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 
 import burung.dbcp.DbcpBean;
+import members.vo.MembersInsertVo;
 import members.vo.MembersVo;
 
 public class MembersDao {
@@ -126,6 +127,35 @@ public class MembersDao {
 			return null;
 		} finally {
 			DbcpBean.close(con, pstmt, rs);
+		}
+	}
+
+	public ArrayList<MembersInsertVo> memberList(String sysdate) {
+		Connection con = null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		ArrayList<MembersInsertVo> list = new ArrayList<>();
+
+		try {
+			con = DbcpBean.getConn();
+			
+			String sql = "select * from members where MEMREGDATE between to_date(?, 'YYYYMMDD HH24:MI') and to_date(?, 'YYYYMMDD HH24:MI')";
+			st = con.prepareStatement(sql);
+			st.setString(1, sysdate + " 00:00");
+			st.setString(2, sysdate + " 23:59");
+			rs = st.executeQuery();
+			
+			while(rs.next()) {
+				list.add(new MembersInsertVo(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)));
+			}
+			
+			return list;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} finally {
+			DbcpBean.close(con, st, rs);
 		}
 	}
 
@@ -260,6 +290,7 @@ public class MembersDao {
 			DbcpBean.close(con, pstmt, rs);
 		}
 	}
+
 	public String findpwd(String id, String email) {
 
 		Connection con = null;

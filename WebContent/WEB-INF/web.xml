@@ -23,4 +23,7 @@
   <listener>
   	<listener-class>board.batch.BoardBatch</listener-class>
   </listener>
+  <listener>
+  	<listener-class>members.batch.MembersBatch</listener-class>
+  </listener>
 </web-app>
