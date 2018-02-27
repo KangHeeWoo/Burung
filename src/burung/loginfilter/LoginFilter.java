@@ -1,6 +1,7 @@
 package burung.loginfilter;
 
 import java.io.IOException;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -72,5 +73,5 @@ public class LoginFilter implements Filter {
 			HttpServletResponse response = (HttpServletResponse) resp;
 			response.sendRedirect(request.getContextPath() + "/members.do?cmd=loginpage");
 		}
-	}
+	}	
 }

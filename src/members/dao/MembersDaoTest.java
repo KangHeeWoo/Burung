@@ -13,5 +13,6 @@ public class MembersDaoTest {
 		MembersDaoJUnit dao = new MembersDaoJUnit();
 		MembersVo vo = dao.list("test1");
 		assertNotNull(vo);
+		
 	}
 }
