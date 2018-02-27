@@ -98,6 +98,10 @@ public class RentDao {
 		ResultSet rs = null;
 		ArrayList<String> list = new ArrayList<>();
 		
+		System.out.println(sDate);
+		System.out.println(eDate);
+		System.out.println(model);
+		
 		try {
 			con = DbcpBean.getConn();
 			

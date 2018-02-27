@@ -1,29 +1,19 @@
 package rent.dao;
 
 import static org.junit.Assert.*;
-import org.junit.Test;
 
-import rent.vo.RentListVo;
+import java.util.ArrayList;
+
+import org.junit.Test;
 
 public class RentDaoTest {
 
 	public RentDaoTest() {}
 	
 	@Test
-	public void insert() {
-		RentDao dao = RentDao.getInstance();
-		int n = dao.addRentList(new RentListVo(0, null, null, 0, null, 1, 1));
-		assertEquals(n, 1);
+	public void list() {
+		RentDaoJUnit dao = new RentDaoJUnit();
+		ArrayList<String> list = dao.rentList("2018-02-28 09:00", "2018-03-01 09:00", "Panamera");
+		assertNotNull(list);
 	}
-	
-	@Test
-	public void num() {}
-	
-	@Test
-	public void car() {
-		
-	}
-	
-	@Test
-	public void list() {}
 }

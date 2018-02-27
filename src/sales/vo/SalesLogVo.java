@@ -5,6 +5,7 @@ public class SalesLogVo {
 	private String sCarName;
 	private int salPrice;
 	private String salDate;
+	
 	public SalesLogVo(String memId, String sCarName, int salPrice, String salDate) {
 		super();
 		this.memId = memId;

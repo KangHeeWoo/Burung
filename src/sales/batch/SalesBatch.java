@@ -51,7 +51,7 @@ public class SalesBatch {
 		PrintWriter pw = null;
 
 		try {
-			pw = new PrintWriter(path + "/log/sales_log" + date + ".txt");
+			pw = new PrintWriter(path + "/log/sales_log_" + date + ".txt");
 
 			SalesDao dao = SalesDao.getInstance();
 			ArrayList<SalesLogVo> list = dao.logList(date);

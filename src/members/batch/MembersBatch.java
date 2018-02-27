@@ -51,7 +51,7 @@ public class MembersBatch {
 		PrintWriter pw = null;
 
 		try {
-			pw = new PrintWriter(path + "/log/members_log" + date + ".txt");
+			pw = new PrintWriter(path + "/log/members_log_" + date + ".txt");
 
 			MembersDao dao = MembersDao.getInstance();
 			ArrayList<MembersInsertVo> list = dao.memberList(date);
