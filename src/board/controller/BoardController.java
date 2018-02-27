@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.soap.Detail;
 
+import org.junit.Test;
+
 import board.dao.BoardDao;
 import board.vo.BoardMemVo;
 import board.vo.BoardVo;
@@ -152,7 +154,6 @@ public class BoardController extends HttpServlet {
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageNum", pageNum);
 		request.getRequestDispatcher("jsp/layout.jsp?spage=Board/boardlist.jsp").forward(request, response);
-	
-	
+
 	}
 }
