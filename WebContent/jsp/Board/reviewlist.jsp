@@ -205,6 +205,8 @@ for(var i=0; i<checked.length; i++){
 			}
 		}
 		var url="review.do?cmd=reviewlist&pageNum="+num+"&cheCar="+cheCar;
+		
+		location.href=url;
 		//console.log(cheCar);
 	}
 	

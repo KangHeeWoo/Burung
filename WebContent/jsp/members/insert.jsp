@@ -14,7 +14,7 @@ var check = false;
 function idcheck(){
 	
 	var memId = document.getElementsByName("memId")[0].value;
-	var reg_exp = new RegExp("^[a-z][a-z0-9]{5,20}$","g"); // 5~20자의 영문 소문자, 숫자만 사용 가능합니다.
+	var reg_exp = new RegExp("^[a-z][a-z0-9]{4,19}$","g"); // 5~20자의 영문 소문자, 숫자만 사용 가능합니다.
 	var match = reg_exp.exec(memId);
 	var idcheck=document.getElementById("idcheck");
 	
@@ -117,7 +117,8 @@ function addrInquiry(){
 		
 function email_change() {
 		var email = frm.email.value;
-		frm.email2.value = email;
+		var email2 = frm.email2;
+		email2.value = email;
 	}
 
 function insertCheck (){
@@ -194,7 +195,7 @@ function insertCheck (){
 		<td>이메일</td>
 		<td><input type="text" name="email1" onfocus="this.value=''" id="email1" placeholder="Email">
 
-		@ <input type="text" id="email2" id="email2" placeholder="Domain">
+		@ <input type="text" id="email2" name="email2" placeholder="Domain">
 
 		<select name="email" onchange="email_change()">
 
@@ -220,6 +221,8 @@ function insertCheck (){
 	
 	<tr>
 		<td>생년월일</td>
+		<td><input type="date" name="Birth"></td>
+		<!-- 
 		<td><select name="Birth1">
        <option value="2013">2013</option>
        <option value="2012">2012</option>
@@ -284,6 +287,7 @@ function insertCheck (){
        <option value="31">31</option>
      </select>일
 		</td>
+		 -->
 	</tr>
 	
 	<tr>

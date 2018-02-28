@@ -196,7 +196,7 @@ function insertCheck (){
 	
 	<tr>
 	<td>생년월일</td>
-	<td><input type = "text" name="birth" value="${Birth }">
+	<td><input type = "date" name="birth" value="${Birth }">
 	</td>
 	</tr>
 	

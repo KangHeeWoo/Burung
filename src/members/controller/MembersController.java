@@ -67,15 +67,18 @@ public class MembersController extends HttpServlet {
 		String memId = request.getParameter("memId");
 		String memPwd = request.getParameter("memPwd");
 		String memAddr = request.getParameter("addr3") + request.getParameter("addr4");
-		String memPhone = request.getParameter("phone1") + request.getParameter("phone2")
+		String memPhone = request.getParameter("phone1") + "-" + request.getParameter("phone2") + "-"
 				+ request.getParameter("phone3");
-		String memEmail = request.getParameter("email1") + request.getParameter("email2");
-		String memBirth = request.getParameter("Birth1") + request.getParameter("Birth2")
-				+ request.getParameter("Birth3");
+		String memEmail = request.getParameter("email1") + "@" + request.getParameter("email2");
+		//String memBirth = request.getParameter("Birth1") + request.getParameter("Birth2")
+		//		+ request.getParameter("Birth3");
+		String memBirth = request.getParameter("Birth");
 		String memName = request.getParameter("memName");
 
 		members.vo.MembersVo members = new MembersVo(0, memId, memPwd, memAddr, memPhone, memEmail, memBirth, memName);
 
+		System.out.println(memEmail);
+		
 		MembersDao dao = MembersDao.getInstance();
 
 		int n = dao.insert(members);
