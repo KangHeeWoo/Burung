@@ -155,7 +155,6 @@ public class ReviewController extends HttpServlet{
 		}else {
 			String[] carValue=cheCar.split(":");
 			listAll=dao.carValueList(startRow, endRow, carValue);
-			
 		}
 
 		//System.out.println("listAll:"+listAll);

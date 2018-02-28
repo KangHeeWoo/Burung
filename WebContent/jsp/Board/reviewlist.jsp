@@ -52,10 +52,7 @@ for(var i=0; i<checked.length; i++){
 		<tr>
 			<th class="cols" id="id">아이디</th><th  class="cols" id="car">차종</th><th  class="cols" id="title">제목</th><th  class="cols" id="regd">입력일</th><th  class="cols" id="hit">조회수</th><th  class="cols" id="score">평점</th>
 		</tr>
-		
 
-		
-		
 		<c:forEach var="review" items="${listAll }">
 		<tr onclick="reviewdetail(${review.revNum})" onmouseover="fontborder(event)" onmouseout="fontout(event)">
 			<td  class="row">${review.memId }</td>
