@@ -101,7 +101,7 @@ img {
 	<c:forEach var="rent" items="${rlist }">
 	<tr>
 		<td>${rent.renNum }</td>
-		<td><img src="<%=request.getContextPath() %>/admin/img/${rent.rcarName}_sub.PNG"></td>
+		<td><img src="<%=request.getContextPath() %>/admin/img/${rent.rcarName}_rent.png"></td>
 		<td>${rent.rcarName }</td>
 		<td>${rent.rcarModel }</td>
 		<td>${rent.timePay }</td>

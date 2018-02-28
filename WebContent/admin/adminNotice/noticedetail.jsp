@@ -6,6 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <style type="text/css">
 .bbs-table {
 width: 100%;
@@ -57,12 +59,14 @@ margin: 0.7em 0 0 0;
     float: right;
 }
 </style>
+<script type="text/javascript">
+</script>
 </head>
 <body>
 <div class="view-menu">
  <div class="fr">
-        <input type="button" value="다음 글" onclick=""/>
-        <input type="button" value="이전 글" onclick=""/>
+        <input type="button" value="수정" id="update" onclick="location.href='<%=request.getContextPath()%>/semi/notice.do?cmd=update&notNum=${param.notNum }'"/>
+        <input type="button" value="삭제" id="delete"  onclick="location.href='<%=request.getContextPath()%>/semi/notice.do?cmd=delete&notNum=${param.notNum }'"/>
         <input type="button" value="목록" onclick="location.href='<%=request.getContextPath()%>/semi/notice.do?cmd=noticelist'"/>
  </div>
  </div>

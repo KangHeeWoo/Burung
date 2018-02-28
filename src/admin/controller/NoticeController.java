@@ -28,6 +28,27 @@ public class NoticeController extends HttpServlet{
 			request.getRequestDispatcher("/admin/layout.jsp?spage=/admin/adminNotice/noticewrite.jsp").forward(request, response);
 		}else if(cmd.equals("detail")) {
 			detail(request,response);
+		}else if(cmd.equals("update")) {
+			int notNum=Integer.parseInt(request.getParameter("notNum"));
+			NoticeDao dao=NoticeDao.getInstance();
+			NoticeVo vo=dao.detail(notNum);
+			int memNum=vo.getMemNum();
+			String notTitle=vo.getNotTitle();
+			String notContent=vo.getNotContent();
+			Date notRegd=vo.getNotRegd();
+			int notHit=vo.getNotHit();
+			String memName=vo.getMemName();
+			request.setAttribute("notTitle", notTitle);
+			request.setAttribute("notContent", notContent);
+			request.setAttribute("notRegd", notRegd);
+			request.setAttribute("notHit", notHit);
+			request.setAttribute("memName", memName);
+			request.setAttribute("notNum", notNum);
+			request.getRequestDispatcher("/admin/layout.jsp?spage=/admin/adminNotice/noticeupdate.jsp").forward(request, response);	
+		}else if(cmd.equals("updateOk")) {
+			updateOk(request,response);
+		}else if(cmd.equals("delete")) {
+			delete(request,response);
 		}
 	}
 	protected void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -88,6 +109,26 @@ public class NoticeController extends HttpServlet{
 		request.setAttribute("notHit", notHit);
 		request.setAttribute("memName", memName);
 		request.getRequestDispatcher("/admin/layout.jsp?spage=/admin/adminNotice/noticedetail.jsp").forward(request, response);
+		
+	}
+	protected void updateOk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		int notNum=Integer.parseInt(request.getParameter("notNum"));
+		String notTitle=request.getParameter("notTitle");
+		String notContent=request.getParameter("notContent");
+		NoticeDao dao=NoticeDao.getInstance();
+		NoticeVo vo=new NoticeVo(notNum, notTitle, notContent, 0, null, 0);
+		int n=dao.update(vo);
+		request.getRequestDispatcher("/semi/notice.do?cmd=detail&notNum="+notNum).forward(request, response);
+		
+	}
+	
+	protected void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		int notNum=Integer.parseInt(request.getParameter("notNum"));
+		NoticeDao dao=NoticeDao.getInstance();
+		int n=dao.delete(notNum);
+		request.getRequestDispatcher("/semi/notice.do?cmd=noticelist").forward(request, response);
 		
 	}
 }
