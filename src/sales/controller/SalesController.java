@@ -149,15 +149,22 @@ public class SalesController extends HttpServlet {
 		Cookie[] cookies = request.getCookies();
 		//ArrayList 생성
 		ArrayList<String> cooks = new ArrayList<>();
-		System.out.println(cookies.length);
+		ArrayList<String> cooks1 = new ArrayList<>();
 		
 		for(int j=0;j<cookies.length;j++) {
 			if(cookies[j].getName().startsWith("Models")) {
 				String value = cookies[j].getValue();
+				System.out.println(value);
+				String[] cname = value.split("[+]");
 				//URLDecoder
 				String models = URLDecoder.decode(value,"utf-8");
+				//String carname = URLDecoder.decode(cname,"utf-8");
 				//ArrayList에 저장
 				cooks.add(models);
+				cooks1.add(cname[0]);
+				System.out.println(cooks1);
+				System.out.println(cooks);
+				
 			}
 		}
 	
@@ -186,7 +193,7 @@ public class SalesController extends HttpServlet {
 		*/
 		//request ArrayList 담기
 		request.setAttribute("cooks",cooks);
-		
+		request.setAttribute("cooks1", cooks1);
 		//forword 방식으로 페이지 이동
 		request.getRequestDispatcher(path).forward(request, response);;
 	}

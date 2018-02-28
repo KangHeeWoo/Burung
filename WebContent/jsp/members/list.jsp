@@ -13,7 +13,7 @@
 		
 			<div class="form-login" >
 <h2> &lt; 마이페이지 &gt; </h2><br>
-<table border="1" width="1000" class="Mylist">
+<table  border="1" width="1000" class="Mylist">
 	<h3>1) 상세정보</h3>
 	<tr>
 		<th>아이디</th>

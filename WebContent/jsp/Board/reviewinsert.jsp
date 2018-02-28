@@ -26,7 +26,7 @@
 <table >
 	<tr>
 		<td>점&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;수</td>
-		<td><input type="number" min="1" max="5" name="revscore" value="${param.revscore }" id="score"></td>
+		<td><input type="number" min="1" max="5" name="revscore" value="${param.revscore }" id="score"  ></td>
 	</tr>
 	<tr>
 		<td>작&nbsp;&nbsp;&nbsp;성&nbsp;&nbsp;자</td>
@@ -67,6 +67,7 @@
 <div id="div">
 	
 </div>
+<input type="submit" value="등록">
 </form>
 <script type="text/javascript">
 
@@ -93,16 +94,7 @@
 			tr.style.fontFamily="jeju";
 		}
 		
-		var tr2=document.createElement("tr");
-		var td3=document.createElement("td");
-		var input2=document.createElement("input");
-		td3.colspan=2;
-		input2.type="submit";
-		input2.value="등록";
 
-		td3.appendChild(input2);
-		tr2.appendChild(td3);
-		table.appendChild(tr2);
 		
 
 		var div=document.getElementById("div");

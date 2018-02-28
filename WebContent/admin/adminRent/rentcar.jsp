@@ -108,20 +108,62 @@ img {
 		<c:choose>
 			<c:when test="${rent.state=='정상' }">
 				<td>
-					<select>
-						<option value="nomal">정상</option>
-						<option value="fault">불량</option>
+				<form action="<%=request.getContextPath()%>/semi/rent.do">
+					<select name="sel">
+						<option value="1">정상</option>
+						<option value="2">불량</option>
 					</select>
-					<input type="button" value="확인" onclick="location.href='<%=request.getContextPath()%>/semi/rent.do?cmd=state&rpagenum=${param.rpagenum }&rlpagenum=${param.rlpagenum }&state=1&rennum=${rent.renNum }'">
+					<c:choose>
+				 		<c:when test="${param.rpagenum==null }">
+				 		<input type="hidden" name="rpagenum" value="1">
+				 		</c:when>
+				 		<c:otherwise>
+					 	<input type="hidden" name="rpagenum" value="${param.rpagenum }">			 		
+				 		</c:otherwise>
+				 	</c:choose>
+				 	<c:choose>
+				 		<c:when test="${param.rlpagenum==null }">
+				 			<input type="hidden" name="rlpagenum" value="1">
+				 		</c:when>
+				 		<c:otherwise>
+				 			<input type="hidden" name="rlpagenum" value="${param.rlpagenum }">
+				 		</c:otherwise>
+				 	</c:choose>
+					<input type="hidden" name="rennum" value="${rent.renNum }">
+					<input type="hidden" name="cmd" value="state">
+					<input type="hidden" name="state" value="1">
+					<input type="submit" value="확인">
+				</form>
 				</td>
 			</c:when>
 			<c:otherwise>
 				<td>
+				<form action="<%=request.getContextPath()%>/semi/rent.do">
 					<select>
-						<option value="fault">불량</option>
-						<option value="nomal">정상</option>
+						<option value="2">불량</option>
+						<option value="1">정상</option>
 					</select>
-					<input type="button" value="확인" onclick="location.href='<%=request.getContextPath()%>/semi/rent.do?cmd=state&rpagenum=${param.rpagenum }&rlpagenum=${param.rlpagenum }&state=2&rennum=${rent.renNum }'">
+					<c:choose>
+				 		<c:when test="${param.rpagenum==null }">
+				 		<input type="hidden" name="rpagenum" value="1">
+				 		</c:when>
+				 		<c:otherwise>
+					 	<input type="hidden" name="rpagenum" value="${param.rpagenum }">			 		
+				 		</c:otherwise>
+				 	</c:choose>
+				 	<c:choose>
+				 		<c:when test="${param.rlpagenum==null }">
+				 			<input type="hidden" name="rlpagenum" value="1">
+				 		</c:when>
+				 		<c:otherwise>
+				 			<input type="hidden" name="rlpagenum" value="${param.rlpagenum }">
+				 		</c:otherwise>
+				 	</c:choose>
+					<input type="hidden" name="rennum" value="${rent.renNum }">
+					<input type="hidden" name="cmd" value="state">
+					<input type="hidden" name="state" value="2">
+					<input type="submit" value="확인">
+				</form>
 				</td>
 			</c:otherwise>
 		</c:choose>

@@ -84,15 +84,19 @@
 </div>
 <div id="cook">
 	<h2>최근본상품</h2>		
-		<c:forEach var = "cooks" items = "${requestScope.cooks }">
+		<c:forEach var = "cooks" items = "${requestScope.cooks }" varStatus="status">
+		<c:forEach var="cooks1" items="${cooks1 }" begin="${status.index }" end="${status.index }">
 			<c:choose>
 				<c:when test = "${cooks == null }">
 					상품없음<br>
 				</c:when>
 				<c:otherwise>
-					<img class="ad" src="/Burung/img/${cooks }_rent.png"><br>
+					<a href="<%=request.getContextPath()%>/sales.do?cmd=choiceName&model=${cooks1 }&name=${cooks}">
+					<img class="ad" src="/Burung/img/${cooks }_rent.png"><br>					
+					</a>
 				</c:otherwise>
 			</c:choose>
+		</c:forEach>
 		</c:forEach>
 </div>
 

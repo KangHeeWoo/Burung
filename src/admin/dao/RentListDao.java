@@ -180,4 +180,37 @@ public class RentListDao {
 			DbcpBean.close(conn, pstmt, null);
 		}
 	}
+	
+	public ArrayList<RentListVo> rentlist(String sysdate){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select * from rentlist rl,rentcar rc where rl.rennum=rc.rennum and rstartdate between to_date(?, 'YYYY/MM/DD HH24:MI') and to_date(?, 'YYYY/MM/DD HH24:MI')";
+		try {
+			con=DbcpBean.getConn();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, sysdate+"00:00");
+			pstmt.setString(2, sysdate+"23:59");
+			rs=pstmt.executeQuery();
+			ArrayList<RentListVo> list=new ArrayList<>();
+			while(rs.next()) {
+				int rListNum=rs.getInt("rListNum");
+				Date rStartDate=rs.getDate("rStartDate");
+				Date rEndDate=rs.getDate("rEndDate");
+				int rTotPrice=rs.getInt("rTotPrice");
+				String renState=rs.getString("renState");
+				int renNum=rs.getInt("renNum");
+				String rCarName=rs.getString("rCarName");
+				int memNum=rs.getInt("memNum");
+				RentListVo vo=new RentListVo(rListNum, rStartDate, rEndDate, rTotPrice, renState, renNum,rCarName,memNum);
+				list.add(vo);
+			}
+			return list;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			DbcpBean.close(con, pstmt, rs);
+		}
+	}
 }
