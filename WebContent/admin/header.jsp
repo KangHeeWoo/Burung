@@ -19,6 +19,6 @@
 	<li><a href="<%=request.getContextPath() %>/semi/sales.do?cmd=carlist">구매관리</a> &nbsp;</li>
 	<li><a href="<%=request.getContextPath() %>/semi/rent.do?cmd=rentlist">렌트관리</a> &nbsp;</li>
 	<li><a href="<%=request.getContextPath() %>/semi/notice.do?cmd=noticelist">공지사항관리</a>
-	<li><a href="<%=request.getContextPath() %>/semi/statistics.do?cmd=statistics">매출통계</a>
+	<li><a href="<%=request.getContextPath() %>/admin/layout.jsp?spage=adminstatistics/statistics.jsp">매출통계</a>
 </ul>
 <hr>
