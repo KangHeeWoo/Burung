@@ -21,9 +21,13 @@
 	</table><br>
 	<!-- 페이징 처리 -->
 	
+	
+	<!-- 페이지 이동시 검색조건, 검색어 갖고 이동할 수 있도록 로직 처리 필요 -->
+	<!-- 페이지 번호 클릭시 페이지 이동이 아니라 javascript로 이동, 검색조건이 있는지 확인하고 이에 따라 if 처리 -->
 	<div>
 		<c:choose>
 			<c:when test="${startPage>10 }">
+				<!-- 수정 필요 -->
 				<a href="<%=request.getContextPath()%>/board.do?cmd=boardlist&pageNum=${startPage-1 }">[ 이전 ]</a>
 			</c:when>
 			<c:otherwise>[이전]</c:otherwise>
@@ -35,6 +39,7 @@
 					<span style="color:black;">${i } </span>
 				</c:when>
 				<c:otherwise>
+					<!-- 수정 필요 -->
 					<span style="color:gray;"><a href="<%=request.getContextPath()%>/board.do?cmd=boardlist&pageNum=${i }">${i } </a></span>
 				</c:otherwise>
 			</c:choose>
@@ -42,6 +47,7 @@
 		
 		<c:choose>
 			<c:when test="${endPage<pageCount }">
+				<!-- 수정 필요 -->
 				<a href="<%=request.getContextPath()%>/board.do?cmd=boardlist&pageNum=${endPage+1 }">[ 다음 ]</a>
 			</c:when>
 			<c:otherwise>[ 다음 ]</c:otherwise>
@@ -57,10 +63,6 @@
 	<input type="button" value="검색" onclick="schClick(1)">
 	<input type="hidden" id="choice" value="${search }">
 </div>
-
-
-
-
 
 <script type="text/javascript">
 	var search=document.getElementById("search");

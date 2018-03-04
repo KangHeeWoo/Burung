@@ -68,6 +68,8 @@ for(var i=0; i<checked.length; i++){
 
 	<!-- 페이징 처리 -->
 	
+	<!-- boardlist와 같은 처리 필요 -->
+	<!-- 체크박스와 정렬기준 조건 추가 -->
 	<div>
 		<c:choose>
 			<c:when test="${startPage>10 }">
@@ -105,12 +107,7 @@ for(var i=0; i<checked.length; i++){
 	<input type="button" value="검색" onclick="schClick(1)">
 	<input type="hidden" id="choice" value="${search }">
 </div>
-
-
 </div>
-
-
-
 
 <script type="text/javascript">
 	var search=document.getElementById("search");
@@ -120,29 +117,6 @@ for(var i=0; i<checked.length; i++){
 	var choiceBy=document.getElementById("choiceBy");
 	var searchBy=document.getElementById("searchBy");
 	var cheCar = "";
-	
-	function orderby(num){
-		var url="review.do?cmd=reviewlist&pageNum="+num;
-		if(searchBy.value!=""){
-			url+="&searchBy="+searchBy.value;
-		}
-		if(searchValue.value !=""){
-			url+="&search="+search.value+"&searchValue="+searchValue.value;
-		}
-		location.href=url;
-	}
-	
-	//나중에 검색조건들어올 자리
-	function schClick(num){
-		var url="review.do?cmd=reviewlist&pageNum="+num;
-		if(searchBy.value!=""){
-			url+="&searchBy="+searchBy.value;
-		}
-		if(searchValue.value !=""){
-			url+="&search="+search.value+"&searchValue="+searchValue.value;
-		}
-		location.href=url;
-	}
 	
 	window.onload=function(){
 		for(var i=0;i<search.length;i++){
@@ -173,6 +147,29 @@ for(var i=0; i<checked.length; i++){
 				}
 			}
 		}
+	}
+	
+	function orderby(num){
+		var url="review.do?cmd=reviewlist&pageNum="+num;
+		if(searchBy.value!=""){
+			url+="&searchBy="+searchBy.value;
+		}
+		if(searchValue.value !=""){
+			url+="&search="+search.value+"&searchValue="+searchValue.value;
+		}
+		location.href=url;
+	}
+	
+	//나중에 검색조건들어올 자리
+	function schClick(num){
+		var url="review.do?cmd=reviewlist&pageNum="+num;
+		if(searchBy.value!=""){
+			url+="&searchBy="+searchBy.value;
+		}
+		if(searchValue.value !=""){
+			url+="&search="+search.value+"&searchValue="+searchValue.value;
+		}
+		location.href=url;
 	}
 	
 	function reviewdetail(revnum){

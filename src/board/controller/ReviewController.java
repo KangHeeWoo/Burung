@@ -124,7 +124,6 @@ public class ReviewController extends HttpServlet{
 		
 		//System.out.println("search : "+search+"	searchValue : "+searchValue+"		searchBy : " + searchBy);
 		
-		
 		int pageNum=1;
 		if(spageNum!=null) {
 			pageNum=Integer.parseInt(spageNum);
