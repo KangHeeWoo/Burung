@@ -28,7 +28,8 @@
 		<c:choose>
 			<c:when test="${startPage>10 }">
 				<!-- 수정 필요 -->
-				<a href="<%=request.getContextPath()%>/board.do?cmd=boardlist&pageNum=${startPage-1 }">[ 이전 ]</a>
+				<a href="javascript:callPage(${startPage-1 })">[ 이전 ]</a>
+			
 			</c:when>
 			<c:otherwise>[이전]</c:otherwise>
 		</c:choose>
@@ -40,7 +41,7 @@
 				</c:when>
 				<c:otherwise>
 					<!-- 수정 필요 -->
-					<span style="color:gray;"><a href="<%=request.getContextPath()%>/board.do?cmd=boardlist&pageNum=${i }">${i } </a></span>
+					<span style="color:gray;"><a href="javascript:callPage(${i})">${i }</a></span>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
@@ -48,7 +49,8 @@
 		<c:choose>
 			<c:when test="${endPage<pageCount }">
 				<!-- 수정 필요 -->
-				<a href="<%=request.getContextPath()%>/board.do?cmd=boardlist&pageNum=${endPage+1 }">[ 다음 ]</a>
+				<a href="javascript:callPage(${endPage + 1 })">[ 다음 ]</a>
+				
 			</c:when>
 			<c:otherwise>[ 다음 ]</c:otherwise>
 		</c:choose>
@@ -69,12 +71,25 @@
 	var searchValue=document.getElementById("searchValue");
 	var choice=document.getElementById("choice");
 	
-	function schClick(num){
-		var url="board.do?cmd=boardlist&pageNum="+num;
-		if(searchValue.value !=""){
-			url+="&search="+search.value+"&searchValue="+searchValue.value;
+	function callPage(num){
+		var url="<%=request.getContextPath()%>/board.do?cmd=boardlist&pageNum="+num;
+		
+		if(searchValue.value!=""){
+			url +="&search="+search.value+"&searchValue="+searchValue.value;
 		}
 		location.href=url;
+	}
+	
+	function schClick(num){
+		if(search.value == "s0"){
+			alert("검색 조건을 선택해 주세요");
+		}else{
+			var url="board.do?cmd=boardlist&pageNum="+num;
+			if(searchValue.value !=""){
+				url+="&search="+search.value+"&searchValue="+searchValue.value;
+			}
+			location.href=url;
+		}
 	}
 	window.onload=function(){
 		for(var i=0;i<search.length;i++){

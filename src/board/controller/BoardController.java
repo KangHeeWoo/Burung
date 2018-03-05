@@ -152,7 +152,8 @@ public class BoardController extends HttpServlet {
 		BoardDao dao = BoardDao.getInstance();
 		ArrayList<BoardMemVo> listAll = dao.listAll(startRow, endRow, search, searchValue);
 		// System.out.println("listAll"+listAll);
-		int pageCount = (int) Math.ceil(dao.getCount() / 10.0);
+		System.out.println("dao"+dao.getCount(search, searchValue));
+		int pageCount = (int) Math.ceil(dao.getCount(search, searchValue) / 10.0);
 		int startPage = ((pageNum - 1) / 10 * 10) + 1;
 		int endPage = startPage + 9;// 끝페이지
 		// System.out.println(endPage);
@@ -160,6 +161,9 @@ public class BoardController extends HttpServlet {
 			endPage = pageCount;
 
 		}
+		System.out.println("st" + startPage);
+		System.out.println("en" + endPage);
+		System.out.println("pageC"+pageCount);
 		// System.out.println(endPage+"," +pageCount);
 		request.setAttribute("listAll", listAll);
 		request.setAttribute("pageCount", pageCount);

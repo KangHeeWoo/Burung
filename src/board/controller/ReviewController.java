@@ -128,6 +128,7 @@ public class ReviewController extends HttpServlet{
 		if(spageNum!=null) {
 			pageNum=Integer.parseInt(spageNum);
 		}
+
 		int startRow=(pageNum-1)*10+1;
 		int endRow=startRow+9;
 		
@@ -147,18 +148,20 @@ public class ReviewController extends HttpServlet{
 		ReviewDao dao=ReviewDao.getInstance();
 		ArrayList<ReviewVo> listAll=null;
 		
+		int pageCount=0;
 		String cheCar=request.getParameter("cheCar");
 		if(cheCar == null ||cheCar.equals("All")) {
 			listAll=dao.listAll(startRow, endRow,search,searchValue, searchBy);
-			
+			pageCount = (int)Math.ceil(dao.getCount(search,searchValue)/10.0);
 		}else {
 			String[] carValue=cheCar.split(":");
-			listAll=dao.carValueList(startRow, endRow, carValue);
+			listAll=dao.carValueList(startRow, endRow, carValue, searchBy);
+			pageCount = (int)Math.ceil(dao.getCount(carValue)/10.0);
 		}
+		System.out.println("¿Ö?"+pageCount);
 
 		//System.out.println("listAll:"+listAll);
 		
-		int pageCount=(int)Math.ceil(dao.getCount()/10.0);
 		int startPage=((pageNum-1)/10*10)+1;
 		int endPage=startPage+9;
 		

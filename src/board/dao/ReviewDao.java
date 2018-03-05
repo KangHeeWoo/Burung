@@ -66,18 +66,51 @@ public class ReviewDao {
 		}
 	}
 
-	public int getCount() {
+	public int getCount(String search,String searchValue) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			conn = DbcpBean.getConn();
-			String sql = "select NVL(count(revnum),0) count from review";
+			String sql = "select NVL(count(revnum),0) count from review r,members m where r.memnum=m.memnum and "+search+" like ?";
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+searchValue+"%");
 			rs = pstmt.executeQuery();
 			rs.next();
 			int count = rs.getInt("count");
 			System.out.println(count);
+			return count;
+		} catch (SQLException se) {
+			return -1;
+		} finally {
+			DbcpBean.close(conn, pstmt, rs);
+		}
+	}
+	public int getCount(String[] carValue) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DbcpBean.getConn();
+			String sql = "select NVL(count(revnum),0) count from review r,salescar c where r.carname=c.scarname and scarmodel in(";
+			
+			for (int i = 0; i < carValue.length; i++) {
+				sql += "?";
+				if (carValue.length != i + 1) {
+					sql += ",";
+				}
+			}
+			
+			sql += ")";
+			pstmt = conn.prepareStatement(sql);
+			for (int i = 0; i < carValue.length; i++) {
+				pstmt.setString(i + 1, carValue[i]);
+			}
+			rs = pstmt.executeQuery();
+			rs.next();
+			int count = rs.getInt("count");
+			
+			//System.out.println("체크박스 count"+count);
 			return count;
 		} catch (SQLException se) {
 			return -1;
@@ -218,7 +251,7 @@ public class ReviewDao {
 		}
 	}
 	
-	public ArrayList<ReviewVo> carValueList(int startRow, int endRow, String[] carValue, String search, String searchValue, String searchBy) {
+	public ArrayList<ReviewVo> carValueList(int startRow, int endRow, String[] carValue, String searchBy) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -234,16 +267,16 @@ public class ReviewDao {
 				}
 			}
 
-			sql += ") and carname = scarname and "+ search + " like ? order by " + searchBy + " desc)aa)where rnum>=? and rnum<=?";
+			sql += ") and carname = scarname order by " + searchBy + " desc)aa)where rnum>=? and rnum<=?";
 			
 			pstmt = conn.prepareStatement(sql);
 			System.out.println(sql);
 			for (int i = 0; i < carValue.length; i++) {
 				pstmt.setString(i + 1, carValue[i]);
 			}
-			pstmt.setString(carValue.length + 1, searchValue);
-			pstmt.setInt(carValue.length + 2, startRow);
-			pstmt.setInt(carValue.length + 3, endRow);
+			
+			pstmt.setInt(carValue.length + 1, startRow);
+			pstmt.setInt(carValue.length + 2, endRow);
 
 			rs = pstmt.executeQuery();
 			while (rs.next()) {

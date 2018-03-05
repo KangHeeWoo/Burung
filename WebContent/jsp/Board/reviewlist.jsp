@@ -73,7 +73,8 @@ for(var i=0; i<checked.length; i++){
 	<div>
 		<c:choose>
 			<c:when test="${startPage>10 }">
-				<a href="<%=request.getContextPath()%>/review.do?cmd=reviewlist&pageNum=${startPage-1 }">[ 이전 ]</a>
+				<a href="javascript:callPage(${startPage-1 })">[ 이전 ]</a>
+				
 			</c:when>
 			<c:otherwise>[이전]</c:otherwise>
 		</c:choose>
@@ -84,14 +85,14 @@ for(var i=0; i<checked.length; i++){
 					<span style="color:black;">${i } </span>
 				</c:when>
 				<c:otherwise>
-					<span style="color:gray;"><a href="<%=request.getContextPath()%>/review.do?cmd=reviewlist&pageNum=${i }">${i } </a></span>
+					<span style="color:gray;"><a href="javascript:callPage(${i})">${i }</a></span>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		
 		<c:choose>
 			<c:when test="${endPage<pageCount }">
-				<a href="<%=request.getContextPath()%>/review.do?cmd=reviewlist&pageNum=${endPage+1 }">[ 다음 ]</a>
+				<a href="javascript:callPage(${endPage + 1 })">[ 다음 ]</a>
 			</c:when>
 			<c:otherwise>[ 다음 ]</c:otherwise>
 		</c:choose>
@@ -117,6 +118,47 @@ for(var i=0; i<checked.length; i++){
 	var choiceBy=document.getElementById("choiceBy");
 	var searchBy=document.getElementById("searchBy");
 	var cheCar = "";
+	
+	var ch_box=document.getElementsByName("ch_box");
+	var cnt = 0;
+	var valCnt = 0;
+	
+	function callPage(num){
+		var url="<%=request.getContextPath()%>/review.do?cmd=reviewlist&pageNum="+num;
+		if(searchBy.value!=""){ // 정렬 조건 여부
+			url+="&searchBy="+searchBy.value;
+		}
+		
+		if(searchValue.value!=""){ // 검색조건 여부
+			url +="&search="+search.value+"&searchValue="+searchValue.value;
+		}else{
+			// 체크박스 조건 여부
+			for(var i=1;i<ch_box.length;i++){
+				if(ch_box[i].checked == true){
+					cnt++;
+				}	
+			}
+			
+			if(cnt == 5) ch_box[0].checked = true;
+			else ch_box[0].checked = false;
+			
+			
+			if(ch_box[0].checked == true || cnt==0){
+				cheCar = "All";
+			}else{
+				for(var i=1;i<ch_box.length;i++){
+					if(ch_box[i].checked == true){					
+						cheCar += ch_box[i].value;
+						if(++valCnt != cnt){
+							cheCar += ":";
+						}
+					}
+				}
+			}
+			url+="&cheCar="+cheCar;
+		}
+		location.href=url;
+	}
 	
 	window.onload=function(){
 		for(var i=0;i<search.length;i++){
@@ -154,8 +196,33 @@ for(var i=0; i<checked.length; i++){
 		if(searchBy.value!=""){
 			url+="&searchBy="+searchBy.value;
 		}
-		if(searchValue.value !=""){
-			url+="&search="+search.value+"&searchValue="+searchValue.value;
+		if(searchValue.value!=""){ // 검색조건 여부
+			url +="&search="+search.value+"&searchValue="+searchValue.value;
+		}else{
+			// 체크박스 조건 여부
+			for(var i=1;i<ch_box.length;i++){
+				if(ch_box[i].checked == true){
+					cnt++;
+				}	
+			}
+			
+			if(cnt == 5) ch_box[0].checked = true;
+			else ch_box[0].checked = false;
+			
+			
+			if(ch_box[0].checked == true || cnt==0){
+				cheCar = "All";
+			}else{
+				for(var i=1;i<ch_box.length;i++){
+					if(ch_box[i].checked == true){					
+						cheCar += ch_box[i].value;
+						if(++valCnt != cnt){
+							cheCar += ":";
+						}
+					}
+				}
+			}
+			url+="&cheCar="+cheCar;
 		}
 		location.href=url;
 	}
@@ -169,7 +236,12 @@ for(var i=0; i<checked.length; i++){
 		if(searchValue.value !=""){
 			url+="&search="+search.value+"&searchValue="+searchValue.value;
 		}
-		location.href=url;
+		
+		if(search.value=="s0"){
+			alert("검색 조건을 선택해 주세요");	
+		}else {
+			location.href=url;
+		}
 	}
 	
 	function reviewdetail(revnum){
@@ -203,15 +275,17 @@ for(var i=0; i<checked.length; i++){
 		}
 		var url="review.do?cmd=reviewlist&pageNum="+num+"&cheCar="+cheCar;
 		
+		if(searchBy.value!=""){ // 정렬 조건 여부
+			url+="&searchBy="+searchBy.value;
+		}
 		location.href=url;
 		//console.log(cheCar);
 	}
 	
 	//체크박스 
 	function carsearch(num){
-		var ch_box=document.getElementsByName("ch_box");
-		var cnt = 0;
-		var valCnt = 0;
+		cnt = 0;
+		valCnt = 0;
 		cheCar = "";
 		
 		for(var i=1;i<ch_box.length;i++){
@@ -237,6 +311,10 @@ for(var i=0; i<checked.length; i++){
 			}
 		}
 		var url="review.do?cmd=reviewlist&pageNum="+num+"&cheCar="+cheCar;
+		
+		if(searchBy.value!=""){ // 정렬 조건 여부
+			url+="&searchBy="+searchBy.value;
+		}
 		
 		location.href=url;
 		//console.log(cheCar);

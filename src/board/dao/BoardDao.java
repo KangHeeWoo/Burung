@@ -40,18 +40,19 @@ public class BoardDao {
    }
 
 
-   public int getCount() {
+   public int getCount(String search,String searchValue) {
       Connection conn = null;
       PreparedStatement pstmt = null;
       ResultSet rs = null;
       try {
          conn = DbcpBean.getConn();
-         String sql = "select NVL(count(boanum),0) count from board";
+         String sql = "select NVL(count(boanum),0) count from board b,members m where b.memnum=m.memnum and "+search+" like ?";
          pstmt = conn.prepareStatement(sql);
+         pstmt.setString(1, "%"+searchValue+"%");
          rs = pstmt.executeQuery();
          rs.next();
          int count = rs.getInt("count");
-         System.out.println(count);
+         System.out.println("getCount"+count);
          return count;
       } catch (SQLException se) {
          return -1;
@@ -203,7 +204,7 @@ public class BoardDao {
             String memid=rs.getString("memid");
             BoardMemVo vo=new BoardMemVo(boanum,boatitle, boahit, boaRegd, memid);
             list.add(vo);
-            //System.out.println(vo);
+            System.out.println(vo);
             
          }
          //System.out.println(list);
