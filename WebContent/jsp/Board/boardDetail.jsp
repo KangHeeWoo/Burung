@@ -12,7 +12,6 @@
 </h4>
 
 <table id="table">
-
 	<tr>
 		<td class="title" id="title">&nbsp;&nbsp;제&nbsp;&nbsp;&nbsp;목</td>
 		<td id="content">${listdetail.boaTitle }</td>

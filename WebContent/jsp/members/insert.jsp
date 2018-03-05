@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/members/insert.css?ver=6">
+	href="<%=request.getContextPath()%>/css/members/insert.css?ver=7">
 
 <script type="text/javascript">
 
@@ -141,27 +141,26 @@ function insertCheck (){
 	<tr>
 		<td>아이디</td>
 		<td><input type="text" name="memId" onkeyup="idcheck()" id="memId"
-		 placeholder="User ID" > <span id="idcheck"
-		style="font-size: 10px; color: red"></span></td>
+		 placeholder="User ID" > <span id="idcheck"></span></td>
 	</tr>	
 	
 	<tr>
 		<td>비밀번호</td>
 		<td><input type="password" name="memPwd" id="pwd1" onkeyup="passwordCheck1()"placeholder=Password> 
-		<span id="same1" style="font-size: 10px; color: red"></span></td>
+		<span id="same1"></span></td>
 	</tr>
 	
 	<tr>
 		<td>비밀번호 확인</td>
 		<td><input type="password" name="memPwd2" id="pwd2" onkeyup="passwordCheck2()" placeholder="Password Check">
-		<span id="same2" style="font-size: 10px; color: red"></span></td>
+		<span id="same2"></span></td>
 	</tr>
 	
 	<tr>
 		<td>주소검색</td>
 		<td><input type="text" id="addr2" placeholder="Addrs ('구'로 검색)">
 		<input	type="button" name="memAddr" id="addr1" onclick="addrInquiry()"	value="Search">
-		<span id="Inquiry" style="font-size: 10px; color: red"></span>
+		<span id="Inquiry"></span>
 		</td>
 	</tr>
 	

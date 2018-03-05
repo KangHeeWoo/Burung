@@ -22,12 +22,17 @@
     border-color:#d2d2d2;
     border-width: 5px;
     box-shadow:0 1px 0 #cfcfcf;
-  	width : 500px;
+  	width : 600px;
 }
 
-.insertForm{
-	width : 500px;
-	margin-left : 150px;
+.updateForm{
+	width : 600px;
+	margin-left : 40px;
+}
+
+.updateForm span{
+	font-size: 15px;
+	color : red;
 }
 
 #insertSub{

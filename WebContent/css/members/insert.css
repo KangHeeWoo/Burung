@@ -22,8 +22,13 @@
 }
 
 .insertForm{
-	width : 500px;
-	margin-left : 150px;
+	width : 600px;
+	margin-left : 80px;
+}
+
+.insertForm span{
+	font-size: 15px;
+	color : red;
 }
 
 #insertSub{

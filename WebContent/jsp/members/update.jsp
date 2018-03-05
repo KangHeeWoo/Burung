@@ -4,7 +4,7 @@
 
 
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/members/updata.css?ver=1">
+	href="<%=request.getContextPath()%>/css/members/updata.css?ver=3">
 
 
 <script type="text/javascript">
@@ -139,21 +139,21 @@ function insertCheck (){
 	<tr>
 	<td>아이디</td>
 	<td><input type="text" name="memId" onkeyup="idcheck()" id="memId" placeholder="아이디"  value="${sessionScope.id}" readonly="readonly"> 
-		<span id="idcheck" style="font-size: 10px; color: red"></span>
+		<span id="idcheck"></span>
 	</td>
 	</tr>
 	
 	<tr>
 	<td>비밀번호</td>
 	<td><input type="password" name="memPwd" id="pwd1" onkeyup="passwordCheck1()"placeholder="비밀번호" value="" required> 
-		<span id="same1" style="font-size: 10px; color: red"></span> 
+		<span id="same1"></span> 
 	</td>
 	</tr>
 	
 	<tr>
 	<td>비밀번호 확인</td>
 	<td><input type="password" name="memPwd2" id="pwd2" onkeyup="passwordCheck2()" placeholder="비밀번호 재확인" required>
-		<span id="same2" style="font-size: 10px; color: red"></span> 
+		<span id="same2"></span> 
 	</td>
 	</tr>
 	
