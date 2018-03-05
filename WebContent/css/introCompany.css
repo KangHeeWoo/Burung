@@ -1,18 +1,7 @@
 @charset "UTF-8";
 
-@font-face{
-	font-family: "DXme";
-	src : url('../font/DXPnM-KSCpc-EUC-H_0.ttf') format('truetype');
-}
-
-@font-face{
-	font-family: "jeju";
-	src : url('../font/JejuMyeongjo-Regular.ttf') format('truetype');
-}
-
 #company {
 	width : 100%;
-	height : 300px;
 }
 
 #intro {
@@ -20,9 +9,16 @@
 	text-align : center;
 }
 
-#his #history {
-	width: 100%;
-	height: auto;
+#history_1{
+	height : 100%;
+}
+
+#history_2{
+	width : 100%;
+}
+
+#history_3{
+	height : 100%;
 }
 
 #mapCompany #map{
@@ -33,47 +29,47 @@
 #mapCompany #mark1{
 	position : absolute;
 	z-index: 1;
-	left : 517px;
-	top : 833px;
+	left : 562px;
+	top : 1209px;
 	cursor : pointer;
 }
 
 #mapCompany #mark2{
 	position : absolute;
 	z-index: 1;
-	left : 230px;
-	top : 1097px;
+	left : 275px;
+	top : 1453px;
 	cursor : pointer;
 }
 
 #mapCompany #mark3{
 	position : absolute;
 	z-index: 1;
-	left : 710px;
-	top : 873px;
+	left : 755px;
+	top : 1209px;
 	cursor : pointer;
 }
 
 #mapCompany #mark4{
 	position : absolute;
 	z-index: 1;
-	left : 606px;
-	top : 1087px;
+	left : 651px;
+	top : 1463px;
 	cursor : pointer;
 }
 
 #mapCompany #mark5{
 	position : absolute;
 	z-index: 1;
-	left : 223px;
-	top : 910px;
+	left : 268px;
+	top : 1286px;
 	cursor : pointer;
 }
 
 #mapCompany #popup {
 	position:absolute;
 	left : 1161px;
-	top : 650px;
+	top : 1000px;
 	width : max-content;
 	padding : 10px;
 	border : 5px outset #e08181;

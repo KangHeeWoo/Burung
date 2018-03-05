@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 
 #mainImg{
@@ -12,7 +13,7 @@
 #modelList{
 	position: absolute;
 	top : 220px;
-	left : 70px;
+	left : 120px;
 }
 
 #modelList li a{
@@ -62,82 +63,19 @@
 #cook .ad {
 	width:150px;
 	height : auto;
-	
-}
-
-@charset "UTF-8";
-
-#mainImg{
-	width:100%;
-}
-
-#subImg{
-	width:50%;
-	display: inline-block;
-}
-
-#modelList{
-	position: absolute;
-}
-
-#modelList li a{
-	color : white;
-	font-size : 20px;
-	text-decoration:none;
-	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-	-moz-text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-	-webkit-text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-
-#selOpt{
-	float : right;
-	width : 48%;
-	display: inline-block;
-}
-
-#selOpt span{
-	width : 200px;
-	display: inline-block;
-	margin-bottom: 40px;
-}
-
-#selOpt .type{
-	color: #b50000;
-	font-weight: bold;
-	width : 100px;
-}
-
-#selectOpt{
-	width : 750px;
-	display: inline-block;
-	color : #b50000;
-	font-weight: bold;
-}
-
-#optSub{
-	float: right;
-	background-color: #555555;
-	border: none;
-    color: white;
-    width: 100px;
-    height: 40px;
-    font-size: 15px;
+	margin : 5px;
 }
 
 #cook{
 	position:fixed;
 	right:45px;
 	top : 250px;
-	background-color:white;
+	background-color:#f1efef;
 	text-align: center;
-
+	font-family: 'jeju';
+	padding-top : 10px;
 }
-/*
-#cook .ad {
-	position:fixed;
-	right:20px;
-	bottom:220px;
-	width:125px;
-	height : auto; 
-	
-}*/
+
+#detail{
+	width:70%;
+}

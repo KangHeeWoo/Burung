@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" href="../css/introCompany.css?ver=178"/>
+<link rel="stylesheet" href="../css/introCompany.css?ver=183"/>
 <script type="text/javascript">
 
 function xy(event){
@@ -81,7 +81,7 @@ function xy(event){
 
 </script>
 
-<img id = "company" src = "../img/company.png">
+<img id = "company" src = "../img/porsche-normal.jpg">
 
 <div id = "mapCompany" onclick="xy(event)">
 	<div id = "map">

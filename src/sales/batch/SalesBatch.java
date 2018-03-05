@@ -46,6 +46,9 @@ public class SalesBatch {
 			date += "0";
 		}
 		date += m;
+		if (d < 10) {
+			date += "0";
+		}
 		date += d;
 
 		PrintWriter pw = null;

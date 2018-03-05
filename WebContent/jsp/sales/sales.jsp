@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/sales.css?ver=8" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/sales.css?ver=12" />
 <script src="${pageContext.request.contextPath }/js/sales.js?ver=8"></script>
 <c:choose>
 	<c:when test="${param.name != null && param.name != ''}">
@@ -82,8 +82,11 @@
 		</form>
 	</div>
 </div>
+<div align="center">
+	<img src="/Burung/img/${name }_detail.jpg" id="detail">
+</div>
 <div id="cook">
-	<h2>최근본상품</h2>		
+	<h3>최근본상품</h3>		
 		<c:forEach var = "cooks" items = "${requestScope.cooks }" varStatus="status">
 		<c:forEach var="cooks1" items="${cooks1 }" begin="${status.index }" end="${status.index }">
 			<c:choose>

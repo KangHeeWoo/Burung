@@ -17,7 +17,7 @@ public class RentBatch {
 	Calendar cal = Calendar.getInstance();
 	String year = String.valueOf(cal.get(Calendar.YEAR));
 	String month = String.valueOf(cal.get(Calendar.MONTH) + 1);
-	String day = String.valueOf(cal.get(Calendar.DATE));
+	String day = String.valueOf(cal.get(Calendar.DATE));	
 	String sysdate = year + "/" + month + "/" + day;
 
 	public RentBatch() {
@@ -28,6 +28,8 @@ public class RentBatch {
 			public void run() {
 				System.out.println("rent batch");
 				try {// 파일생성
+					if(month.length() == 1) month = "0" + month;
+					if(day.length() == 1) day = "0" + day;
 					PrintWriter pw = new PrintWriter(path1 + "/log/rent_log_" + year + month + day + ".txt");
 					RentListDao dao = new RentListDao();
 					ArrayList<RentListVo> list = dao.rentlist(sysdate);

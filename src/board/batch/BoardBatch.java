@@ -31,6 +31,7 @@ public class BoardBatch {
 				if (month < 10) {
 					month1 = "0" + String.valueOf(month);
 				}
+				if(cal.get(Calendar.DATE) < 10) month1 +="0";
 				int date = cal.get(Calendar.DATE);
 				String date1 = String.valueOf(year) + month1 + String.valueOf(date);
 

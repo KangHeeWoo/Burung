@@ -1,19 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../css/introCompany.css?ver=1">
-</head>
-<body>
-	<div id = historyCompany>
-		<img id = "company" src = "../img/company.png">		
-	</div>
-	<div id = his>
-		<img id = "history" src = "../img/history.jpg">
-	</div>
-</body>
-</html>
+
+<link rel="stylesheet" type="text/css" href="../css/introCompany.css?ver=4">
+<div id=his align="center">
+	<img id="history_1" src="../img/history_1.jpg">
+	<br><br>
+	<img id="history_2" src="../img/history_2.jpg">
+	<br><br><br>
+	<img id="history_3" src="../img/history_3.jpg">
+</div>
