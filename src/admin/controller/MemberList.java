@@ -81,17 +81,17 @@ public class MemberList extends HttpServlet{
 			int rpageCount=(int)Math.ceil(rdao.getCount(memNum)/5.0);
 			//전체페이지 갯수 구하기(구매)
 			int spageCount=(int)Math.ceil(sdao.getCount(memNum)/5.0);
-			int sstartPage=((pageNum-1)/4*4)+1;//구매시작페이지 번호
-			int rstartPage=((pageNum2-1)/4*4)+1;//렌트시작
-			int rendPage=rstartPage+3;// 끝페이지 번호	//4페이지
-			int sendPage=sstartPage+3;
+			int sstartPage=((pageNum-1)/5*5)+1;//구매시작페이지 번호
+			int rstartPage=((pageNum2-1)/5*5)+1;//렌트시작
+			int rendPage=rstartPage+4;// 끝페이지 번호	//4페이지
+			int sendPage=sstartPage+4;
 			if(rpageCount<rendPage) {
 				rendPage=rpageCount;
 			}
 			if(spageCount<sendPage) {
 				sendPage=spageCount;
 			}
-			System.out.println(rentdetail.size());
+			System.out.println(rstartPage);
 			request.setAttribute("rpageCount", rpageCount);//렌트페이지전체
 			request.setAttribute("spageCount", spageCount);//구매페이지전체
 			request.setAttribute("sstartPage", sstartPage);//구매

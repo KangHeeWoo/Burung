@@ -97,4 +97,24 @@ public class SalesCarDao {
 			DbcpBean.close(conn, pstmt, rs);
 		}
 	}
+	
+	public int carUpdate(String carName,int price,int cnt) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		String sql="update salescar set salcnt=salcnt+?,scarprice=? where scarname=?";
+		try {
+			conn=DbcpBean.getConn();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, cnt);
+			pstmt.setInt(2, price);
+			pstmt.setString(3, carName);
+			
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			DbcpBean.close(conn, pstmt, null);
+		}
+	}
 }

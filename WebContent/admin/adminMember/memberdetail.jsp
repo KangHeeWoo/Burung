@@ -143,8 +143,8 @@ table.type11 td {
 <!-- 렌트내역 페이징처리 -->
 <div>
 	<c:choose>
-		<c:when test="${rstartPage>3 }">
-		<a href="<%=request.getContextPath()%>/semi/list.do?rpageNum=${rstartPage-1}">[이전]</a>
+		<c:when test="${rstartPage>5 }">
+		<a href="<%=request.getContextPath()%>/semi/list.do?rpageNum=${rstartPage-1}&cmd=memberdetail&memNum=${memNum}&pageNum=${pageNum}">[이전]</a>
 		</c:when>
 		<c:otherwise>
 			[이전]
@@ -166,7 +166,7 @@ table.type11 td {
 	</c:forEach>
 	<c:choose>
 	<c:when test="${rpageCount>rendPage }">
-	<a href="<%=request.getContextPath()%>/semi/list.do?rpageNum=${rendPage+1}">[다음]</a>
+	<a href="<%=request.getContextPath()%>/semi/list.do?rpageNum=${rendPage+1}&cmd=memberdetail&memNum=${memNum}&pageNum=${pageNum}">[다음]</a>
 	</c:when>
 	<c:otherwise>
 		[다음]

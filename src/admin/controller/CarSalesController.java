@@ -123,6 +123,21 @@ public class CarSalesController extends HttpServlet{
 			}else {
 				
 			}
+		}else if(cmd.equals("update")) {
+			String carName=request.getParameter("scarName1");
+			String scnt=request.getParameter("salCnt1");
+			int cnt=0;
+			if(scnt!="") {
+				cnt=Integer.parseInt(scnt);
+			}
+			int price=Integer.parseInt(request.getParameter("scarPrice1"));
+			
+			SalesCarDao dao=new SalesCarDao();
+			int n=dao.carUpdate(carName, price, cnt);
+			
+			if(n>0) {
+				response.sendRedirect(request.getContextPath()+"/semi/sales.do?cmd=carlist");
+			}
 		}
 	}
 }
