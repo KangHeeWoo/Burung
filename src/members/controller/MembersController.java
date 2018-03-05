@@ -151,24 +151,25 @@ public class MembersController extends HttpServlet {
 
 		String memId = request.getParameter("memId");
 		String memPwd = request.getParameter("memPwd");
+		
 		String memAddr = request.getParameter("addr4");
 		String memPhone = request.getParameter("phone1") + "-" + request.getParameter("phone2") + "-"
 				+ request.getParameter("phone3");
 		String memEmail = request.getParameter("email1") + "@" + request.getParameter("email2");
 		String memBirth = request.getParameter("birth");
 		String memName = request.getParameter("memName");
-
+		
 		MembersDao dao = MembersDao.getInstance();
-
-		System.out.println("dao : " + dao);
 
 		members.vo.MembersVo members = new MembersVo(memId, memPwd, memAddr, memPhone, memEmail, memBirth, memName);
 
-		System.out.println("members : " + members);
-
 		int n = dao.update(members);
-
-		list(request, response);
+		
+		if (n > 0) {
+			list(request, response);
+		} else {
+			request.setAttribute("result", "fail");
+		}
 	}
 
 	private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

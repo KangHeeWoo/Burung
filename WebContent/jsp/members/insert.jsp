@@ -69,8 +69,6 @@ function passwordCheck1() {
 		same1.innerHTML="사용 가능한 비밀번호 입니다.";
 		check = true;
 	}
-}
-function passwordCheck2() {
 	
 	if(pwd1.value == pwd2.value){
 		same2.innerHTML = "비밀번호가 일치합니다.";
@@ -79,7 +77,9 @@ function passwordCheck2() {
 		same2.innerHTML = "비밀번호가 일치하지 않습니다.";
 		check = false;
 	}
-}	
+	
+	console.log(check);
+}
 
 function addrInquiry(){
 	
@@ -134,8 +134,7 @@ function insertCheck (){
 		
 			<div class="form-login" >
 <h2>[ 회원가입 ]</h2><br>
-<form method="post" name="frm" onsubmit = "return insertCheck()"
-	action="<%=request.getContextPath()%>/members.do?cmd=insertOk">
+<form method="post" name="frm" onsubmit="return insertCheck()" action="<%=request.getContextPath()%>/members.do?cmd=insertOk">
 
 <table class="insertForm">
 	<tr>
@@ -152,7 +151,7 @@ function insertCheck (){
 	
 	<tr>
 		<td>비밀번호 확인</td>
-		<td><input type="password" name="memPwd2" id="pwd2" onkeyup="passwordCheck2()" placeholder="Password Check">
+		<td><input type="password" name="memPwd2" id="pwd2" onkeyup="passwordCheck1()" placeholder="Password Check">
 		<span id="same2"></span></td>
 	</tr>
 	

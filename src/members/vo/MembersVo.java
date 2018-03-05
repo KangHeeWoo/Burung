@@ -99,7 +99,7 @@ public class MembersVo {
 	}
 	@Override
 	public String toString() {
-		return "MembersBeans [memId=" + memId + ", memPwd=" + memPwd + ", memAddr=" + memAddr + ", memPhone=" + memPhone
+		return "MembersBeans [memId=" + memId + ", memPwd=" + memPwd + ",  memAddr=" + memAddr + ", memPhone=" + memPhone
 				+ ", memEmail=" + memEmail + ", memBirth=" + memBirth + ", memName=" + memName + "]";
 	}
 

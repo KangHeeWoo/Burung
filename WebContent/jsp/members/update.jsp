@@ -72,15 +72,13 @@ function passwordCheck1() {
 		same1.innerHTML="사용 가능한 비밀번호 입니다.";
 		check = true;
 	}
-}
-function passwordCheck2() {
 	
 	if(pwd1.value == pwd2.value){
 		same2.innerHTML = "비밀번호가 일치합니다.";
 		check = true;
 	}else{
 		same2.innerHTML = "비밀번호가 일치하지 않습니다.";
-		check = false;
+		check = false;	
 	}
 }	
 
@@ -133,7 +131,7 @@ function insertCheck (){
 			<div class="form-login" >
 
 <h2>[ 회원수정하기 ]</h2><br>
-	<form method="post"	action="<%=request.getContextPath()%>/members.do?cmd=updateOk">
+	<form method="post"	action="<%=request.getContextPath()%>/members.do?cmd=updateOk" onsubmit = "return insertCheck()">
 
 	<table class="updateForm">
 	<tr>
@@ -152,7 +150,7 @@ function insertCheck (){
 	
 	<tr>
 	<td>비밀번호 확인</td>
-	<td><input type="password" name="memPwd2" id="pwd2" onkeyup="passwordCheck2()" placeholder="비밀번호 재확인" required>
+	<td><input type="password" name="memPwd2" id="pwd2" onkeyup="passwordCheck1()" placeholder="비밀번호 재확인" required>
 		<span id="same2"></span> 
 	</td>
 	</tr>
