@@ -17,7 +17,6 @@ function xy(event){
 	//element.classList.add("bounce");
 }
 
-
 	var xhr = null;
 	function showPopup1(){
 		xhr = new XMLHttpRequest();
