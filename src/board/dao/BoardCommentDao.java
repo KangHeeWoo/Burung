@@ -26,12 +26,12 @@ public class BoardCommentDao {
 			String sql="insert into boardcomment values(0,?,sysdate,?,?)";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1,bcomcon);
-			pstmt.setInt(2, memnum);
-			pstmt.setInt(3, boanum);
+			pstmt.setInt(2, boanum);
+			pstmt.setInt(3, memnum);
 			int n=pstmt.executeUpdate();
 			return n;
 		}catch(SQLException se) {
-			System.out.println(se.getMessage());
+			se.printStackTrace();
 			return -1;
 		}finally {
 			DbcpBean.close(conn, pstmt, null);

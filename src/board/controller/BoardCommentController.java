@@ -85,7 +85,7 @@ public class BoardCommentController extends HttpServlet{
 		if(n>0) {
 			pw.print("<code>success</code>");
 		}else {
-		pw.print("<code>fail</code>");
+			pw.print("<code>fail</code>");
 		}
 		pw.print("</result>");
 		pw.close();

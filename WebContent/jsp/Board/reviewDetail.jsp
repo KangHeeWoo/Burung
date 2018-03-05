@@ -65,7 +65,7 @@
 <div >
 <table><tr><td id="ccco">
 	<textarea rows="5" cols="97"  id="comment"  placeholder="30자 이내로 작성해주세요."></textarea></td>
-	<td><input type="button" value="등록"   onclick="addBoardComm()" id="bnt"></td></tr>
+	<td><input type="button" value="등록"   onclick="addReviewComm()" id="bnt"></td></tr>
 </table>
 </div>
 
