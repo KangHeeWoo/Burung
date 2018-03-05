@@ -2,7 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/sales.css?ver=12" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/css/sales.css?ver=12" />
 <script src="${pageContext.request.contextPath }/js/sales.js?ver=8"></script>
 <c:choose>
 	<c:when test="${param.name != null && param.name != ''}">
@@ -34,8 +35,8 @@
 <div id="sales">
 	<ul id="modelList"></ul>
 	<img id="mainImg">
-	<hr><br>
-	<img id="subImg">
+	<hr>
+	<br> <img id="subImg">
 	<div id="selOpt">
 		<form name="frm" method="post" onsubmit="return buy()"
 			action="${pageContext.request.contextPath }/sales.do?cmd=buy">
@@ -86,21 +87,24 @@
 	<img src="/Burung/img/${name }_detail.jpg" id="detail">
 </div>
 <div id="cook">
-	<h3>최근본상품</h3>		
-		<c:forEach var = "cooks" items = "${requestScope.cooks }" varStatus="status">
-		<c:forEach var="cooks1" items="${cooks1 }" begin="${status.index }" end="${status.index }">
+	<h3>최근본상품</h3>
+	<c:forEach var="cooks" items="${requestScope.cooks }"
+		varStatus="status">
+		<c:forEach var="cooks1" items="${cooks1 }" begin="${status.index }"
+			end="${status.index }">
 			<c:choose>
-				<c:when test = "${cooks == null }">
+				<c:when test="${cooks == null }">
 					상품없음<br>
 				</c:when>
 				<c:otherwise>
-					<a href="<%=request.getContextPath()%>/sales.do?cmd=choiceName&model=${cooks1 }&name=${cooks}">
-					<img class="ad" src="/Burung/img/${cooks }_rent.png"><br>					
+					<a
+						href="<%=request.getContextPath()%>/sales.do?cmd=choiceName&model=${cooks1 }&name=${cooks}">
+						<img class="ad" src="/Burung/img/${cooks }_rent.png"><br>
 					</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-		</c:forEach>
+	</c:forEach>
 </div>
 
 
