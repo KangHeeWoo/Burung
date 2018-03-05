@@ -350,7 +350,7 @@ img {
 	</c:forEach>
 	<c:choose>
 		<c:when test="${rlpageCount>rlendPage }">
-		<a href="<%=request.getContextPath()%>/semi/rent.do?rlpagenum=${rlendPage-1}&cmd=rentlist&rpagenum=${rpagenum2}">[다음]</a>
+		<a href="<%=request.getContextPath()%>/semi/rent.do?rlpagenum=${rlendPage+1}&cmd=rentlist&rpagenum=${rpagenum2}">[다음]</a>
 		</c:when>
 		<c:otherwise>
 			[다음]

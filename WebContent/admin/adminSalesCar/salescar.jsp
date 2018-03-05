@@ -7,7 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!--  나중에 다운받아서 로컬에넣으세여 -->
 
 <!-- modal Start -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/admin/css/remodal.css">
@@ -50,21 +49,53 @@ table.type11 td {
 		window.location ='#modal';
 		console.log("asd");
 	}
-	function showAdd(){
-		window.open("<%=request.getContextPath()%>/semi/sales.do?cmd=carinsert","add","width=250,height=500,left=100,top=50");
+
+	
+	$(document).ready(function(){
+		 $('#con2').click(function(){
+			 if(confirm("등록하시겠습니까?")){
+				 $('form[name="test"]').submit();
+			 }
+		 })
+	})
+	function upCar(car,model,price){
+		window.location ='#modal1';
+		$('#scarName').val(car);
+		$('#scarModel').val(model);
+		$('#scarPrice').val(price);
 	}
 	
 	$(document).ready(function(){
-		 $('.remodal-confirm').click(function(){
+		 $('#con').click(function(){
 			 if(confirm("등록하시겠습니까?")){
-				 $('form[name="test"]').submit();
+				 $('form[name="test1"]').submit();
 			 }
 		 })
 	})
 </script>
 </head>
 <body>
-
+<div id="upModal" class="remodal" data-remodal-id="modal1" style="max-width:800px;">
+	<div class="modalTop" style="margin-bottom:10px;">
+		<span class="modalTitle">차량추가</span>
+	</div>
+	<form name="test1" action="<%=request.getContextPath() %>/semi/sales.do?cmd=update" method="post">
+	<div>
+		차량이름<br>
+		<input type="text" name="scarName1" id="scarName"><br>
+		차량모델<br>
+		<input type="text" name="scarModel1" id="scarModel"><br>
+		수량<br>
+		<input type="text" name="salCnt1"><br>
+		차량가격<br>
+		<input type="text" name="scarPrice1" id="scarPrice"><br><br>
+	</div>
+		<div style="margin:10px;">
+			<button  data-remodal-action="confirm" id="con" class="remodal-confirm">확인</button>
+			<button data-remodal-action="cancel" class="remodal-cancel">닫기</button>
+		</div>
+	</form>
+</div>
 
 
 <div id="insModal" class="remodal" data-remodal-id="modal" style="max-width:800px;">
@@ -85,7 +116,7 @@ table.type11 td {
 		서브이미지<input type="file" name="sub"><br><br>
 	</div>
 		<div style="margin:10px;">
-			<button  data-remodal-action="confirm" class="remodal-confirm">확인</button>
+			<button  data-remodal-action="confirm" id="con2" class="remodal-confirm">확인</button>
 			<button data-remodal-action="cancel" class="remodal-cancel">닫기</button>
 		</div>
 	</form>
@@ -102,7 +133,7 @@ table.type11 td {
 
 <div id="caradd" style="display: none">
 <h2>신규차량등록</h2>
-<form action="<%=request.getContextPath() %>/semi/sales.do?cmd=insertOk" method="post" enctype="multipart/form-data">
+<form action="<%=request.getContextPath() %>/semi/sales.do?cmd=insertOk" method="get" enctype="multipart/form-data">
 차량이름<br>
 <input type="text" name="scarName"><br>
 차량모델<br>
@@ -127,6 +158,7 @@ table.type11 td {
 		<th>차량모델</th>
 		<th>수량</th>
 		<th>가격</th>
+		<th>입고</th>
 	</tr>
 	<c:forEach var="car" items="${list }">
 	<tr>
@@ -136,6 +168,7 @@ table.type11 td {
 		<td style="text-align: left">${car.scarModel }</td>
 		<td style="text-align: left">${car.salCnt }</td>
 		<td style="text-align: left">${car.scarPrice }</td>
+		<td style="text-align: center;"><input type="button" value="입고" onclick="upCar('${car.scarName}','${car.scarModel }','${car.scarPrice}')"></td>
 	</tr>
 	</c:forEach>
 </table>

@@ -97,7 +97,7 @@ public class RentController extends HttpServlet{
 		RentCarDao rdao=RentCarDao.getInstance();
 		ArrayList<RentCarVo> rlist=rdao.list(rstartRow, rendRow);
 		int rpageCount=(int)Math.ceil(rdao.getCount()/10.0);
-		int rstartPage=((rpagenum2-1)/4*4)+1;
+		int rstartPage=((rpagenum2-1)/5*5)+1;
 		int rendPage=rstartPage+4;
 		if(rpageCount<rendPage) {
 			rendPage=rpageCount;

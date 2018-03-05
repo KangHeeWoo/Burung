@@ -106,7 +106,7 @@ a[class*="btn"] {
 		<c:choose>
 		<c:when test="${pagenum==i }">
 			<a href="<%=request.getContextPath() %>/semi/notice.do?pagenum=${i}&cmd=noticelist">
-			<span style="color: blue">${i }</span>
+			<span style="color: blue">[${i }]</span>
 			</a>
 		</c:when>
 		<c:otherwise>
