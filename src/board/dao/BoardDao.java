@@ -46,9 +46,9 @@ public class BoardDao {
       ResultSet rs = null;
       try {
          conn = DbcpBean.getConn();
-         String sql = "select NVL(count(boanum),0) count from board b,members m where b.memnum=m.memnum and "+search+" like ?";
+         String sql = "select NVL(count(boanum),0) count from board b,members m where b.memnum=m.memnum and upper("+search+") like '%' || upper(?) || '%'";
          pstmt = conn.prepareStatement(sql);
-         pstmt.setString(1, "%"+searchValue+"%");
+         pstmt.setString(1, searchValue);
          rs = pstmt.executeQuery();
          rs.next();
          int count = rs.getInt("count");
@@ -189,9 +189,9 @@ public class BoardDao {
         	 pstmt.setInt(1, startRow);
         	 pstmt.setInt(2, endRow);
          }else {
-        	 sql="select * from(select aa.*,rownum rnum from(select boanum, boatitle,boahit,boaRegd,m.memid memid from board b,members m where m.memNum=b.memNum and " +search+ " like ? order by boaregd desc)aa)where rnum>=? and rnum<=?"; 
+        	 sql="select * from(select aa.*,rownum rnum from(select boanum, boatitle,boahit,boaRegd,m.memid memid from board b,members m where m.memNum=b.memNum and upper(" +search+ ") like '%' || upper(?) || '%' order by boaregd desc)aa)where rnum>=? and rnum<=?"; 
         	 pstmt=conn.prepareStatement(sql);
-        	 pstmt.setString(1, "%"+searchValue+"%");
+        	 pstmt.setString(1,searchValue);
         	 pstmt.setInt(2, startRow);
         	 pstmt.setInt(3, endRow);
          }

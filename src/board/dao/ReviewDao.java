@@ -72,9 +72,9 @@ public class ReviewDao {
 		ResultSet rs = null;
 		try {
 			conn = DbcpBean.getConn();
-			String sql = "select NVL(count(revnum),0) count from review r,members m where r.memnum=m.memnum and "+search+" like ?";
+			String sql = "select NVL(count(revnum),0) count from review r,members m where r.memnum=m.memnum and upper("+search+") like '%' || upper(?) || '%'";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "%"+searchValue+"%");
+			pstmt.setString(1, searchValue);
 			rs = pstmt.executeQuery();
 			rs.next();
 			int count = rs.getInt("count");
@@ -322,10 +322,10 @@ public class ReviewDao {
 				pstmt.setInt(1, startRow);
 				pstmt.setInt(2, endRow);
 			} else {
-				sql = "select * from(select aa.*,rownum rnum from(select carname,revnum,revcontent,revscore,revtitle,revhit,revregd,m.memid memid, m.memnum memnum from review r, members m where m.memnum=r.memnum and "
-						+ search + " like ? order by " + searchBy + " desc)aa)where rnum>=? and rnum<=? ";
+				sql = "select * from(select aa.*,rownum rnum from(select carname,revnum,revcontent,revscore,revtitle,revhit,revregd,m.memid memid, m.memnum memnum from review r, members m where m.memnum=r.memnum and upper( "
+						+ search + ") like '%' || upper(?) || '%' order by " + searchBy + " desc)aa)where rnum>=? and rnum<=? ";
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, "%" + searchValue + "%");
+				pstmt.setString(1, searchValue );
 				pstmt.setInt(2, startRow);
 				pstmt.setInt(3, endRow);
 			}
