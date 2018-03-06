@@ -60,7 +60,7 @@ table.type11 td {
 				tr1.appendChild(td);
 				for(var i=0;i<json.list.length;i++){
 					var td=document.createElement("td");
-					alert(json.list[i].optType);
+					//alert(json.list[i].optType);
 					if(json.list[i].optType=='color'){
 						td.innerHTML=json.list[i].optInfo;						
 					}else if(json.list[i].optType=='wheel'){
