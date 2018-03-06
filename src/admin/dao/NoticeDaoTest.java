@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import admin.vo.MemberVo;
+import admin.vo.NoticeVo;
 
 
 public class NoticeDaoTest {
@@ -14,8 +15,8 @@ public class NoticeDaoTest {
 	
 	@Test
 	public void list() {
-		MemberDao dao=new MemberDao();
-		ArrayList<MemberVo> list=dao.memDetail(1);
+		NoticeDaoJUnit dao=new NoticeDaoJUnit();
+		ArrayList<NoticeVo> list= dao.list(1, 5);
 		assertNotNull(list);
 	}
 }
