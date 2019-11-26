@@ -59,7 +59,7 @@ public class MembersController extends HttpServlet {
 			findid(request, response);
 		} else if (cmd.equals("findpwd")) {
 			findpwd(request, response);
-			}
+		}
 	}
 
 	private void insert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -70,15 +70,16 @@ public class MembersController extends HttpServlet {
 		String memPhone = request.getParameter("phone1") + "-" + request.getParameter("phone2") + "-"
 				+ request.getParameter("phone3");
 		String memEmail = request.getParameter("email1") + "@" + request.getParameter("email2");
-		//String memBirth = request.getParameter("Birth1") + request.getParameter("Birth2")
-		//		+ request.getParameter("Birth3");
+		// String memBirth = request.getParameter("Birth1") +
+		// request.getParameter("Birth2")
+		// + request.getParameter("Birth3");
 		String memBirth = request.getParameter("Birth");
 		String memName = request.getParameter("memName");
 
 		members.vo.MembersVo members = new MembersVo(0, memId, memPwd, memAddr, memPhone, memEmail, memBirth, memName);
 
 		System.out.println(memEmail);
-		
+
 		MembersDao dao = MembersDao.getInstance();
 
 		int n = dao.insert(members);
@@ -151,20 +152,20 @@ public class MembersController extends HttpServlet {
 
 		String memId = request.getParameter("memId");
 		String memPwd = request.getParameter("memPwd");
-		
+
 		String memAddr = request.getParameter("addr4");
 		String memPhone = request.getParameter("phone1") + "-" + request.getParameter("phone2") + "-"
 				+ request.getParameter("phone3");
 		String memEmail = request.getParameter("email1") + "@" + request.getParameter("email2");
 		String memBirth = request.getParameter("birth");
 		String memName = request.getParameter("memName");
-		
+
 		MembersDao dao = MembersDao.getInstance();
 
 		members.vo.MembersVo members = new MembersVo(memId, memPwd, memAddr, memPhone, memEmail, memBirth, memName);
 
 		int n = dao.update(members);
-		
+
 		if (n > 0) {
 			list(request, response);
 		} else {
@@ -253,7 +254,7 @@ public class MembersController extends HttpServlet {
 
 		JSONObject json = new JSONObject();
 		MembersDao dao = MembersDao.getInstance();
-		
+
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 
@@ -267,18 +268,20 @@ public class MembersController extends HttpServlet {
 		pw.close();
 
 	}
-	private void findpwd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	private void findpwd(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		JSONObject json = new JSONObject();
 		MembersDao dao = MembersDao.getInstance();
-		
+
 		String id = request.getParameter("id");
 		String email = request.getParameter("email");
 
 		String getpwd = dao.findpwd(id, email);
 
 		json.put("pwd", getpwd);
-			
+
 		response.setContentType("text/plain;charset=utf-8");
 		PrintWriter pw = response.getWriter();
 		pw.print(json);
