@@ -49,6 +49,7 @@ public class RentController extends HttpServlet{
 		String eDate = request.getParameter("eDate");
 		Date strDate = null;
 		Date endDate = null;
+		
 		try {
 			strDate = new Date(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(sDate).getTime());
 			endDate = new Date(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(eDate).getTime());
@@ -56,6 +57,7 @@ public class RentController extends HttpServlet{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		int price = Integer.parseInt(request.getParameter("price"));
 		
 		RentDao rDao = RentDao.getInstance();
@@ -92,7 +94,7 @@ public class RentController extends HttpServlet{
 		request.setAttribute("sDate", sDate + " " + sTime);
 		request.setAttribute("eDate", eDate + " " + eTime);
 		request.setAttribute("cName", cName);
-		request.setAttribute("price", rentTime*rentCar.getTimePay());
+		request.setAttribute("price", rentTime * rentCar.getTimePay());
 		request.getRequestDispatcher("/jsp/layout.jsp?spage=rent/rentdetail.jsp").forward(request, response);
 	}
 	
@@ -103,7 +105,6 @@ public class RentController extends HttpServlet{
 		String eTime = request.getParameter("eTime");
 		String model = request.getParameter("model");
 
-		
 		//최초 진입시 기본 날짜 지정
 		if(sDate == null) {
 			Calendar cal = Calendar.getInstance();
